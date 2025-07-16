@@ -1,20 +1,21 @@
 "use client";
 import { useEffect } from "react";
 import Image from "next/image";
-import { Carousel as BootstrapCarousel } from "bootstrap";
 
 export default function Carousel() {
   useEffect(() => {
-    import("bootstrap/dist/js/bootstrap.bundle.min.js").then(() => {
-      const carouselElement = document.getElementById("carouselExample");
-      if (carouselElement) {
-        new BootstrapCarousel(carouselElement, {
-          interval: 3000,  // เลื่อนอัตโนมัติทุก 3 วิ
-          wrap: true,      // เลื่อนวนซ้ำ
-          ride: "carousel" // เริ่มเล่นอัตโนมัติ
-        });
-      }
-    });
+    if (typeof window !== "undefined") {
+      import("bootstrap/dist/js/bootstrap.bundle.min.js").then(() => {
+        const carouselElement = document.getElementById("carouselExample");
+        if (carouselElement) {
+          new window.bootstrap.Carousel(carouselElement, {
+            interval: 3000,
+            wrap: true,
+            ride: "carousel",
+          });
+        }
+      });
+    }
   }, []);
 
   return (

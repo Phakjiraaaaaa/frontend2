@@ -9,7 +9,7 @@ export default function Navigation() {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
 
-  const baseColor = "#5a5a5a";
+  const baseColor = "#5a5a5aff";
   const hoverColor = "#7d7dff";
 
   const navLinkStyle = {
@@ -114,7 +114,7 @@ export default function Navigation() {
               <Link
                 href="/register"
                 className="nav-link"
-                style={{ ...navLinkStyle, color: "#28a745" }}
+                style={navLinkStyle}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 onClick={handleLinkClick}

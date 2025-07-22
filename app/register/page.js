@@ -115,7 +115,7 @@ export default function RegisterPage() {
           margin: '3rem auto',
           padding: '2.5rem 3rem',
           borderRadius: 16,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          backgroundColor: 'rgba(198, 198, 198, 0.9)',
           boxShadow: '0 12px 30px rgba(0, 0, 0, 0.2)',
           color: '#333',
         }}

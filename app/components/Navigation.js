@@ -49,13 +49,20 @@ export default function Navigation() {
       }}
     >
       <div className="container-fluid">
-        <Link
-          href="/"
-          className="navbar-brand"
-          style={{ fontSize: "1.25rem", color: baseColor }}
-        >
-          Phakjiraaaaa
-        </Link>
+      
+      <Link
+         href="/"className="navbar-brand d-flex align-items-center gap-2"
+         style={{ fontSize: "1.25rem", color: baseColor }}
+>
+         <img
+           src="/images/logo.png"alt="โลโก้"
+           width={30}
+           height={30}
+           style={{ objectFit: "contain" }}
+           />
+            Phakjiraaaaa
+      </Link>
+
 
         <button
           className="navbar-toggler"

@@ -3,10 +3,6 @@ export default function Footer() {
     <div className="container">
       <footer className="py-5">
 
-        {/* 🔽 โลโก้ส่วนบนของ Footer */}
-        <div className="mb-4 text-center">
-          <img src="/images/logo.png" alt="โลโก้บริษัท" width={120} height={40} />
-        </div>
 
         <div className="row">
           <div className="col-6 col-md-2 mb-3">
@@ -41,7 +37,9 @@ export default function Footer() {
               <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">แจ้งข้อกังวล</a></li>
             </ul>
           </div>
-
+            
+                 
+          
           <div className="col-md-5 offset-md-1 mb-3">
             <form>
               <h5>Subscribe to our newsletter</h5>
@@ -55,10 +53,21 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 🔽 ส่วนล่างพร้อมโลโก้ + Social */}
+        <div className="mb-4 text-center">
+          <img src="/images/silders/logo.png" alt="โลโก้บริษัท" width={120} height={130} />
+          <img src="/images/silders/logo1.png" alt="โลโก้บริษัท" width={120} height={100} />
+          <img src="/images/silders/logo1.png" alt="โลโก้บริษัท" width={120} height={100} />
+          <img src="/images/silders/logo1.png" alt="โลโก้บริษัท" width={120} height={100} />
+          <img src="/images/silders/logo.png" alt="โลโก้บริษัท" width={120} height={130} />
+          <img src="/images/silders/logo1.png" alt="โลโก้บริษัท" width={120} height={100} />
+          <img src="/images/silders/logo1.png" alt="โลโก้บริษัท" width={120} height={100} />
+          <img src="/images/silders/logo1.png" alt="โลโก้บริษัท" width={120} height={100} />
+          <img src="/images/silders/logo.png" alt="โลโก้บริษัท" width={120} height={130} />
+          <img src="/images/silders/logo1.png" alt="โลโก้บริษัท" width={120} height={100} />
+        </div>
+        
         <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center py-4 my-4 border-top">
           <div className="d-flex align-items-center mb-3 mb-sm-0">
-            <img src="/images/logo.png" alt="โลโก้บริษัท" width={100} height={30} className="me-3" />
             <p className="mb-0">© 2025 Company, Inc. All rights reserved.</p>
           </div>
 

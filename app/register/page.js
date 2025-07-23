@@ -1,156 +1,197 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [prefix, setPrefix] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [address, setAddress] = useState('');
-  const [gender, setGender] = useState('');
-  const [birthDate, setBirthDate] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [prefix, setPrefix] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [focusedInput, setFocusedInput] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    setFadeIn(true);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (
       !username.trim() ||
       !password.trim() ||
       !prefix ||
       !firstName.trim() ||
       !lastName.trim() ||
-      !gender ||
-      !birthDate ||
       !acceptedTerms
     ) {
-      alert('กรุณากรอกข้อมูลให้ครบถ้วนและยอมรับเงื่อนไข');
+      alert("กรุณากรอกข้อมูลให้ครบถ้วนและยอมรับเงื่อนไข");
       return;
     }
 
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      alert(
-        `สมัครสมาชิกสำเร็จ!\n` +
+    alert(
+      `สมัครสมาชิกสำเร็จ!\n` +
         `ชื่อผู้ใช้: ${username}\n` +
         `คำนำหน้า: ${prefix}\n` +
         `ชื่อ: ${firstName}\n` +
         `นามสกุล: ${lastName}\n` +
-        `ที่อยู่: ${address}\n` +
-        `เพศ: ${gender}\n` +
-        `วันเกิด: ${birthDate}\n` +
         `ยอมรับเงื่อนไข: ใช่`
-      );
+    );
 
-      setUsername('');
-      setPassword('');
-      setPrefix('');
-      setFirstName('');
-      setLastName('');
-      setAddress('');
-      setGender('');
-      setBirthDate('');
-      setAcceptedTerms(false);
-      setIsSubmitting(false);
-    }, 800);
+    router.push("/login");
   };
 
-  const inputStyle = {
-    width: '100%',
-    padding: '12px 14px',
-    marginBottom: 8,
-    border: '1.5px solid #ccc',
-    borderRadius: 8,
+  const baseInputStyle = {
+    width: "100%",
+    padding: 8,
+    marginBottom: 12,
+    borderRadius: 4,
+    border: "1.5px solid #ccc",
     fontSize: 16,
-    transition: 'border-color 0.3s, box-shadow 0.3s',
+    transition: "border-color 0.3s, box-shadow 0.3s",
   };
 
-  const inputFocusStyle = {
-    borderColor: '#0d6efd',
-    outline: 'none',
-    boxShadow: '0 0 8px rgba(13, 110, 253, 0.5)',
-  };
-
-  const labelStyle = {
-    fontWeight: '600',
-    display: 'block',
-    marginBottom: 6,
+  const focusInputStyle = {
+    borderColor: "#0d6efd",
+    boxShadow: "0 0 8px rgba(13, 110, 253, 0.5)",
+    outline: "none",
   };
 
   const buttonStyle = {
-    width: '100%',
-    padding: 14,
+    width: "100%",
+    padding: 12,
     fontSize: 18,
-    fontWeight: '600',
-    backgroundColor: '#0d6efd',
-    color: 'white',
-    border: 'none',
-    borderRadius: 12,
-    cursor: isSubmitting ? 'wait' : 'pointer',
-    boxShadow: '0 6px 12px rgba(13, 110, 253, 0.4)',
+    backgroundColor: "#0d6efd",
+    color: "white",
+    border: "none",
+    borderRadius: 6,
+    cursor: "pointer",
+    fontWeight: "600",
+    transition: "background-color 0.3s, transform 0.1s",
+    userSelect: "none",
+  };
+
+  const buttonHoverStyle = {
+    backgroundColor: "#084bcc",
   };
 
   return (
-    <>
-      <style>
-        {`
-          body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background: url('https://your-image-url.com/shoe-store.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          }
-        `}
-      </style>
-
+    <div
+      style={{
+        position: "relative",
+        height: "100vh",
+        width: "100%",
+        backgroundImage: 'url("/images/silders/bg.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        opacity: fadeIn ? 1 : 0,
+        transition: "opacity 1s ease-in",
+      }}
+    >
       <main
         style={{
-          maxWidth: 500,
-          margin: '3rem auto',
-          padding: '2.5rem 3rem',
-          borderRadius: 16,
-          backgroundColor: 'rgba(198, 198, 198, 0.9)',
-          boxShadow: '0 12px 30px rgba(0, 0, 0, 0.2)',
-          color: '#333',
+          width: "150%",
+          maxWidth: 400,
+          padding: "2rem",
+          borderRadius: 12,
+          backgroundColor: "rgba(175, 175, 175, 0.95)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+          userSelect: "none",
         }}
       >
-        <h1 style={{ textAlign: 'center', color: '#0d6efd', marginBottom: 24 }}>
+        <h1
+          style={{
+            textAlign: "center",
+            color: "#0d6efd",
+            marginBottom: "1.5rem",
+            userSelect: "none",
+          }}
+        >
           สมัครสมาชิก
         </h1>
 
-        <form onSubmit={handleSubmit}>
-          <label style={labelStyle}>ชื่อผู้ใช้</label>
+        <form onSubmit={handleSubmit} noValidate>
+          <label htmlFor="username">ชื่อผู้ใช้</label>
           <input
             type="text"
+            id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            style={inputStyle}
             placeholder="กรอกชื่อผู้ใช้"
-            disabled={isSubmitting}
+            style={{
+              ...baseInputStyle,
+              ...(focusedInput === "username" ? focusInputStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("username")}
+            onBlur={() => setFocusedInput(null)}
+            required
           />
 
-          <label style={labelStyle}>รหัสผ่าน</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={inputStyle}
-            placeholder="กรอกรหัสผ่าน"
-            disabled={isSubmitting}
-          />
+          <label htmlFor="password" style={{ display: "block", marginBottom: 4 }}>
+            รหัสผ่าน
+          </label>
+          <div style={{ position: "relative", marginBottom: 12 }}>
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="กรอกรหัสผ่าน"
+              style={{
+                ...baseInputStyle,
+                paddingRight: 40,
+                ...(focusedInput === "password" ? focusInputStyle : {}),
+              }}
+              onFocus={() => setFocusedInput("password")}
+              onBlur={() => setFocusedInput(null)}
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "ซ่อนรหัสผ่าน" : "แสดงรหัสผ่าน"}
+              style={{
+                position: "absolute",
+                right: 8,
+                top: "50%",
+                transform: "translateY(-50%)",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "#0d6efd",
+                fontSize: 20,
+                userSelect: "none",
+              }}
+              tabIndex={-1}
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </button>
+          </div>
 
-          <label style={labelStyle}>คำนำหน้า</label>
+          <label htmlFor="prefix">คำนำหน้า</label>
           <select
+            id="prefix"
             value={prefix}
             onChange={(e) => setPrefix(e.target.value)}
-            style={{ ...inputStyle, backgroundColor: '#fff', cursor: 'pointer' }}
-            disabled={isSubmitting}
+            style={{
+              ...baseInputStyle,
+              backgroundColor: "white",
+              cursor: "pointer",
+              ...(focusedInput === "prefix" ? focusInputStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("prefix")}
+            onBlur={() => setFocusedInput(null)}
+            required
           >
             <option value="">-- กรุณาเลือก --</option>
             <option value="นาย">นาย</option>
@@ -158,83 +199,82 @@ export default function RegisterPage() {
             <option value="นางสาว">นางสาว</option>
           </select>
 
-          <label style={labelStyle}>ชื่อ</label>
+          <label htmlFor="firstName">ชื่อ</label>
           <input
             type="text"
+            id="firstName"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            style={inputStyle}
             placeholder="กรอกชื่อ"
-            disabled={isSubmitting}
+            style={{
+              ...baseInputStyle,
+              ...(focusedInput === "firstName" ? focusInputStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("firstName")}
+            onBlur={() => setFocusedInput(null)}
+            required
           />
 
-          <label style={labelStyle}>นามสกุล</label>
+          <label htmlFor="lastName">นามสกุล</label>
           <input
             type="text"
+            id="lastName"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            style={inputStyle}
             placeholder="กรอกนามสกุล"
-            disabled={isSubmitting}
+            style={{
+              ...baseInputStyle,
+              ...(focusedInput === "lastName" ? focusInputStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("lastName")}
+            onBlur={() => setFocusedInput(null)}
+            required
           />
 
-          <label style={labelStyle}>ที่อยู่</label>
-          <textarea
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            style={{ ...inputStyle, minHeight: 60 }}
-            placeholder="กรอกที่อยู่ (ถ้ามี)"
-            disabled={isSubmitting}
-          />
-
-          <label style={labelStyle}>เพศ</label>
-          <label>
-            <input
-              type="radio"
-              value="ชาย"
-              checked={gender === 'ชาย'}
-              onChange={(e) => setGender(e.target.value)}
-              disabled={isSubmitting}
-            />{' '}
-            ชาย
-          </label>
-          {' '}
-          <label>
-            <input
-              type="radio"
-              value="หญิง"
-              checked={gender === 'หญิง'}
-              onChange={(e) => setGender(e.target.value)}
-              disabled={isSubmitting}
-            />{' '}
-            หญิง
-          </label>
-
-          <br />
-          <label style={labelStyle}>วันเกิด</label>
-          <input
-            type="date"
-            value={birthDate}
-            onChange={(e) => setBirthDate(e.target.value)}
-            style={inputStyle}
-            disabled={isSubmitting}
-          />
-
-          <label style={{ display: 'flex', alignItems: 'center', margin: '1rem 0' }}>
+          <label
+            style={{ display: "flex", alignItems: "center", marginBottom: 16 }}
+          >
             <input
               type="checkbox"
               checked={acceptedTerms}
               onChange={(e) => setAcceptedTerms(e.target.checked)}
-              disabled={isSubmitting}
+              required
+              style={{ marginRight: 8 }}
             />
-            <span style={{ marginLeft: 10 }}>ยอมรับเงื่อนไข</span>
+            ยอมรับเงื่อนไข
           </label>
 
-          <button type="submit" style={buttonStyle} disabled={isSubmitting}>
-            {isSubmitting ? 'กำลังสมัคร...' : 'สมัครสมาชิก'}
+          <button
+            type="submit"
+            style={buttonStyle}
+            onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.95)")}
+            onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor)
+            }
+          >
+            สมัครสมาชิก
           </button>
+
+          <div style={{ marginTop: 16, textAlign: "center" }}>
+            <Link
+              href="/login"
+              style={{
+                color: "#0d6efd",
+                textDecoration: "underline",
+                cursor: "pointer",
+                userSelect: "none",
+              }}
+            >
+              กลับไปที่หน้าเข้าสู่ระบบ
+            </Link>
+          </div>
         </form>
       </main>
-    </>
+    </div>
   );
 }

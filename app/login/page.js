@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -8,7 +8,15 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [focusedInput, setFocusedInput] = useState(null);
+  const [fadeIn, setFadeIn] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    // เริ่มแอนิเมชัน fade-in
+    setFadeIn(true);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,8 +26,44 @@ export default function Login() {
       return;
     }
 
-    alert(`เข้าสู่ระบบสำเร็จ!\nUsername: ${username}\nจำฉันไว้: ${remember ? "ใช่" : "ไม่ใช่"}`);
-    router.push("/home"); // เปลี่ยนหน้าเมื่อเข้าสู่ระบบ
+    alert(
+      `เข้าสู่ระบบสำเร็จ!\nUsername: ${username}\nจำฉันไว้: ${
+        remember ? "ใช่" : "ไม่ใช่"
+      }`
+    );
+    router.push("/home");
+  };
+
+  const inputBaseStyle = {
+    width: "100%",
+    padding: 8,
+    marginBottom: 12,
+    borderRadius: 4,
+    border: "1.5px solid #ccc",
+    fontSize: 16,
+    transition: "border-color 0.3s, box-shadow 0.3s",
+  };
+
+  const inputFocusStyle = {
+    borderColor: "#0d6efd",
+    boxShadow: "0 0 5px 2px rgba(13, 110, 253, 0.4)",
+    outline: "none",
+  };
+
+  const buttonStyle = {
+    width: "100%",
+    padding: 10,
+    fontSize: 16,
+    backgroundColor: "#0d6efd",
+    color: "white",
+    border: "none",
+    borderRadius: 4,
+    cursor: "pointer",
+    transition: "background-color 0.3s, transform 0.1s",
+  };
+
+  const buttonHoverStyle = {
+    backgroundColor: "#084bcc",
   };
 
   return (
@@ -28,26 +72,36 @@ export default function Login() {
         position: "relative",
         height: "100vh",
         width: "100%",
-        backgroundImage: 'url("/images/silders/bg.jpg")', 
+        backgroundImage: 'url("/images/silders/bg.jpg")',
+        backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        opacity: fadeIn ? 1 : 0,
+        transition: "opacity 1s ease-in",
       }}
     >
-      {/* กล่องฟอร์ม */}
       <main
         style={{
-          width: "100%",
+          width: "150%",
           maxWidth: 400,
           padding: "2rem",
-          borderRadius: 8,
+          borderRadius: 12,
           backgroundColor: "rgba(175, 175, 175, 0.95)",
           boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+          animation: fadeIn ? "fadeIn 1s ease forwards" : "none",
         }}
       >
-        <h1 style={{ textAlign: "center", color: "#0d6efd", marginBottom: "1.5rem" }}>
+        <h1
+          style={{
+            textAlign: "center",
+            color: "#0d6efd",
+            marginBottom: "1.5rem",
+            userSelect: "none",
+          }}
+        >
           เข้าสู่ระบบ
         </h1>
 
@@ -58,21 +112,63 @@ export default function Login() {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            style={{ width: "100%", padding: 8, marginBottom: 12 }}
+            style={{
+              ...inputBaseStyle,
+              ...(focusedInput === "username" ? inputFocusStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("username")}
+            onBlur={() => setFocusedInput(null)}
             required
           />
 
-          <label htmlFor="password">รหัสผ่าน</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "100%", padding: 8, marginBottom: 12 }}
-            required
-          />
+          <label htmlFor="password" style={{ display: "block", marginBottom: 4 }}>
+            รหัสผ่าน
+          </label>
+          <div
+            style={{
+              position: "relative",
+              marginBottom: 12,
+            }}
+          >
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{
+                ...inputBaseStyle,
+                paddingRight: 40,
+                ...(focusedInput === "password" ? inputFocusStyle : {}),
+              }}
+              onFocus={() => setFocusedInput("password")}
+              onBlur={() => setFocusedInput(null)}
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? "ซ่อนรหัสผ่าน" : "แสดงรหัสผ่าน"}
+              style={{
+                position: "absolute",
+                right: 10,
+                top: "50%",
+                transform: "translateY(-50%)",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "#0d6efd",
+                fontSize: 18,
+                userSelect: "none",
+              }}
+              tabIndex={-1}
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </button>
+          </div>
 
-          <label style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
+          <label
+            style={{ display: "flex", alignItems: "center", marginBottom: 12 }}
+          >
             <input
               type="checkbox"
               checked={remember}
@@ -84,16 +180,16 @@ export default function Login() {
 
           <button
             type="submit"
-            style={{
-              width: "100%",
-              padding: 10,
-              fontSize: 16,
-              backgroundColor: "#0d6efd",
-              color: "white",
-              border: "none",
-              borderRadius: 4,
-              cursor: "pointer",
-            }}
+            style={buttonStyle}
+            onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.95)")}
+            onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor)
+            }
           >
             เข้าสู่ระบบ
           </button>
@@ -109,6 +205,7 @@ export default function Login() {
                 borderRadius: 4,
                 textDecoration: "none",
                 display: "inline-block",
+                userSelect: "none",
               }}
             >
               สมัครสมาชิก
@@ -121,6 +218,7 @@ export default function Login() {
                 textDecoration: "underline",
                 display: "inline-block",
                 marginTop: 8,
+                userSelect: "none",
               }}
             >
               ลืมรหัสผ่าน

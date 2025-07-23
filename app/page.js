@@ -6,10 +6,10 @@ export default function Home() {
   return (
     <div
       style={{
-        backgroundImage: 'url("/images/silders/11.png")', // ใส่ URL รูปภาพพื้นหลัง
+        backgroundImage: 'url("/images/silders/11.png")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        minHeight: '100vh', // ให้เต็มหน้าจอแนวตั้ง
+        minHeight: '100vh', 
         width: '100%',
       }}
     >

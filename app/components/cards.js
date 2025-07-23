@@ -9,7 +9,7 @@ export default function Cards() {
 
   return (
     <div className="container my-5 cards-container">
-      {/* โหลดฟอนต์ Anton จาก Google Fonts */}
+     
       <link
         href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
         rel="stylesheet"

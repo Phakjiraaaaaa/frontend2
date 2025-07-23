@@ -43,7 +43,7 @@ export default function Navigation() {
     <nav
       className="navbar navbar-expand-lg"
       style={{
-        backgroundColor: "#f0f0f0",
+        backgroundColor: "#f0f0f0ff",
         borderBottom: "1px solid #ccc",
         padding: "0.75rem 1rem",
       }}
@@ -55,12 +55,12 @@ export default function Navigation() {
          style={{ fontSize: "1.25rem", color: baseColor }}
 >
          <img
-           src="/images/logo.png"alt="โลโก้"
-           width={30}
-           height={30}
+           src="/images/silders/logo.png"alt="โลโก้"
+           width={40}
+           height={40}
            style={{ objectFit: "contain" }}
            />
-            Phakjiraaaaa
+            Sneakerss Brand
       </Link>
 
 

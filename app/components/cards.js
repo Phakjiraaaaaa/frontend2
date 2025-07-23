@@ -59,7 +59,7 @@ export default function CardsCarousel() {
         rel="stylesheet"
       />
       <h2 className="text-center mb-5 animate__animated animate__fadeInDown gradient-text hover-pop custom-font">
-        Nike
+        Sneakerss
       </h2>
 
       <div

@@ -53,7 +53,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mb-4 text-center">
+
+        <div className=" text-center">
           <img src="/images/silders/footer.png" alt="โลโก้บริษัท" width={120} height={130} />
           <img src="/images/silders/footer1.png" alt="โลโก้บริษัท" width={120} height={120} />
           <img src="/images/silders/footer2.png" alt="โลโก้บริษัท" width={120} height={100} />
@@ -64,7 +65,9 @@ export default function Footer() {
           <img src="/images/silders/footer7.png" alt="โลโก้บริษัท" width={120} height={100} />
           <img src="/images/silders/footer8.png" alt="โลโก้บริษัท" width={120} height={130} />
           <img src="/images/silders/footer9.png" alt="โลโก้บริษัท" width={120} height={100} />
-        </div>
+        </div> 
+
+
         
         <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center py-4 my-4 border-top">
           <div className="d-flex align-items-center mb-3 mb-sm-0">

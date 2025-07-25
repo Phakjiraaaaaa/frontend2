@@ -12,7 +12,7 @@ export default function Carousel() {
         if (carouselElement && Carousel) {
           new Carousel(carouselElement, {
             interval: 3000,
-            ride: "carousel", // 
+            ride: "carousel",
             wrap: true,
           });
         }
@@ -24,21 +24,22 @@ export default function Carousel() {
     <div
       id="carouselExample"
       className="carousel slide"
-      data-bs-ride="carousel" 
+      data-bs-ride="carousel"
       style={{
-        width: "800px",
-        height: "350px",
+        width: "100%",
+        maxWidth: "800px",
+        aspectRatio: "16 / 7",
         margin: "40px auto 0",
         overflow: "hidden",
         borderRadius: "8px",
       }}
     >
-      <div className="carousel-inner" style={{ height: "350px" }}>
+      <div className="carousel-inner" style={{ height: "100%" }}>
         {["01.png", "02.jpg", "03.png", "04.jpg", "05.jpg"].map((img, index) => (
           <div
             key={img}
             className={`carousel-item ${index === 0 ? "active" : ""}`}
-            style={{ height: "350px" }}
+            style={{ height: "100%" }}
           >
             <Image
               priority
@@ -47,7 +48,11 @@ export default function Carousel() {
               alt={`Slide ${index + 1}`}
               width={800}
               height={350}
-              style={{ objectFit: "cover", height: "350px" }}
+              style={{
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
             />
           </div>
         ))}

@@ -59,19 +59,19 @@ export default function Footer() {
           <img src="/images/silders/footer1.png" alt="โลโก้บริษัท" width={120} height={120} />
           <img src="/images/silders/footer2.png" alt="โลโก้บริษัท" width={120} height={100} />
           <img src="/images/silders/footer3.png" alt="โลโก้บริษัท" width={120} height={130} />
-          <img src="/images/silders/footer4.png" alt="โลโก้บริษัท" width={100} height={90} />
-          <img src="/images/silders/footer5.png" alt="โลโก้บริษัท" width={120} height={100} />
-          <img src="/images/silders/footer6.png" alt="โลโก้บริษัท" width={120} height={100} />
-          <img src="/images/silders/footer7.png" alt="โลโก้บริษัท" width={120} height={100} />
-          <img src="/images/silders/footer8.png" alt="โลโก้บริษัท" width={120} height={130} />
-          <img src="/images/silders/footer9.png" alt="โลโก้บริษัท" width={120} height={100} />
+          <img src="/images/silders/footer4.png" alt="โลโก้บริษัท" width={100} height={80} />
+          <img src="/images/silders/footer5.png" alt="โลโก้บริษัท" width={120} height={80} />
+          <img src="/images/silders/footer6.png" alt="โลโก้บริษัท" width={100} height={80} />
+          <img src="/images/silders/footer7.png" alt="โลโก้บริษัท" width={120} height={75} />
+          <img src="/images/silders/footer8.png" alt="โลโก้บริษัท" width={110} height={75} />
+          <img src="/images/silders/footer9.png" alt="โลโก้บริษัท" width={120} height={110} />
         </div> 
 
 
         
         <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center py-4 my-4 border-top">
           <div className="d-flex align-items-center mb-3 mb-sm-0">
-            <p className="mb-0">© 2025 Company, Inc. All rights reserved.</p>
+            <p className="mb-0">© 2025 Sneakerss Brand. All rights reserved.</p>
           </div>
 
           <ul className="list-unstyled d-flex">

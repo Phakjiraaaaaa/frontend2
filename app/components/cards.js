@@ -47,10 +47,7 @@ export default function CardsCarousel() {
                     key={index}
                     className="col-12 col-sm-6 col-md-4 mb-4 d-flex justify-content-center"
                   >
-                    <div
-                      className="card shadow-lg hover-scale fixed-card-size"
-                      style={{ transition: "transform 0.3s ease" }}
-                    >
+                    <div className="card shadow-lg hover-scale fixed-card-size" style={{ transition: "transform 0.3s ease" }}>
                       <div className="image-wrapper">
                         <img
                           src={item.img}
@@ -78,30 +75,18 @@ export default function CardsCarousel() {
         </div>
 
         {/* ปุ่มควบคุม */}
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#cardsCarousel"
-          data-bs-slide="prev"
-          style={{ width: "5%", opacity: 0.7 }}
-        >
+        <button className="carousel-control-prev" type="button" data-bs-target="#cardsCarousel" data-bs-slide="prev" style={{ width: "5%", opacity: 0.7 }}>
           <span className="carousel-control-prev-icon" aria-hidden="true" />
           <span className="visually-hidden">Previous</span>
         </button>
 
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#cardsCarousel"
-          data-bs-slide="next"
-          style={{ width: "5%", opacity: 0.7 }}
-        >
+        <button className="carousel-control-next" type="button" data-bs-target="#cardsCarousel" data-bs-slide="next" style={{ width: "5%", opacity: 0.7 }}>
           <span className="carousel-control-next-icon" aria-hidden="true" />
           <span className="visually-hidden">Next</span>
         </button>
       </div>
 
-      {/* CSS Styling */}
+      {/*  CSS */}
       <style jsx>{`
         .cards-container {
           background-color: #f0f0f0;
@@ -141,8 +126,8 @@ export default function CardsCarousel() {
         }
 
         .fixed-card-size {
-          width: 320px;
-          height: 400px;
+          width: 280px;
+          height: 360px;
           display: flex;
           flex-direction: column;
         }
@@ -162,11 +147,14 @@ export default function CardsCarousel() {
           display: block;
         }
 
-        .fixed-img-nb {
-          object-position: center top !important;
-          position: relative;
-          top: -10px;
-        }
+       .fixed-img-nb {
+         object-fit: contain !important; 
+         object-position: center center !important; 
+         position: relative;
+         top: -5px;                    
+         max-height: 90%;                  
+         background-color: #fff;  
+         }   
 
         @media (max-width: 576px) {
           .custom-font {
@@ -184,11 +172,7 @@ export default function CardsCarousel() {
         }
       `}</style>
 
-      {/* Animate.css CDN */}
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-      />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     </div>
   );
 }

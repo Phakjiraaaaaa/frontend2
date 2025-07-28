@@ -30,7 +30,7 @@ export default function Service() {
 
           {/* บริการ 3 */}
           <div className="bg-white shadow-lg rounded-xl p-6 text-center hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out">
-            <div className="bg-pink-1ฟ00 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-pink-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
               <img src="/images/silders/10.png" alt="แนะนำขนาด" className="w-10 h-10" />
             </div>
             <h2 className="text-xl font-bold text-pink-800 mb-2">แนะนำขนาดรองเท้า</h2>

@@ -1,9 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Inter } from 'next/font/google';
-import Navigation from './components/Navigation';
-import Footer from './components/Footer';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { Inter } from "next/font/google";
+import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
+import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -19,15 +19,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
-        <div className='container-fluid'>
-          <div className='row'>
-          <div className='col'>
-        <Navigation />
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col">
+              <Navigation />
+            </div>
+          </div>
+          {children}
+          <Footer />
         </div>
-        </div>
-        {children}
-        <Footer />
-      </div>
       </body>
     </html>
   );

@@ -37,9 +37,9 @@ export default function Footer() {
               <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">แจ้งข้อกังวล</a></li>
             </ul>
           </div>
-            
-                 
-          
+
+
+
           <div className="col-md-5 offset-md-1 mb-3">
             <form>
               <h5>Subscribe to our newsletter</h5>
@@ -54,21 +54,23 @@ export default function Footer() {
         </div>
 
 
-        <div className=" text-center">
-          <img src="/images/silders/footer.png" alt="โลโก้บริษัท" width={120} height={130} />
-          <img src="/images/silders/footer1.png" alt="โลโก้บริษัท" width={120} height={120} />
-          <img src="/images/silders/footer2.png" alt="โลโก้บริษัท" width={120} height={100} />
-          <img src="/images/silders/footer3.png" alt="โลโก้บริษัท" width={120} height={130} />
-          <img src="/images/silders/footer4.png" alt="โลโก้บริษัท" width={100} height={80} />
-          <img src="/images/silders/footer5.png" alt="โลโก้บริษัท" width={120} height={80} />
-          <img src="/images/silders/footer6.png" alt="โลโก้บริษัท" width={100} height={80} />
-          <img src="/images/silders/footer7.png" alt="โลโก้บริษัท" width={120} height={75} />
-          <img src="/images/silders/footer8.png" alt="โลโก้บริษัท" width={110} height={75} />
-          <img src="/images/silders/footer9.png" alt="โลโก้บริษัท" width={120} height={110} />
-        </div> 
+        <div className="shoe-gallery text-center">
+          <img src="/images/silders/footer.png" alt="รองเท้า" className="shoe-img" />
+          <img src="/images/silders/footer1.png" alt="รองเท้า" className="shoe-img" />
+          <img src="/images/silders/footer2.png" alt="รองเท้า" className="shoe-img" />
+          <img src="/images/silders/footer3.png" alt="รองเท้า" className="shoe-img" />
+          <img src="/images/silders/footer4.png" alt="รองเท้า" className="shoe-img" />
+          <img src="/images/silders/footer5.png" alt="รองเท้า" className="shoe-img" />
+          <img src="/images/silders/footer6.png" alt="รองเท้า" className="shoe-img" />
+          <img src="/images/silders/footer7.png" alt="รองเท้า" className="shoe-img" />
+          <img src="/images/silders/footer8.png" alt="รองเท้า" className="shoe-img" />
+          <img src="/images/silders/footer9.png" alt="รองเท้า" className="shoe-img" />
+        </div>
 
 
-        
+
+
+
         <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center py-4 my-4 border-top">
           <div className="d-flex align-items-center mb-3 mb-sm-0">
             <p className="mb-0">© 2025 Sneakerss Brand. All rights reserved.</p>

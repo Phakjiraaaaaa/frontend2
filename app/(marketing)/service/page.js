@@ -9,7 +9,7 @@ export default function Service() {
           {/* บริการ 1 */}
           <div className="bg-white shadow-lg rounded-xl p-6 text-center hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out">
             <div className="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="/images/silders/08.jpg" alt="จัดส่งสินค้า" className="w-10 h-10" />
+              <img src="/images/silders/08.jpg" alt="จัดส่งสินค้า" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
             <h2 className="text-xl font-bold text-blue-800 mb-2">จัดส่งรวดเร็ว</h2>
             <p className="text-gray-600">
@@ -20,7 +20,7 @@ export default function Service() {
           {/* บริการ 2 */}
           <div className="bg-white shadow-lg rounded-xl p-6 text-center hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out">
             <div className="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="/images/silders/09.png" alt="ซ่อมรองเท้า" className="w-10 h-10" />
+              <img src="/images/silders/09.png" alt="ซ่อมรองเท้า" style={{ maxWidth: '100%', height: 'auto' }}  />
             </div>
             <h2 className="text-xl font-bold text-green-800 mb-2">บริการซ่อมรองเท้า</h2>
             <p className="text-gray-600">
@@ -31,7 +31,7 @@ export default function Service() {
           {/* บริการ 3 */}
           <div className="bg-white shadow-lg rounded-xl p-6 text-center hover:scale-105 hover:shadow-2xl transition duration-300 ease-in-out">
             <div className="bg-pink-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <img src="/images/silders/10.png" alt="แนะนำขนาด" className="w-10 h-10" />
+              <img src="/images/silders/10.png" alt="แนะนำขนาด" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
             <h2 className="text-xl font-bold text-pink-800 mb-2">แนะนำขนาดรองเท้า</h2>
             <p className="text-gray-600">

@@ -14,7 +14,6 @@ export default function Login() {
   const router = useRouter();
 
   useEffect(() => {
-    // เริ่มแอนิเมชัน fade-in
     setFadeIn(true);
   }, []);
 
@@ -26,20 +25,19 @@ export default function Login() {
       return;
     }
 
-    alert(
-      `เข้าสู่ระบบสำเร็จ!\nUsername: ${username}\nจำฉันไว้: ${
-        remember ? "ใช่" : "ไม่ใช่"
-      }`
-    );
+    alert(`เข้าสู่ระบบสำเร็จ!\nUsername: ${username}\nจำฉันไว้: ${remember ? "ใช่" : "ไม่ใช่"}`);
     router.push("/home");
   };
 
+  // ✅ ป้องกัน warning: ใช้ borderWidth, borderStyle, borderColor
   const inputBaseStyle = {
     width: "100%",
     padding: 8,
     marginBottom: 12,
+    borderWidth: "1.5px",
+    borderStyle: "solid",
+    borderColor: "#ccc",
     borderRadius: 4,
-    border: "1.5px solid #ccc",
     fontSize: 16,
     transition: "border-color 0.3s, box-shadow 0.3s",
   };
@@ -62,9 +60,7 @@ export default function Login() {
     transition: "background-color 0.3s, transform 0.1s",
   };
 
-  const buttonHoverStyle = {
-    backgroundColor: "#084bcc",
-  };
+  const buttonHoverStyle = { backgroundColor: "#084bcc" };
 
   return (
     <div
@@ -85,7 +81,7 @@ export default function Login() {
     >
       <main
         style={{
-          width: "150%",
+          width: "100%",
           maxWidth: 400,
           padding: "2rem",
           borderRadius: 12,
@@ -106,30 +102,24 @@ export default function Login() {
         </h1>
 
         <form onSubmit={handleSubmit} noValidate>
+          {/* Username */}
           <label htmlFor="username">ชื่อผู้ใช้</label>
           <input
             type="text"
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            style={{
-              ...inputBaseStyle,
-              ...(focusedInput === "username" ? inputFocusStyle : {}),
-            }}
+            style={{ ...inputBaseStyle, ...(focusedInput === "username" ? inputFocusStyle : {}) }}
             onFocus={() => setFocusedInput("username")}
             onBlur={() => setFocusedInput(null)}
             required
           />
 
+          {/* Password */}
           <label htmlFor="password" style={{ display: "block", marginBottom: 4 }}>
             รหัสผ่าน
           </label>
-          <div
-            style={{
-              position: "relative",
-              marginBottom: 12,
-            }}
-          >
+          <div style={{ position: "relative", marginBottom: 12 }}>
             <input
               type={showPassword ? "text" : "password"}
               id="password"
@@ -166,9 +156,8 @@ export default function Login() {
             </button>
           </div>
 
-          <label
-            style={{ display: "flex", alignItems: "center", marginBottom: 12 }}
-          >
+          {/* Remember me */}
+          <label style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
             <input
               type="checkbox"
               checked={remember}
@@ -178,22 +167,20 @@ export default function Login() {
             จำฉันไว้
           </label>
 
+          {/* Login Button */}
           <button
             type="submit"
             style={buttonStyle}
             onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.95)")}
             onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-            onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)
-            }
-            onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor)
-            }
+            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)}
+            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor)}
           >
             เข้าสู่ระบบ
           </button>
 
+          {/* Links */}
           <div style={{ marginTop: 16, textAlign: "center" }}>
             <Link
               href="/register"
@@ -205,7 +192,6 @@ export default function Login() {
                 borderRadius: 4,
                 textDecoration: "none",
                 display: "inline-block",
-                userSelect: "none",
               }}
             >
               สมัครสมาชิก
@@ -218,7 +204,6 @@ export default function Login() {
                 textDecoration: "underline",
                 display: "inline-block",
                 marginTop: 8,
-                userSelect: "none",
               }}
             >
               ลืมรหัสผ่าน

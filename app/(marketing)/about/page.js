@@ -7,8 +7,6 @@ export default function About() {
     
       <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
         
-        <h1 className="text-4xl text-red-700 mb-6">About</h1>
-
         <div className="flex justify-center items-center mb-6">
           <Image
             src="/images/silders/07.png"

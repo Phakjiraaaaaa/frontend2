@@ -1,7 +1,6 @@
 export default function Contact() {
   return (
     <>
-      <h1 className="text-4xl text-center text-blue-700 mb-6">Contact Page</h1>
       <div className="container">
         <div
           className="row row-cols-1 gy-5 wow fadeInUp"

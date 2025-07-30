@@ -1,7 +1,6 @@
 export default function Service() {
   return (
     <>
-      <h1 className="text-4xl text-center text-blue-700 font-bold mb-10 underline decoration-blue-300">บริการของเรา</h1>
 
       <div className="bg-gradient-to-b from-blue-50 to-white py-10">
         <div className="container mx-auto px-4 grid gap-8 grid-cols-1 md:grid-cols-3">

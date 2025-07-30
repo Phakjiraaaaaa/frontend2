@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="col-6 col-md-2 mb-3">
             <h5>บริษัท</h5>
             <ul className="nav flex-column">
-              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">เกี่ยวกับ Nike</a></li>
+              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">เกี่ยวกับเรา</a></li>
               <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ร่วมงานกับเรา</a></li>
               <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ร่วมลงทุนกับเรา</a></li>
               <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ความยั่งยืน</a></li>

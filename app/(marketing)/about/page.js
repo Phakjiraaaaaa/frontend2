@@ -13,13 +13,14 @@ export default function About() {
     role: "Online shoe seller & owner Sneakerss Brand",
     bio: "ฉันเป็นแม่ค้ารองเท้าออนไลน์ที่มีความหลงใหลในแฟชั่นและการบริการลูกค้า ด้วยประสบการณ์หลายปีในการขายผ่านช่องทางโซเชียล ฉันมุ่งมั่นนำเสนอรองเท้าคุณภาพดีในราคาจับต้องได้ พร้อมบริการที่จริงใจ",
     quote: "ความมั่นใจเริ่มต้นที่รองเท้าคู่โปรดของคุณ",
-    skills: [
-      "Online Marketing",
-      "Product Photography",
-      "Customer Service",
-      "Social Media Management",
-      "Brand Building",
-    ],
+  skills: [
+  { name: "การตลาดออนไลน์", description: "รู้จักช่องทางการโปรโมตสินค้าทั้ง Facebook, IG, TikTok เพื่อเพิ่มยอดขาย" },
+  { name: "การถ่ายภาพสินค้า", description: "ถ่ายรองเท้าให้ดูโดดเด่น ดึงดูดลูกค้าด้วยภาพที่สวยและดูจริง" },
+  { name: "บริการลูกค้า", description: "ตอบแชทไว ให้ข้อมูลครบ ดูแลลูกค้าด้วยความจริงใจ" },
+  { name: "การจัดการโซเชียลมีเดีย", description: "บริหารเพจให้มีชีวิตชีวา อัปเดตตลอด สร้างการมีส่วนร่วมกับลูกค้า" },
+  { name: "การสร้างแบรนด์", description: "ออกแบบร้านให้ดูน่าเชื่อถือ มีสไตล์เฉพาะตัวให้ลูกค้าจดจำ" },
+],
+
     education: [
       {
         degree: "ระดับประกาศนียบัตรวิชาชีพชั้นสูง",
@@ -45,11 +46,7 @@ export default function About() {
       },
     ],
     socialMedia: [
-      {
-        platform: "Instagram",
-        handle: "@_phakjiraaaaaa",
-        icon: "bi-instagram",
-      },
+      { platform: "Instagram", handle: "@_phakjiraaaaaa", icon: "bi-instagram" },
       { platform: "Facebook", handle: "Sneakerss Brand", icon: "bi-facebook" },
       { platform: "TikTok", handle: "@phaisneakers", icon: "bi-tiktok" },
     ],
@@ -65,7 +62,7 @@ export default function About() {
             style={{ width: "300px", height: "300px", margin: "0 auto" }}
           >
             <Image
-              src="/images/f1.jpg"
+              src="/images/silders/Phai.jpg"
               alt={personalInfo.name}
               width={300}
               height={300}

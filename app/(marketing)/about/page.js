@@ -13,13 +13,31 @@ export default function About() {
     role: "Online shoe seller & owner Sneakerss Brand",
     bio: "ฉันเป็นแม่ค้ารองเท้าออนไลน์ที่มีความหลงใหลในแฟชั่นและการบริการลูกค้า ด้วยประสบการณ์หลายปีในการขายผ่านช่องทางโซเชียล ฉันมุ่งมั่นนำเสนอรองเท้าคุณภาพดีในราคาจับต้องได้ พร้อมบริการที่จริงใจ",
     quote: "ความมั่นใจเริ่มต้นที่รองเท้าคู่โปรดของคุณ",
-  skills: [
-  { name: "การตลาดออนไลน์", description: "รู้จักช่องทางการโปรโมตสินค้าทั้ง Facebook, IG, TikTok เพื่อเพิ่มยอดขาย" },
-  { name: "การถ่ายภาพสินค้า", description: "ถ่ายรองเท้าให้ดูโดดเด่น ดึงดูดลูกค้าด้วยภาพที่สวยและดูจริง" },
-  { name: "บริการลูกค้า", description: "ตอบแชทไว ให้ข้อมูลครบ ดูแลลูกค้าด้วยความจริงใจ" },
-  { name: "การจัดการโซเชียลมีเดีย", description: "บริหารเพจให้มีชีวิตชีวา อัปเดตตลอด สร้างการมีส่วนร่วมกับลูกค้า" },
-  { name: "การสร้างแบรนด์", description: "ออกแบบร้านให้ดูน่าเชื่อถือ มีสไตล์เฉพาะตัวให้ลูกค้าจดจำ" },
-],
+    skills: [
+      {
+        name: "การตลาดออนไลน์",
+        description:
+          "รู้จักช่องทางการโปรโมตสินค้าทั้ง Facebook, IG,TikTok เพื่อเพิ่มยอดขาย",
+      },
+      {
+        name: "การถ่ายภาพสินค้า",
+        description:
+          "ถ่ายรองเท้าให้ดูโดดเด่นดึงดูดลูกค้าด้วยภาพที่สวยและดูจริง",
+      },
+      {
+        name: "บริการลูกค้า",
+        description: "ตอบแชทไว ให้ข้อมูลครบ ดูแลลูกค้าด้วยความจริงใจ",
+      },
+      {
+        name: "การจัดการโซเชียลมีเดีย",
+        description:
+          "บริหารเพจให้มีชีวิตชีวาอัปเดตตลอดสร้างการมีส่วนร่วมกับลูกค้า",
+      },
+      {
+        name: "การสร้างแบรนด์",
+        description: "ออกแบบร้านให้ดูน่าเชื่อถือมีสไตล์เฉพาะตัวให้ลูกค้าจดจำ",
+      },
+    ],
 
     education: [
       {
@@ -46,7 +64,11 @@ export default function About() {
       },
     ],
     socialMedia: [
-      { platform: "Instagram", handle: "@_phakjiraaaaaa", icon: "bi-instagram" },
+      {
+        platform: "Instagram",
+        handle: "@_phakjiraaaaaa",
+        icon: "bi-instagram",
+      },
       { platform: "Facebook", handle: "Sneakerss Brand", icon: "bi-facebook" },
       { platform: "TikTok", handle: "@phaisneakers", icon: "bi-tiktok" },
     ],
@@ -234,7 +256,9 @@ export default function About() {
                   <div className="col-md-6 mb-4">
                     <div className="card border-0 shadow-sm h-100">
                       <div className="card-body">
-                        <h5 className="card-title mb-3"><strong>แรงบันดาลใจ</strong></h5>
+                        <h5 className="card-title mb-3">
+                          <strong>แรงบันดาลใจ</strong>
+                        </h5>
                         <p className="card-text">
                           แรงบันดาลใจของฉันเริ่มจากความรักในรองเท้าและแฟชั่น
                           ฉันอยากให้ทุกคนที่ใส่รองเท้าของฉันรู้สึกมั่นใจและโดดเด่นในทุกก้าวเดิน
@@ -249,15 +273,15 @@ export default function About() {
                   <div className="col-12 mb-4">
                     <div className="card border-0 shadow-sm">
                       <div className="card-body">
-                        <h5 className="card-title mb-3"><strong>แนวคิดในการขายรองเท้า
-                          </strong></h5>
+                        <h5 className="card-title mb-3">
+                          <strong>แนวคิดในการขายรองเท้า</strong>
+                        </h5>
                         <p className="card-text">
                           สำหรับฉัน ฉันเชื่อว่า
                           การขายรองเท้าไม่ได้เป็นแค่การขายสินค้าแต่เป็นการส่งต่อความมั่นใจและ
                           ความสุขให้กับลูกค้า
                           ฉันเชื่อว่ารองเท้าที่ดีจะช่วยให้ทุกคนก้าวเดินได้อย่างมั่นใจและรู้สึก
-                          สวยในแบบของตัวเอง
-                          ดังนั้นทุกคู่ที่ขาย
+                          สวยในแบบของตัวเอง ดังนั้นทุกคู่ที่ขาย
                           ฉันใส่ใจเลือกสรรทั้งคุณภาพและดีไซน์
                           เพื่อให้เหมาะกับสไตล์และความสบายของลูกค้าทุกคน
                           ความพึงพอใจและรอยยิ้มของลูกค้าคือสิ่งที่ทำให้ธุรกิจนี้มีความหมายและ
@@ -270,7 +294,6 @@ export default function About() {
               </div>
             )}
 
-            {/* Skills Tab */}
             {activeTab === "skills" && (
               <div className="skills-content">
                 <h3 className="mb-4" style={{ color: "#7ec4cf" }}>
@@ -281,38 +304,48 @@ export default function About() {
                   <div className="col-md-6 mb-4">
                     <div className="card border-0 shadow-sm h-100">
                       <div className="card-body">
-                        <h5 className="card-title mb-3">ทักษะหลัก</h5>
+                        <h5 className="card-title mb-3">
+                          <strong>ทักษะหลัก</strong>
+                        </h5>
                         <ul className="list-group list-group-flush">
                           {personalInfo.skills.map((skill, index) => (
                             <li
                               key={index}
-                              className="list-group-item border-0 d-flex align-items-center"
+                              className="list-group-item border-0 d-flex flex-column align-items-start"
                             >
-                              <div
-                                style={{
-                                  width: "30px",
-                                  height: "30px",
-                                  background: "#7ec4cf",
-                                  borderRadius: "50%",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  marginRight: "15px",
-                                }}
-                              >
-                                <i className="bi bi-check-lg text-white"></i>
+                              <div className="d-flex align-items-center mb-1">
+                                <div
+                                  style={{
+                                    width: "30px",
+                                    height: "30px",
+                                    background: "#7ec4cf",
+                                    borderRadius: "50%",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    marginRight: "15px",
+                                  }}
+                                >
+                                  <i className="bi bi-check-lg text-white"></i>
+                                </div>
+                                <strong>{skill.name}</strong>
                               </div>
-                              {skill}
+                              <small className="text-muted ps-5">
+                                {skill.description}
+                              </small>
                             </li>
                           ))}
                         </ul>
                       </div>
                     </div>
                   </div>
+
                   <div className="col-md-6 mb-4">
                     <div className="card border-0 shadow-sm h-100">
                       <div className="card-body">
-                        <h5 className="card-title mb-3">การศึกษา</h5>
+                        <h5 className="card-title mb-3">
+                          <strong>การศึกษา</strong>
+                        </h5>
                         <ul className="list-group list-group-flush">
                           {personalInfo.education.map((edu, index) => (
                             <li
@@ -335,59 +368,6 @@ export default function About() {
                             </li>
                           ))}
                         </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12 mb-4">
-                    <div className="card border-0 shadow-sm">
-                      <div className="card-body text-center p-4">
-                        <h5 className="card-title mb-3">
-                          สถานที่ท่องเที่ยวที่ประทับใจ
-                        </h5>
-                        <div className="row">
-                          <div className="col-md-4 mb-3">
-                            <Image
-                              src="/images/f2.jpg"
-                              alt="ประตูท่าแพ"
-                              width={300}
-                              height={200}
-                              className="rounded-3 shadow-sm img-fluid"
-                              style={{
-                                objectFit: "cover",
-                                height: "200px",
-                                width: "100%",
-                              }}
-                            />
-                          </div>
-                          <div className="col-md-4 mb-3">
-                            <Image
-                              src="/images/service2.jpg"
-                              alt="สถานที่ท่องเที่ยว 2"
-                              width={300}
-                              height={200}
-                              className="rounded-3 shadow-sm img-fluid"
-                              style={{
-                                objectFit: "cover",
-                                height: "200px",
-                                width: "100%",
-                              }}
-                            />
-                          </div>
-                          <div className="col-md-4 mb-3">
-                            <Image
-                              src="/images/service6.jpg"
-                              alt="สถานที่ท่องเที่ยว 3"
-                              width={300}
-                              height={200}
-                              className="rounded-3 shadow-sm img-fluid"
-                              style={{
-                                objectFit: "cover",
-                                height: "200px",
-                                width: "100%",
-                              }}
-                            />
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -423,8 +403,8 @@ export default function About() {
                         </h6>
                         <p className="card-text">
                           {index === 0
-                            ? "ในฐานะไกด์นำเที่ยวอิสระ ฉันได้พัฒนาโปรแกรมท่องเที่ยวที่มีเอกลักษณ์เฉพาะตัว นำเสนอประสบการณ์ท่องเที่ยวที่แตกต่างจากทัวร์ทั่วไป เน้นการสัมผัสวัฒนธรรมท้องถิ่นและธรรมชาติอย่างใกล้ชิด"
-                            : "ทำงานร่วมกับทีมวางแผนทัวร์ในการพัฒนาเส้นทางท่องเที่ยวใหม่ๆ ช่วยในการวิจัยสถานที่ท่องเที่ยว ประสานงานกับพันธมิตรท้องถิ่น และดูแลความพึงพอใจของลูกค้า"}
+                            ? "ในฐานะเจ้าของร้านรองเท้าออนไลน์ ฉันดูแลตั้งแต่การคัดเลือกรองเท้าคุณภาพ การถ่ายภาพสินค้า และการโปรโมตร้านผ่านช่องทางโซเชียลมีเดีย เพื่อสร้างแบรนด์ที่น่าเชื่อถือและได้รับความนิยมในกลุ่มลูกค้าแฟชั่น"
+                            : "ร่วมงานกับทีมการตลาดในการวางแผนแคมเปญโปรโมชันและการจัดการบริการลูกค้าอย่างมืออาชีพ เพื่อเพิ่มยอดขายและสร้างความพึงพอใจสูงสุดให้กับลูกค้า"}
                         </p>
                         <div className="mt-3">
                           <h6 className="mb-2">ผลงานสำคัญ:</h6>
@@ -432,20 +412,20 @@ export default function About() {
                             <li className="mb-2 d-flex align-items-center">
                               <i
                                 className="bi bi-check-circle-fill me-2"
-                                style={{ color: "#b892ff" }}
+                                style={{ color: "#ff85a2" }}
                               ></i>
                               {index === 0
-                                ? "พัฒนาทัวร์ 'Hidden Thailand' ที่นำเสนอสถานที่ท่องเที่ยวที่ยังไม่เป็นที่รู้จักมากนัก"
-                                : "มีส่วนร่วมในการพัฒนาเส้นทางท่องเที่ยวเชิงวัฒนธรรมที่ได้รับความนิยมสูงสุดของบริษัท"}
+                                ? "สร้างแบรนด์ Sneakerss Brand ที่ได้รับความนิยมในกลุ่มลูกค้าแฟชั่นรองเท้า"
+                                : "ออกแบบแคมเปญโปรโมชันออนไลน์ที่เพิ่มยอดขายสูงสุด 30% ในช่วงเทศกาล"}
                             </li>
                             <li className="mb-2 d-flex align-items-center">
                               <i
                                 className="bi bi-check-circle-fill me-2"
-                                style={{ color: "#b892ff" }}
+                                style={{ color: "#ff85a2" }}
                               ></i>
                               {index === 0
-                                ? "สร้างเครือข่ายกับชุมชนท้องถิ่นเพื่อนำเสนอประสบการณ์ท่องเที่ยวที่แท้จริง"
-                                : "พัฒนาระบบการประเมินความพึงพอใจของลูกค้าที่ช่วยปรับปรุงคุณภาพการบริการ"}
+                                ? "พัฒนาการถ่ายภาพสินค้าและการจัดการโซเชียลมีเดียเพื่อดึงดูดลูกค้าใหม่"
+                                : "สร้างความสัมพันธ์ลูกค้าผ่านบริการหลังการขายที่ใส่ใจและตอบกลับรวดเร็ว"}
                             </li>
                           </ul>
                         </div>
@@ -454,12 +434,18 @@ export default function About() {
                   ))}
                 </div>
                 <div className="card border-0 shadow-sm">
-                  <div className="card-body p-4 text-center">
-                    <h5 className="card-title mb-3">เป้าหมายในอนาคต</h5>
-                    <p className="card-text">
-                      ฉันตั้งใจที่จะขยายธุรกิจนำเที่ยวให้ครอบคลุมภูมิภาคอาเซียน
-                      และมุ่งมั่นที่จะส่งเสริมการท่องเที่ยวอย่างยั่งยืน 100%
-                      ในอนาคตฉันหวังว่าจะได้เขียนหนังสือแนะนำการท่องเที่ยวและสร้างแพลตฟอร์มออนไลน์เพื่อเชื่อมโยงนักท่องเที่ยวกับชุมชนท้องถิ่น
+                  <div className="card-body p-4">
+                    <h5
+                      className="card-title mb-3"
+                      style={{ color: "#ff85a2" }}
+                    >
+                      ประสบการณ์ขายรองเท้าออนไลน์
+                    </h5>
+                    <p>
+                      ฉันเริ่มต้นจากการไลฟ์สดขายรองเท้าผ้าใบคุณภาพดีที่คัดสรรมาอย่างดี
+                      พร้อมให้คำปรึกษาและบริการหลังการขายอย่างจริงใจ ผ่านช่องทาง
+                      Facebook, Instagram และ TikTok
+                      เพื่อสร้างความสัมพันธ์ที่ดีกับลูกค้าและเพิ่มยอดขายอย่างต่อเนื่อง
                     </p>
                   </div>
                 </div>
@@ -469,46 +455,54 @@ export default function About() {
         </div>
       </div>
 
-      {/* Contact Section */}
-      <div className="row mt-5">
-        <div className="col-12 text-center">
-          <div
-            className="p-4 rounded-4 shadow-sm"
-            style={{ background: "rgba(255, 133, 162, 0.1)" }}
-          >
-            <h3 className="mb-3" style={{ color: "#ff85a2" }}>
-              สนใจเดินทางกับฉัน
-            </h3>
-            <p className="mb-4">
-              หากคุณสนใจเดินทางท่องเที่ยวหรือมีคำถามเกี่ยวกับสถานที่ท่องเที่ยว
-              สามารถติดต่อได้ตามช่องทางด้านล่าง
-            </p>
-            <div className="d-flex justify-content-center gap-3">
-              <button
-                className="btn px-4 py-2"
-                style={{
-                  background: "#ff85a2",
-                  color: "white",
-                  borderRadius: "30px",
-                }}
-              >
-                <i className="bi bi-envelope-fill me-2"></i>
-                ส่งอีเมล
-              </button>
-              <button
-                className="btn px-4 py-2"
-                style={{
-                  background: "#7ec4cf",
-                  color: "white",
-                  borderRadius: "30px",
-                }}
-              >
-                <i className="bi bi-chat-fill me-2"></i>
-                แชทกับฉัน
-              </button>
-            </div>
-          </div>
+      <div
+        className="contact-container p-4 rounded-4 shadow-sm"
+        style={{ backgroundColor: "#fff" }}
+      >
+        <h3 style={{ color: "#ff85a2", marginBottom: "1rem" }}>ติดต่อฉัน</h3>
+        <p style={{ marginBottom: "1.5rem" }}>
+          หากคุณสนใจรองเท้าคุณภาพและบริการดี ๆ จากฉัน สามารถติดต่อได้ที่:
+        </p>
+
+        <div className="buttons-wrapper d-flex flex-column gap-3">
+          {personalInfo.socialMedia.map((social, index) => (
+            <a
+              key={index}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-button d-flex align-items-center"
+            >
+              <i className={`${social.icon} me-2`}></i>
+              <strong>{social.platform}:</strong>&nbsp;{social.handle}
+            </a>
+          ))}
         </div>
+
+        <style jsx>{`
+          .social-button {
+            padding: 12px 20px;
+            border-radius: 30px;
+            background-color: #ffdee4;
+            color: #ff85a2;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border: 2px solid transparent;
+            max-width: 320px;
+          }
+
+          .social-button i {
+            font-size: 1.3rem;
+          }
+
+          .social-button:hover {
+            background-color: #ff85a2;
+            color: white;
+            border-color: #ff85a2;
+            text-decoration: none;
+          }
+        `}</style>
       </div>
     </div>
   );

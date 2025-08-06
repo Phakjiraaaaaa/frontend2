@@ -1,26 +1,31 @@
 "use client";
+
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
+  const [focused, setFocused] = useState(false);
+
+  useEffect(() => {
+    setFadeIn(true);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ตรวจสอบความถูกต้องของอีเมล
     if (!email || !email.includes("@") || !email.includes(".")) {
       setError("กรุณากรอกอีเมลให้ถูกต้อง");
       return;
     }
 
-    // ล้าง error และเริ่มโหลด
     setError("");
     setLoading(true);
 
-    // สมมติว่าเรียก API สำเร็จ
     setTimeout(() => {
       setSuccess(true);
       setEmail("");
@@ -28,7 +33,6 @@ export default function ForgotPassword() {
     }, 2000);
   };
 
-  // ปิดข้อความ success อัตโนมัติ
   useEffect(() => {
     if (success) {
       const timer = setTimeout(() => setSuccess(false), 4000);
@@ -36,85 +40,150 @@ export default function ForgotPassword() {
     }
   }, [success]);
 
+  const inputStyle = {
+    width: "100%",
+    padding: "10px",
+    marginBottom: "12px",
+    borderRadius: "4px",
+    border: "1.5px solid #ccc",
+    fontSize: "16px",
+    outline: "none",
+    transition: "border-color 0.3s, box-shadow 0.3s",
+    ...(focused
+      ? {
+          borderColor: "#0d6efd",
+          boxShadow: "0 0 5px 2px rgba(13, 110, 253, 0.4)",
+        }
+      : {}),
+  };
+
+  const buttonStyle = {
+    width: "100%",
+    padding: "10px",
+    fontSize: "16px",
+    backgroundColor: "#0d6efd",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    transition: "background-color 0.3s, transform 0.1s",
+  };
+
   return (
     <div
-      className="container mt-5"
       style={{
-        maxWidth: "400px",
-        border: "1px solid #ccc",
-        borderRadius: "5%",
-        padding: "20px",
-        boxShadow: "0 4px 8px rgba(0,0,0,0.1)"
+        position: "relative",
+        height: "100vh",
+        width: "100%",
+        backgroundImage: 'url("/images/silders/bg.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        opacity: fadeIn ? 1 : 0,
+        transition: "opacity 1s ease-in",
       }}
     >
-      <h1 className="text-center mb-4">ลืมรหัสผ่าน</h1>
+      <main
+        style={{
+          width: "100%",
+          maxWidth: 400,
+          padding: "2rem",
+          borderRadius: 12,
+          backgroundColor: "rgba(175, 175, 175, 0.95)",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+        }}
+      >
+        <h1
+          style={{
+            textAlign: "center",
+            color: "#0d6efd",
+            marginBottom: "1.5rem",
+            userSelect: "none",
+          }}
+        >
+          ลืมรหัสผ่าน
+        </h1>
 
-      {success && (
-        <div className="alert alert-success" role="alert">
-          ส่งลิงก์รีเซ็ตรหัสผ่านเรียบร้อย! โปรดตรวจสอบอีเมลของคุณ
-        </div>
-      )}
+        {success && (
+          <div
+            style={{
+              backgroundColor: "#d1e7dd",
+              color: "#0f5132",
+              padding: "10px",
+              borderRadius: "5px",
+              marginBottom: "1rem",
+              textAlign: "center",
+            }}
+          >
+            ส่งลิงก์รีเซ็ตรหัสผ่านเรียบร้อย! โปรดตรวจสอบอีเมลของคุณ
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">อีเมล</label>
+        <form onSubmit={handleSubmit} noValidate>
+          <label htmlFor="email">อีเมล</label>
           <input
             type="email"
             id="email"
-            className="form-control"
             placeholder="กรอกอีเมลของคุณ"
-            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
             disabled={loading}
+            required
+            style={inputStyle}
           />
           {error && (
-            <div className="text-danger small mt-1">
+            <div style={{ color: "red", fontSize: "14px", marginBottom: "12px" }}>
               {error}
             </div>
           )}
-        </div>
 
-        <div className="d-grid mb-4">
-          {loading ? (
-            <button className="btn btn-secondary btn-lg py-3" disabled>
-              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-              กำลังส่ง...
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="btn btn-lg py-3"
+          <button
+            type="submit"
+            disabled={loading || success}
+            style={{
+              ...buttonStyle,
+              backgroundColor: loading || success ? "#6c757d" : "#0d6efd",
+            }}
+            onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.95)")}
+            onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+          >
+            {loading ? (
+              <>
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                กำลังส่ง...
+              </>
+            ) : (
+              <>
+                <i className="bi bi-envelope me-2"></i>
+                ยืนยัน
+              </>
+            )}
+          </button>
+
+          <div style={{ marginTop: "16px", textAlign: "center" }}>
+            <Link
+              href="/login"
               style={{
-                background: 'linear-gradient(135deg, #ff0055ff, #325ab7ff)',
-                border: 'none',
-                borderRadius: '12px',
-                color: 'white',
-                fontWeight: '600',
-                transition: 'all 0.3s ease'
+                color: "#0d6efd",
+                textDecoration: "underline",
+                fontWeight: "bold",
               }}
-              onMouseOver={(e) => {
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.3)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = 'none';
-              }}
-              disabled={loading || success}
             >
-              <i className="bi bi-envelope-check me-2"></i>
-              ยืนยัน
-            </button>
-          )}
-        </div>
-
-        <div className="text-center">
-          <a href="/login" className="text-decoration-none text-primary">
-            กลับไปหน้าเข้าสู่ระบบ
-          </a>
-        </div>
-      </form>
+              กลับไปหน้าเข้าสู่ระบบ
+            </Link>
+          </div>
+        </form>
+      </main>
     </div>
   );
 }

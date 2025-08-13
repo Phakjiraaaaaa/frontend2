@@ -122,7 +122,6 @@ export default function Navigation() {
             {[
               { href: "/login", label: "เข้าสู่ระบบ" },
               { href: "/register", label: "สมัครสมาชิก" },
-              { href: "/admin/users", label: "Admin" },
             ].map(({ href, label }) => (
               <li className="nav-item" key={href}>
                 <Link

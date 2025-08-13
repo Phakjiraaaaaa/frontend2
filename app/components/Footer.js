@@ -1,16 +1,17 @@
+
+
 export default function Footer() {
   return (
     <div className="container">
       <footer className="py-5">
-
-
         <div className="row">
           <div className="col-6 col-md-2 mb-3">
             <h5>แหล่งข้อมูล</h5>
             <ul className="nav flex-column">
-              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ค้นหาหน้าร้าน</a></li>
-              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ตัวค้นหารองเท้าวิ่ง</a></li>
-              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">สมัครเป็น Member</a></li>
+              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">หน้าร้าน</a></li>
+              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ผู้ชาย</a></li>
+              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ผู้หญิง</a></li>
+               <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">เด็ก</a></li>
             </ul>
           </div>
 
@@ -25,19 +26,6 @@ export default function Footer() {
               <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ติดต่อเรา</a></li>
             </ul>
           </div>
-
-          <div className="col-6 col-md-2 mb-3">
-            <h5>บริษัท</h5>
-            <ul className="nav flex-column">
-              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">เกี่ยวกับเรา</a></li>
-              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ร่วมงานกับเรา</a></li>
-              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ร่วมลงทุนกับเรา</a></li>
-              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ความยั่งยืน</a></li>
-              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">ผลกระทบ</a></li>
-              <li className="nav-item mb-2"><a href="#" className="nav-link p-0 text-body-secondary">แจ้งข้อกังวล</a></li>
-            </ul>
-          </div>
-
 
 
           <div className="col-md-5 offset-md-1 mb-3">

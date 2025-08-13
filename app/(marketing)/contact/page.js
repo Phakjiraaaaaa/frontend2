@@ -130,7 +130,7 @@ export default function Contact() {
                   </form>
                 </div>
                 <div className="col-lg-6 d-flex align-items-center justify-content-center">
-                  <Image src="/images/shoes-contact.jpg" alt="ติดต่อร้านรองเท้า" width={300} height={300} className="rounded-circle shadow" style={{ objectFit: "cover", border: "5px solid white" }} />
+                  <Image src="/images/silders/Phai.jpg" alt="ติดต่อร้านรองเท้า" width={300} height={300} className="rounded-circle shadow" style={{ objectFit: "cover", border: "5px solid white" }} />
                 </div>
               </div>
             )}

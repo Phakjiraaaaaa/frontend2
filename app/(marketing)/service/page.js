@@ -15,7 +15,7 @@ export default function ShoeStore() {
       category: "men",
       features: ["ระบายอากาศได้ดี", "พื้นยางกันลื่น", "มีไซส์ 39-45"],
     },
-     {
+    {
       id: 2,
       title: "รองเท้าผ้าใบผู้หญิง รุ่น Nike\nAir Force 1 Low",
       description: "น้ำหนักเบา เข้าได้ทุกสไตล์ ใส่เดินเล่นหรือเที่ยวก็เหมาะ",
@@ -47,7 +47,7 @@ export default function ShoeStore() {
       title: "รองเท้าผู้หญิง รุ่น New Balance 530",
       description: "สายคาดไขว้ ใส่ออกงานได้ ใส่สบายทุกโอกาส",
       image: "/images/silders/ญ2.png",
-      price: "$ 99.99",
+      price: "฿ 3,500",
       category: "women",
       features: ["สายชอบความนิ่ม", "มีหลายสีให้เลือก", "บาสบาย"],
     },
@@ -56,9 +56,9 @@ export default function ShoeStore() {
       title: "รองเท้าเด็ก รุ่น  New Balance\n574 HOOK & LOOP",
       description: "ปลอดภัย พื้นนุ่ม เหมาะกับเด็ก",
       image: "/images/silders/ด2.png",
-      price: "$ 59.99",
+      price: "฿ 1,500",
       category: "kids",
-      features: ["น้ำหนักเบา", "ลายน่าารัก","ไซส์ 0-10"],
+      features: ["น้ำหนักเบา", "ลายน่ารัก","ไซส์ 0-10"],
     },
     {
       id: 7,
@@ -121,7 +121,7 @@ export default function ShoeStore() {
       image: "/images/silders/ช5.png",
       price: "฿ 3,200",
       category: "men",
-      features: [" เหมาะกับทุกไลฟ์สไตล์", "ทนทาน", "ใช้งานได้นาน"],
+      features: ["เหมาะกับทุกไลฟ์สไตล์", "ทนทาน", "ใช้งานได้นาน"],
     },
     {
       id: 14,
@@ -130,7 +130,7 @@ export default function ShoeStore() {
       image: "/images/silders/ญ5.png",
       price: "฿ 3,200",
       category: "women",
-      features: [ "ใส่สบายทุกก้าว"," สบายตลอดวัน", "ไม่เจ็บเท้า"],
+      features: [ "ใส่สบายทุกก้าว","สบายตลอดวัน", "ไม่เจ็บเท้า"],
     },
     {
       id: 15,
@@ -157,16 +157,16 @@ export default function ShoeStore() {
       image: "/images/silders/ญ6.png",
       price: "฿ 47,400",
       category: "women",
-      features: [ "มีหลายสีให้เลือก","มีหลายสี", "ตอบโจทย์ทุกสไตล์"],
+      features: [ "มีหลายสีให้เลือก","ตอบโจทย์ทุกสไตล์"],
     },
-     {
+    {
       id: 18,
       title: "รองเท้าผู้ชาย รุ่น PUMA\nRS Surge Sneakers Unisex ",
       description: "พื้นนุ่ม เดิน วิ่ง หรือเล่นกีฬาเบา ๆ ก็สบาย",
       image: "/images/silders/ช7.png",
       price: "฿ 4,500",
       category: "men",
-      features: [" เหมาะกับทุกไลฟ์สไตล์", "เคลื่อนไหวได้คล่องตัว", "คงความเท่"],
+      features: ["เหมาะกับทุกไลฟ์สไตล์", "เคลื่อนไหวได้คล่องตัว", "คงความเท่"],
     },
     {
       id: 19,
@@ -175,7 +175,7 @@ export default function ShoeStore() {
       image: "/images/silders/ญ7.png",
       price: "฿ 3,800",
       category: "women",
-      features: [ "สีสันสดใส"," ดีไซน์เรียบหรูแต่โดดเด่น", "น้ำหนักเบา ใส่สบายตลอดวันา"],
+      features: [ "สีสันสดใส","ดีไซน์เรียบหรูแต่โดดเด่น", "น้ำหนักเบา ใส่สบายตลอดวัน"],
     },
     {
       id: 20,
@@ -184,7 +184,7 @@ export default function ShoeStore() {
       image: "/images/silders/ด7.png",
       price: "฿ 1,300",
       category: "kids",
-      features: [" ครอบคลุมเด็กทุกวัย", " ครอบคลุมเด็กทุกวัย", "ดีไซน์สวย"],
+      features: ["ครอบคลุมเด็กทุกวัย", "ดีไซน์สวย"],
     },
   ];
 
@@ -231,6 +231,8 @@ export default function ShoeStore() {
           ))}
         </div>
       </div>
+
+      {/* Promotion */}
       <div className="row mt-5">
         <div className="col-12">
           <div
@@ -258,7 +260,8 @@ export default function ShoeStore() {
         </div>
       </div>
 
-      <div className="row g-4">
+      {/* Product List */}
+      <div className="row g-4 mt-4">
         {filteredProducts.map((product) => (
           <div key={product.id} className="col-md-6 col-lg-4">
             <div className="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
@@ -280,9 +283,7 @@ export default function ShoeStore() {
                         ? "#7ec4cf"
                         : product.category === "women"
                         ? "#b892ff"
-                        : product.category === "kids"
-                        ? "#ffc107"
-                        : "#ff85a2",
+                        : "#ffc107",
                   }}
                 >
                   {product.title}
@@ -299,9 +300,7 @@ export default function ShoeStore() {
                               ? "#7ec4cf"
                               : product.category === "women"
                               ? "#b892ff"
-                              : product.category === "kids"
-                              ? "#ffc107"
-                              : "#ff85a2",
+                              : "#ffc107",
                         }}
                       ></i>
                       {f}
@@ -319,9 +318,7 @@ export default function ShoeStore() {
                         ? "#7ec4cf"
                         : product.category === "women"
                         ? "#b892ff"
-                        : product.category === "kids"
-                        ? "#ffc107"
-                        : "#ff85a2",
+                        : "#ffc107",
                     color: "white",
                     borderRadius: "30px",
                   }}
@@ -334,7 +331,7 @@ export default function ShoeStore() {
         ))}
       </div>
 
-      {/* Contact */}
+      {/* Contact Section */}
       <div className="row mt-5">
         <div className="col-12 text-center">
           <div
@@ -344,28 +341,43 @@ export default function ShoeStore() {
             <h3 className="mb-3" style={{ color: "#b892ff" }}>
               <strong>สอบถามเพิ่มเติม</strong>
             </h3>
-            <p className="mb-4">สนใจสินค้าหรืออยากสั่งซื้อแบบโอนเงิน ทักแชทได้เลย!</p>
-            <div className="d-flex justify-content-center gap-3">
-              <button
+            <p className="mb-4">
+              สนใจสินค้าหรืออยากสั่งซื้อแบบโอนเงิน ทักแชทได้เลย!
+            </p>
+
+            <div className="d-flex justify-content-center gap-3 flex-wrap">
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/share/1AnghNXN5p/" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn px-4 py-2"
                 style={{
-                  background: "#7e89cfff",
+                  background: "#1877f2",
                   color: "white",
                   borderRadius: "30px",
                 }}
               >
-                <i className="bi bi-chat-dots-fill me-2"></i> แชทผ่าน Facebook
-              </button>
-              <button
+                <i className="bi bi-facebook me-2"></i> แชทผ่าน Facebook
+              </a>
+
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/_phakjiraaaaaa?igsh=MTAxczZwd2drZjQ4bA=="
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn px-4 py-2"
                 style={{
-                  background: "#e681efff",
+                  background: "#e4405f",
                   color: "white",
                   borderRadius: "30px",
                 }}
               >
-                <i className="bi bi-whatsapp me-2"></i> ติดต่อผ่าน instagram
-              </button>
+                <i className="bi bi-instagram me-2"></i> ติดต่อผ่าน Instagram
+              </a>
+
+             
+
             </div>
           </div>
         </div>

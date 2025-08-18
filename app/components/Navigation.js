@@ -12,7 +12,7 @@ export default function Navigation() {
   const baseColor = "#1f1f1fff";
   const hoverColor = "#7d7dff";
 
-  // 🔹 ปรับเพิ่ม fontSize, letterSpacing และ textShadow
+ 
   const navLinkStyle = {
     fontSize: "1.1rem",
     fontWeight: "500",
@@ -25,7 +25,7 @@ export default function Navigation() {
     textShadow: "0px 1px 2px rgba(0,0,0,0.1)",
   };
 
-  // 🔹 เพิ่มเอฟเฟกต์ scale + glow
+ 
   const handleMouseEnter = (e) => {
     e.currentTarget.style.transform = "scale(1.15)";
     e.currentTarget.style.color = hoverColor;
@@ -56,7 +56,7 @@ export default function Navigation() {
       }}
     >
       <div className="container-fluid">
-        {/* 🔹 โลโก้มี hover effect ด้วย */}
+       
         <Link
           href="/"
           className="navbar-brand d-flex align-items-center gap-2"
@@ -95,7 +95,7 @@ export default function Navigation() {
           id="navbarNav"
         >
           {/* 🔹 เมนูซ้าย */}
-          <ul className="navbar-nav">
+          <ul className="navbar-nav" style={{ display: "flex", gap: "1rem" }}>
             {[
               { href: "/", label: "หน้าแรก" },
               { href: "/about", label: "เกี่ยวกับเรา" },
@@ -118,18 +118,35 @@ export default function Navigation() {
           </ul>
 
           {/* 🔹 เมนูขวา */}
-          <ul className="navbar-nav ms-auto">
+          <ul
+            className="navbar-nav ms-auto"
+            style={{ display: "flex", gap: "0.6rem" }} 
+          >
             {[
-              { href: "/login", label: "เข้าสู่ระบบ" },
-              { href: "/register", label: "สมัครสมาชิก" },
-            ].map(({ href, label }) => (
+              { href: "/login", label: "Login", color: "#1E90FF" },       
+              { href: "/register", label: "สมัครสมาชิก", color: "#28a745" }, 
+              { href: "/admin/users", label: "Admin", color: "#dc3545" },       
+            ].map(({ href, label, color }) => (
               <li className="nav-item" key={href}>
                 <Link
                   href={href}
                   className="nav-link"
-                  style={navLinkStyle}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                  style={{
+                    ...navLinkStyle,
+                    backgroundColor: color,
+                    color: "#fff",
+                    borderRadius: "5px",
+                    padding: "0.4rem 0.9rem",
+                    textAlign: "center",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.1)";
+                    e.currentTarget.style.boxShadow = `0 0 8px ${color}`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
                   onClick={handleLinkClick}
                 >
                   {label}

@@ -64,13 +64,9 @@ export default function About() {
       },
     ],
     socialMedia: [
-      {
-        platform: "Instagram",
-        handle: "@_phakjiraaaaaa",
-        icon: "bi-instagram",
-      },
+      { platform: "Instagram", handle: "@_phakjiraaaaaa", icon: "bi-instagram", },
       { platform: "Facebook", handle: "Sneakerss Brand", icon: "bi-facebook" },
-      { platform: "TikTok", handle: "@phaisneakers", icon: "bi-tiktok" },
+      { platform: "TikTok", handle: "@_phakjiraaaaaa", icon: "bi-tiktok" },
     ],
   };
 
@@ -459,7 +455,9 @@ export default function About() {
         className="contact-container p-4 rounded-4 shadow-sm"
         style={{ backgroundColor: "#fff" }}
       >
-        <h3 style={{ color: "#ff85a2", marginBottom: "1rem" }}> <strong>ติดต่อฉัน </strong>
+        <h3 style={{ color: "#ff85a2", marginBottom: "1rem" }}>
+          {" "}
+          <strong>ติดต่อฉัน </strong>
         </h3>
         <p style={{ marginBottom: "1.5rem" }}>
           หากคุณสนใจรองเท้าคุณภาพและบริการดี ๆ จากฉัน สามารถติดต่อได้ที่:

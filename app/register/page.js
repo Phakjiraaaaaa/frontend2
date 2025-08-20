@@ -19,7 +19,7 @@ export default function Register() {
     setFadeIn(true);
   }, []);
 
-  // ✅ ฟังก์ชันสมัครสมาชิก
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,18 +46,19 @@ export default function Register() {
         showConfirmButton: false,
         timer: 2000
       }).then(() => {
-        router.push('/login'); // ✅ เปลี่ยนเป็น '/register' ได้ถ้าต้องการกลับไปหน้าเดิม
+        router.push('/login'); 
       });
     } else {
       Swal.fire({
         icon: 'error',
         title: '<h3>ไม่สามารถสมัครสมาชิกได้</h3>',
-        showConfirmButton: true
+         showConfirmButton: false,
+        timer: 2000
       });
     }
   };
 
-  // ✅ Styles inline
+ 
   const inputBaseStyle = {
     width: '100%',
     padding: 8,
@@ -199,7 +200,7 @@ export default function Register() {
             </button>
           </div>
 
-          {/* ปุ่ม Submit */}
+         
           <button
             type="submit"
             style={buttonStyle}

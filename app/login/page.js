@@ -30,13 +30,17 @@ export default function Login() {
     }
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+      const res = await fetch(
+        "https://backend-nextjs-virid.vercel.app/api/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        }
+      );
 
       const data = await res.json();
+      console.log(username);
 
       if (data.token) {
         localStorage.setItem("token", data.token);
@@ -52,6 +56,8 @@ export default function Login() {
         Swal.fire({
           icon: "error",
           title: "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
+          showConfirmButton: false,
+          timer: 2000,
         });
       }
     } catch (error) {
@@ -59,6 +65,8 @@ export default function Login() {
       Swal.fire({
         icon: "error",
         title: "เกิดข้อผิดพลาดในการเข้าสู่ระบบ",
+        showConfirmButton: false,
+        timer: 2000,
       });
     }
   };
@@ -150,7 +158,10 @@ export default function Login() {
             required
           />
 
-          <label htmlFor="password" style={{ display: "block", marginBottom: 4 }}>
+          <label
+            htmlFor="password"
+            style={{ display: "block", marginBottom: 4 }}
+          >
             รหัสผ่าน
           </label>
           <div style={{ position: "relative", marginBottom: 12 }}>
@@ -190,7 +201,9 @@ export default function Login() {
             </button>
           </div>
 
-          <label style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
+          <label
+            style={{ display: "flex", alignItems: "center", marginBottom: 12 }}
+          >
             <input
               type="checkbox"
               checked={remember}
@@ -203,14 +216,18 @@ export default function Login() {
           <button
             type="submit"
             style={buttonStyle}
-            onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.95)")}
+            onMouseDown={(e) =>
+              (e.currentTarget.style.transform = "scale(0.95)")
+            }
             onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
             onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                buttonHoverStyle.backgroundColor)
             }
             onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor)
+              (e.currentTarget.style.backgroundColor =
+                buttonStyle.backgroundColor)
             }
           >
             เข้าสู่ระบบ

@@ -2,11 +2,11 @@
 
 export async function GET() {
   try {
-    const res = await fetch('http://itdev.cmtc.ac.th:3000/api/users', {
+    const res = await fetch('https://backend-nextjs-virid.vercel.app/api/users', {
       headers: {
         'Content-Type': 'application/json',
       },
-      next: { revalidate: 0 }, // ไม่ cache ข้อมูล
+      next: { revalidate: 0 }, 
     });
 
     if (!res.ok) {
@@ -29,7 +29,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     
-    const res = await fetch('http://itdev.cmtc.ac.th:3000/api/users', {
+    const res = await fetch('/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

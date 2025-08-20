@@ -37,7 +37,7 @@ export default function Carousel() {
       <div
         className="absolute top-0 left-0 w-full h-full animate-slowMove"
         style={{
-          backgroundImage: "url('/images/silders/BG.jpg')", // เปลี่ยนเป็น BG.mp4 ไม่ได้ ต้องใช้ video tag ถ้าต้องการวิดีโอ
+          backgroundImage: "url('/images/silders/BG.jpg')", 
           backgroundSize: "cover",
           backgroundPosition: "center",
           filter: "blur(8px) brightness(0.7)",

@@ -9,18 +9,15 @@ export default function Navigation() {
   const [tokenState, setToken] = useState("");
   const router = useRouter();
 
-  // อ่าน token จาก localStorage ตอน mount
   useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
   }, []);
 
-  // โหลด Bootstrap JS
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
 
-  // ออกระบบพร้อมยืนยัน
   const handleSignOut = () => {
     Swal.fire({
       title: "คุณแน่ใจไหม?",
@@ -108,7 +105,7 @@ export default function Navigation() {
           Sneakerss Brand
         </Link>
 
-        {/* Toggle button สำหรับมือถือ */}
+      
         <button
           className="navbar-toggler"
           type="button"
@@ -166,9 +163,9 @@ export default function Navigation() {
                     e.currentTarget.style.color = "#fff";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "scale(1.0)";
-                    e.currentTarget.style.backgroundColor = "";
-                    e.currentTarget.style.color = "";
+                    e.currentTarget.style.transform = "scale(1)";
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.color = "#dc3545"; 
                   }}
                 >
                   <i className="bi bi-box-arrow-right"></i> Sign Out
@@ -179,13 +176,46 @@ export default function Navigation() {
                 <li className="nav-item">
                   <Link
                     href="/login"
-                    className="btn btn-outline-primary d-flex align-items-center gap-1"
+                    className="btn"
+                    style={{
+                      backgroundColor: "#007bff", // สีฟ้า
+                      color: "#fff",
+                      border: "none",
+                      fontFamily: fontFamily,
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "#0069d9";
+                      e.currentTarget.style.transform = "scale(1.05)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "#007bff";
+                      e.currentTarget.style.transform = "scale(1)";
+                    }}
                   >
                     <i className="bi bi-box-arrow-in-right"></i> Login
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/register" className="btn btn-success">
+                  <Link
+                    href="/register"
+                    className="btn"
+                    style={{
+                      backgroundColor: "#28a745", 
+                      color: "#fff",
+                      border: "none",
+                      fontFamily: fontFamily,
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = "#218838"; 
+                      e.currentTarget.style.transform = "scale(1.05)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "#28a745"; 
+                      e.currentTarget.style.transform = "scale(1)";
+                    }}
+                  >
                     สมัครสมาชิก
                   </Link>
                 </li>

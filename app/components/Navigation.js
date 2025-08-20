@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 export default function Navigation() {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
@@ -19,19 +20,29 @@ export default function Navigation() {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
 
+  // ออกระบบพร้อมยืนยัน
   const handleSignOut = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    router.push("/login"); // เปลี่ยนเป็น /login
+    Swal.fire({
+      title: "คุณแน่ใจไหม?",
+      text: "ออกจากระบบ!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "ใช่!",
+      cancelButtonText: "ยกเลิก",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("token");
+        setToken(null);
+        router.push("/login");
+        Swal.fire("ออกจากระบบเรียบร้อย!", "", "success");
+      }
+    });
   };
 
-  const handleToggle = () => {
-    setIsNavbarOpen(!isNavbarOpen);
-  };
-
-  const handleLinkClick = () => {
-    setIsNavbarOpen(false);
-  };
+  const handleToggle = () => setIsNavbarOpen(!isNavbarOpen);
+  const handleLinkClick = () => setIsNavbarOpen(false);
 
   // Styles
   const baseColor = "#1f1f1fff";
@@ -145,6 +156,20 @@ export default function Navigation() {
                   type="button"
                   onClick={handleSignOut}
                   className="btn btn-outline-danger d-flex align-items-center gap-1"
+                  style={{
+                    fontFamily: fontFamily,
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.05)";
+                    e.currentTarget.style.backgroundColor = "#d33";
+                    e.currentTarget.style.color = "#fff";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1.0)";
+                    e.currentTarget.style.backgroundColor = "";
+                    e.currentTarget.style.color = "";
+                  }}
                 >
                   <i className="bi bi-box-arrow-right"></i> Sign Out
                 </button>

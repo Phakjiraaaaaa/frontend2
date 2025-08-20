@@ -53,7 +53,7 @@ export default function Page() {
 
     if (result.isConfirmed) {
       try {
-        const res = await fetch(`/api/users/${id}`, {
+        const res = await fetch(`https://backend-nextjs-virid.vercel.app/api/users/${id}`, {
           method: "DELETE",
           headers: { Accept: "application/json" },
         });

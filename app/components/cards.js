@@ -36,7 +36,7 @@ export default function CardsCarousel() {
         id="cardsCarousel"
         className="carousel slide"
         data-bs-ride="carousel"
-        data-bs-interval="3000"
+        data-bs-interval="2500"
       >
         <div className="carousel-inner">
           {cardGroups.map((group, idx) => (

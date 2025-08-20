@@ -30,10 +30,27 @@ export default function Navigation() {
       cancelButtonText: "ยกเลิก",
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem("token");
-        setToken(null);
-        router.push("/login");
-        Swal.fire("ออกจากระบบเรียบร้อย!", "", "success");
+        Swal.fire({
+          title: "กำลังออกจากระบบ...",
+          timer: 2000,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+          showConfirmButton: false,
+        });
+
+        setTimeout(() => {
+          localStorage.removeItem("token");
+          setToken(null);
+          Swal.fire({
+            title: "ออกจากระบบเรียบร้อย!",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+          }).then(() => {
+            router.push("/login");
+          });
+        }, 2000);
       }
     });
   };
@@ -105,7 +122,6 @@ export default function Navigation() {
           Sneakerss Brand
         </Link>
 
-      
         <button
           className="navbar-toggler"
           type="button"
@@ -146,26 +162,29 @@ export default function Navigation() {
           </ul>
 
           {/* เมนูขวา */}
-          <ul className="navbar-nav ms-auto" style={{ display: "flex", gap: "0.6rem" }}>
+          <ul
+            className="navbar-nav ms-auto"
+            style={{ display: "flex", gap: "0.6rem" }}
+          >
             {tokenState ? (
               <li className="nav-item">
                 <button
                   type="button"
                   onClick={handleSignOut}
-                  className="btn btn-outline-danger d-flex align-items-center gap-1"
+                  className="btn"
                   style={{
+                    backgroundColor: "#dc3545",
+                    color: "#fff",
+                    border: "none",
                     fontFamily: fontFamily,
                     transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "scale(1.05)";
-                    e.currentTarget.style.backgroundColor = "#d33";
-                    e.currentTarget.style.color = "#fff";
+                    e.currentTarget.style.backgroundColor = "#c82333";
                   }}
                   onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#dc3545";
                     e.currentTarget.style.transform = "scale(1)";
-                    e.currentTarget.style.backgroundColor = "transparent";
-                    e.currentTarget.style.color = "#dc3545"; 
                   }}
                 >
                   <i className="bi bi-box-arrow-right"></i> Sign Out
@@ -178,7 +197,7 @@ export default function Navigation() {
                     href="/login"
                     className="btn"
                     style={{
-                      backgroundColor: "#007bff", // สีฟ้า
+                      backgroundColor: "#007bff",
                       color: "#fff",
                       border: "none",
                       fontFamily: fontFamily,
@@ -201,18 +220,18 @@ export default function Navigation() {
                     href="/register"
                     className="btn"
                     style={{
-                      backgroundColor: "#28a745", 
+                      backgroundColor: "#28a745",
                       color: "#fff",
                       border: "none",
                       fontFamily: fontFamily,
                       transition: "all 0.3s ease",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = "#218838"; 
+                      e.currentTarget.style.backgroundColor = "#218838";
                       e.currentTarget.style.transform = "scale(1.05)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "#28a745"; 
+                      e.currentTarget.style.backgroundColor = "#28a745";
                       e.currentTarget.style.transform = "scale(1)";
                     }}
                   >

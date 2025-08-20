@@ -23,7 +23,7 @@ export default function EditUser() {
     setFadeIn(true);
     async function fetchUser() {
       try {
-        const res = await fetch(`http://itdev.cmtc.ac.th:3000/api/users/${id}`);
+        const res = await fetch(`https://backend-nextjs-virid.vercel.app/api/users/${id}`);
         if (!res.ok) throw new Error("Failed to fetch user data");
         const data = await res.json();
 
@@ -65,7 +65,7 @@ export default function EditUser() {
     }
 
     try {
-      const res = await fetch("http://itdev.cmtc.ac.th:3000/api/users", {
+      const res = await fetch("https://backend-nextjs-virid.vercel.app/api/users", {
         method: "PUT",
         headers: {
           Accept: "application/json",

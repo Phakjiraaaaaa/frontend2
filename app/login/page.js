@@ -14,8 +14,13 @@ export default function Login() {
   const [fadeIn, setFadeIn] = useState(false);
   const router = useRouter();
 
+ 
   useEffect(() => {
     setFadeIn(true);
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+    if (token) {
+      router.push("/admin/users"); // redirect ถ้ามี token
+    }
   }, []);
 
   const handleSubmit = async (e) => {
@@ -43,7 +48,13 @@ export default function Login() {
       console.log(username);
 
       if (data.token) {
-        localStorage.setItem("token", data.token);
+        
+        if (remember) {
+          localStorage.setItem("token", data.token);
+        } else {
+          sessionStorage.setItem("token", data.token);
+        }
+
         Swal.fire({
           icon: "success",
           title: "เข้าสู่ระบบสำเร็จ",
@@ -57,7 +68,7 @@ export default function Login() {
           icon: "error",
           title: "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1200,
         });
       }
     } catch (error) {
@@ -66,7 +77,7 @@ export default function Login() {
         icon: "error",
         title: "เกิดข้อผิดพลาดในการเข้าสู่ระบบ",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 1200,
       });
     }
   };

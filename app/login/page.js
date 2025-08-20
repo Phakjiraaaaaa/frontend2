@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -17,19 +18,51 @@ export default function Login() {
     setFadeIn(true);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!username.trim() || !password.trim()) {
-      alert("กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
+      Swal.fire({
+        icon: "warning",
+        title: "กรุณากรอกชื่อผู้ใช้และรหัสผ่าน",
+      });
       return;
     }
 
-    alert(`เข้าสู่ระบบสำเร็จ!\nUsername: ${username}\nจำฉันไว้: ${remember ? "ใช่" : "ไม่ใช่"}`);
-    router.push("/home");
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        Swal.fire({
+          icon: "success",
+          title: "เข้าสู่ระบบสำเร็จ",
+          showConfirmButton: false,
+          timer: 1200,
+        }).then(() => {
+          router.push("/admin/users");
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
+        });
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "เกิดข้อผิดพลาดในการเข้าสู่ระบบ",
+      });
+    }
   };
 
-  // ✅ ป้องกัน warning: ใช้ borderWidth, borderStyle, borderColor
   const inputBaseStyle = {
     width: "100%",
     padding: 8,
@@ -102,20 +135,21 @@ export default function Login() {
         </h1>
 
         <form onSubmit={handleSubmit} noValidate>
-          {/* Username */}
           <label htmlFor="username">ชื่อผู้ใช้</label>
           <input
             type="text"
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            style={{ ...inputBaseStyle, ...(focusedInput === "username" ? inputFocusStyle : {}) }}
+            style={{
+              ...inputBaseStyle,
+              ...(focusedInput === "username" ? inputFocusStyle : {}),
+            }}
             onFocus={() => setFocusedInput("username")}
             onBlur={() => setFocusedInput(null)}
             required
           />
 
-          {/* Password */}
           <label htmlFor="password" style={{ display: "block", marginBottom: 4 }}>
             รหัสผ่าน
           </label>
@@ -156,7 +190,6 @@ export default function Login() {
             </button>
           </div>
 
-          {/* Remember me */}
           <label style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
             <input
               type="checkbox"
@@ -167,20 +200,22 @@ export default function Login() {
             จำฉันไว้
           </label>
 
-          {/* Login Button */}
           <button
             type="submit"
             style={buttonStyle}
             onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.95)")}
             onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
             onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)}
-            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor)}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor)
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor)
+            }
           >
             เข้าสู่ระบบ
           </button>
 
-          {/* Links */}
           <div style={{ marginTop: 16, textAlign: "center" }}>
             <Link
               href="/register"

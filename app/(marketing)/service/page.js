@@ -270,8 +270,8 @@ export default function ShoeStore() {
                 alt={product.title}
                 width={500}
                 height={300}
-                className="card-img-top"
-                style={{ objectFit: "cover", height: "200px" }}
+                className="card-img-top -mt-20"
+                style={{ objectFit: "cover", height: "250px" }}
               />
               <div className="card-body p-4">
                 <h5

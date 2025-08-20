@@ -1,18 +1,43 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Navigation() {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const [tokenState, setToken] = useState("");
+  const router = useRouter();
 
+  // อ่าน token จาก localStorage ตอน mount
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setToken(token);
+  }, []);
+
+  // โหลด Bootstrap JS
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
 
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+    router.push("/login"); // เปลี่ยนเป็น /login
+  };
+
+  const handleToggle = () => {
+    setIsNavbarOpen(!isNavbarOpen);
+  };
+
+  const handleLinkClick = () => {
+    setIsNavbarOpen(false);
+  };
+
+  // Styles
   const baseColor = "#1f1f1fff";
   const hoverColor = "#7d7dff";
+  const fontFamily = "'Prompt', sans-serif";
 
- 
   const navLinkStyle = {
     fontSize: "1.1rem",
     fontWeight: "500",
@@ -23,9 +48,9 @@ export default function Navigation() {
     display: "inline-block",
     cursor: "pointer",
     textShadow: "0px 1px 2px rgba(0,0,0,0.1)",
+    fontFamily: fontFamily,
   };
 
- 
   const handleMouseEnter = (e) => {
     e.currentTarget.style.transform = "scale(1.15)";
     e.currentTarget.style.color = hoverColor;
@@ -38,14 +63,6 @@ export default function Navigation() {
     e.currentTarget.style.textShadow = "0px 1px 2px rgba(0,0,0,0.1)";
   };
 
-  const handleToggle = () => {
-    setIsNavbarOpen(!isNavbarOpen);
-  };
-
-  const handleLinkClick = () => {
-    setIsNavbarOpen(false);
-  };
-
   return (
     <nav
       className="navbar navbar-expand-lg shadow-sm"
@@ -56,7 +73,7 @@ export default function Navigation() {
       }}
     >
       <div className="container-fluid">
-       
+        {/* Logo */}
         <Link
           href="/"
           className="navbar-brand d-flex align-items-center gap-2"
@@ -65,6 +82,7 @@ export default function Navigation() {
             fontWeight: "bold",
             color: baseColor,
             transition: "all 0.3s ease",
+            fontFamily: fontFamily,
           }}
           onMouseEnter={(e) => (e.currentTarget.style.color = hoverColor)}
           onMouseLeave={(e) => (e.currentTarget.style.color = baseColor)}
@@ -79,6 +97,7 @@ export default function Navigation() {
           Sneakerss Brand
         </Link>
 
+        {/* Toggle button สำหรับมือถือ */}
         <button
           className="navbar-toggler"
           type="button"
@@ -90,11 +109,12 @@ export default function Navigation() {
           <span className="navbar-toggler-icon" />
         </button>
 
+        {/* เมนู */}
         <div
           className={`collapse navbar-collapse ${isNavbarOpen ? "show" : ""}`}
           id="navbarNav"
         >
-          {/* 🔹 เมนูซ้าย */}
+          {/* เมนูซ้าย */}
           <ul className="navbar-nav" style={{ display: "flex", gap: "1rem" }}>
             {[
               { href: "/", label: "หน้าแรก" },
@@ -117,42 +137,35 @@ export default function Navigation() {
             ))}
           </ul>
 
-          {/* 🔹 เมนูขวา */}
-          <ul
-            className="navbar-nav ms-auto"
-            style={{ display: "flex", gap: "0.6rem" }} 
-          >
-            {[
-              { href: "/login", label: "Login", color: "#1E90FF" },       
-              { href: "/register", label: "สมัครสมาชิก", color: "#28a745" }, 
-              { href: "/admin/users", label: "Admin", color: "#dc3545" },       
-            ].map(({ href, label, color }) => (
-              <li className="nav-item" key={href}>
-                <Link
-                  href={href}
-                  className="nav-link"
-                  style={{
-                    ...navLinkStyle,
-                    backgroundColor: color,
-                    color: "#fff",
-                    borderRadius: "5px",
-                    padding: "0.4rem 0.9rem",
-                    textAlign: "center",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "scale(1.1)";
-                    e.currentTarget.style.boxShadow = `0 0 8px ${color}`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "scale(1)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                  onClick={handleLinkClick}
+          {/* เมนูขวา */}
+          <ul className="navbar-nav ms-auto" style={{ display: "flex", gap: "0.6rem" }}>
+            {tokenState ? (
+              <li className="nav-item">
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="btn btn-outline-danger d-flex align-items-center gap-1"
                 >
-                  {label}
-                </Link>
+                  <i className="bi bi-box-arrow-right"></i> Sign Out
+                </button>
               </li>
-            ))}
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link
+                    href="/login"
+                    className="btn btn-outline-primary d-flex align-items-center gap-1"
+                  >
+                    <i className="bi bi-box-arrow-in-right"></i> Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link href="/register" className="btn btn-success">
+                    สมัครสมาชิก
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

@@ -4,12 +4,20 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
     async function getUsers() {
       try {
         const res = await fetch("http://itdev.cmtc.ac.th:3000/api/users");
@@ -47,11 +55,10 @@ export default function Page() {
       try {
         const res = await fetch(`http://itdev.cmtc.ac.th:3000/api/users/${id}`, {
           method: "DELETE",
-          headers: {
-            Accept: "application/json",
-          },
+          headers: { Accept: "application/json" },
         });
-        const data = await res.json();
+        if (!res.ok) throw new Error("Delete failed");
+        await res.json();
         Swal.fire("ลบแล้ว!", "ข้อมูลถูกลบเรียบร้อย", "success");
       } catch (error) {
         console.error("Error deleting:", error);
@@ -87,10 +94,15 @@ export default function Page() {
         }}
       >
         <div className="card">
-          
           <div className="card-body">
             {loading ? (
-              <div style={{ textAlign: "center", fontSize: "1.2rem", color: "#0d6efd" }}>
+              <div
+                style={{
+                  textAlign: "center",
+                  fontSize: "1.2rem",
+                  color: "#0d6efd",
+                }}
+              >
                 Loading...
               </div>
             ) : (

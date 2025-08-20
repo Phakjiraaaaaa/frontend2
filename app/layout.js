@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import "./globals.css";
 
+// ฟอนต์ภาษาอังกฤษ
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -17,8 +18,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
+    <html lang="th">
+      <head>
+        {/* ฟอนต์ภาษาไทย Prompt */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className={`${inter.variable} antialiased`} style={{ fontFamily: "'Prompt', 'Inter', sans-serif" }}>
         <div className="container-fluid">
           <div className="row">
             <div className="col">

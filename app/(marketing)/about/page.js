@@ -64,9 +64,24 @@ export default function About() {
       },
     ],
     socialMedia: [
-      { platform: "Instagram", handle: "@_phakjiraaaaaa", icon: "bi-instagram", },
-      { platform: "Facebook", handle: "Sneakerss Brand", icon: "bi-facebook" },
-      { platform: "TikTok", handle: "@_phakjiraaaaaa", icon: "bi-tiktok" },
+      {
+        platform: "Instagram",
+        handle: "@_phakjiraaaaaa",
+        icon: "bi-instagram",
+        url: "https://www.instagram.com/_phakjiraaaaaa/",
+      },
+      {
+        platform: "Facebook",
+        handle: "Sneakerss Brand",
+        icon: "bi-facebook",
+        url: "https://www.facebook.com/SneakerssBrand",
+      },
+      {
+        platform: "TikTok",
+        handle: "@_phakjiraaaaaa",
+        icon: "bi-tiktok",
+        url: "https://www.tiktok.com/@_phakjiraaaaaa",
+      },
     ],
   };
 
@@ -109,7 +124,10 @@ export default function About() {
         </div>
         <div className="col-lg-7">
           <div className="p-4 rounded-4 shadow-sm">
-            <h1 className="display-5 fw-bold mb-2" style={{ color: "#ff85a2" }}>
+            <h1
+              className="display-5 fw-bold mb-2"
+              style={{ color: "#1934e3ff" }}
+            >
               {personalInfo.name}
             </h1>
             <h3 className="fs-4 mb-3 text-secondary">
@@ -408,7 +426,7 @@ export default function About() {
                             <li className="mb-2 d-flex align-items-center">
                               <i
                                 className="bi bi-check-circle-fill me-2"
-                                style={{ color: "#ff85a2" }}
+                                style={{ color: "#b892ff" }}
                               ></i>
                               {index === 0
                                 ? "สร้างแบรนด์ Sneakerss Brand ที่ได้รับความนิยมในกลุ่มลูกค้าแฟชั่นรองเท้า"
@@ -417,7 +435,7 @@ export default function About() {
                             <li className="mb-2 d-flex align-items-center">
                               <i
                                 className="bi bi-check-circle-fill me-2"
-                                style={{ color: "#ff85a2" }}
+                                style={{ color: "#b892ff" }}
                               ></i>
                               {index === 0
                                 ? "พัฒนาการถ่ายภาพสินค้าและการจัดการโซเชียลมีเดียเพื่อดึงดูดลูกค้าใหม่"

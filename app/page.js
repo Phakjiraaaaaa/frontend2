@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div
       style={{
-        backgroundImage: 'url("/images/silders/11.png")',
+        backgroundImage: '/images/silders/A9.png',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh', 

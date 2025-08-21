@@ -8,15 +8,51 @@ export default function CardsCarousel() {
   }, []);
 
   const cards = [
-    { title: "Nike Dunk Low Panda", price: "฿3,700", img: "/images/silders/nike1.png" },
-    { title: "Nike SB Dunk Low Pro", price: "฿5,200", img: "/images/silders/nike2.png" },
-    { title: "Nike Air Force 1", price: "฿4,700", img: "/images/silders/nike3.png" },
-    { title: "New Balance 530", price: "฿4,300", img: "/images/silders/NB4.png" },
-    { title: "New Balance 2002", price: "฿3,300", img: "/images/silders/NB5.png" },
-    { title: "New Balance BB550", price: "฿3,000", img: "/images/silders/NB6.png" },
-    { title: "Adida Samba OG Shoes", price: "฿3,800", img: "/images/silders/A7.png" },
-    { title: "Adidas Campus 00s Shoes", price: "฿3,800", img: "/images/silders/A8.png" },
-    { title: "Adidas Superstar II Shoes", price: "฿4,000", img: "/images/silders/A9.png" },
+    {
+      title: "Nike Dunk Low Panda",
+      price: "฿3,700",
+      img: "/images/silders/nike1.png",
+    },
+    {
+      title: "Nike SB Dunk Low Pro",
+      price: "฿5,200",
+      img: "/images/silders/nike2.png",
+    },
+    {
+      title: "Nike Air Force 1",
+      price: "฿4,700",
+      img: "/images/silders/nike3.png",
+    },
+    {
+      title: "New Balance 530",
+      price: "฿4,300",
+      img: "/images/silders/NB4.png",
+    },
+    {
+      title: "New Balance 2002",
+      price: "฿3,300",
+      img: "/images/silders/NB5.png",
+    },
+    {
+      title: "New Balance BB550",
+      price: "฿3,000",
+      img: "/images/silders/NB6.png",
+    },
+    {
+      title: "Adida Samba OG Shoes",
+      price: "฿3,800",
+      img: "/images/silders/A7.png",
+    },
+    {
+      title: "Adidas Campus 00s Shoes",
+      price: "฿3,800",
+      img: "/images/silders/A8.png",
+    },
+    {
+      title: "Adidas Superstar II Shoes",
+      price: "฿4,000",
+      img: "/images/silders/A9.png",
+    },
   ];
 
   const chunkSize = 3;
@@ -27,7 +63,10 @@ export default function CardsCarousel() {
 
   return (
     <div className="container my-5 cards-container">
-      <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+        rel="stylesheet"
+      />
       <h2 className="text-center mb-5 animate__animated animate__fadeInDown gradient-text hover-pop custom-font">
         Sneakerss
       </h2>
@@ -40,19 +79,29 @@ export default function CardsCarousel() {
       >
         <div className="carousel-inner">
           {cardGroups.map((group, idx) => (
-            <div key={idx} className={`carousel-item ${idx === 0 ? "active" : ""}`}>
+            <div
+              key={idx}
+              className={`carousel-item ${idx === 0 ? "active" : ""}`}
+            >
               <div className="row justify-content-center">
                 {group.map((item, index) => (
                   <div
                     key={index}
                     className="col-12 col-sm-6 col-md-4 mb-4 d-flex justify-content-center"
                   >
-                    <div className="card shadow-lg hover-scale fixed-card-size" style={{ transition: "transform 0.3s ease" }}>
+                    <div
+                      className="card shadow-lg hover-scale fixed-card-size"
+                      style={{ transition: "transform 0.3s ease" }}
+                    >
                       <div className="image-wrapper">
                         <img
                           src={item.img}
                           className={`fixed-img-size ${
-                            ["New Balance 530", "New Balance 2002", "New Balance BB550"].includes(item.title)
+                            [
+                              "New Balance 530",
+                              "New Balance 2002",
+                              "New Balance BB550",
+                            ].includes(item.title)
                               ? "fixed-img-nb"
                               : ""
                           }`}
@@ -75,12 +124,24 @@ export default function CardsCarousel() {
         </div>
 
         {/* ปุ่มควบคุม */}
-        <button className="carousel-control-prev" type="button" data-bs-target="#cardsCarousel" data-bs-slide="prev" style={{ width: "5%", opacity: 0.7 }}>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#cardsCarousel"
+          data-bs-slide="prev"
+          style={{ width: "5%", opacity: 0.7 }}
+        >
           <span className="carousel-control-prev-icon" aria-hidden="true" />
           <span className="visually-hidden">Previous</span>
         </button>
 
-        <button className="carousel-control-next" type="button" data-bs-target="#cardsCarousel" data-bs-slide="next" style={{ width: "5%", opacity: 0.7 }}>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#cardsCarousel"
+          data-bs-slide="next"
+          style={{ width: "5%", opacity: 0.7 }}
+        >
           <span className="carousel-control-next-icon" aria-hidden="true" />
           <span className="visually-hidden">Next</span>
         </button>
@@ -147,14 +208,14 @@ export default function CardsCarousel() {
           display: block;
         }
 
-       .fixed-img-nb {
-         object-fit: contain !important; 
-         object-position: center center !important; 
-         position: relative;
-         top: -5px;                    
-         max-height: 90%;                  
-         background-color: #fff;  
-         }   
+        .fixed-img-nb {
+          object-fit: contain !important;
+          object-position: center center !important;
+          position: relative;
+          top: -5px;
+          max-height: 90%;
+          background-color: #fff;
+        }
 
         @media (max-width: 576px) {
           .custom-font {
@@ -172,7 +233,10 @@ export default function CardsCarousel() {
         }
       `}</style>
 
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      />
     </div>
   );
 }

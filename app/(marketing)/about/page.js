@@ -38,7 +38,6 @@ export default function About() {
         description: "ออกแบบร้านให้ดูน่าเชื่อถือมีสไตล์เฉพาะตัวให้ลูกค้าจดจำ",
       },
     ],
-
     education: [
       {
         degree: "ระดับประกาศนียบัตรวิชาชีพชั้นสูง",
@@ -68,22 +67,43 @@ export default function About() {
         platform: "Instagram",
         handle: "@_phakjiraaaaaa",
         icon: "bi-instagram",
-        url: "https://www.instagram.com/_phakjiraaaaaa/",
+        link: "https://www.instagram.com/_phakjiraaaaaa?igsh=MTAxczZwd2drZjQ4bA==",
       },
       {
         platform: "Facebook",
         handle: "Sneakerss Brand",
         icon: "bi-facebook",
-        url: "https://www.facebook.com/SneakerssBrand",
+        link: "https://www.facebook.com/share/1AnghNXN5p/",
       },
       {
         platform: "TikTok",
         handle: "@_phakjiraaaaaa",
         icon: "bi-tiktok",
-        url: "https://www.tiktok.com/@_phakjiraaaaaa",
+        link: "https://www.tiktok.com",
       },
     ],
   };
+
+  const tabs = [
+    {
+      id: "story",
+      label: "เรื่องราวของฉัน",
+      icon: "bi-book",
+      color: "#ff85a2",
+    },
+    {
+      id: "skills",
+      label: "ทักษะและความสามารถ",
+      icon: "bi-stars",
+      color: "#7ec4cf",
+    },
+    {
+      id: "experience",
+      label: "ประสบการณ์",
+      icon: "bi-briefcase",
+      color: "#b892ff",
+    },
+  ];
 
   return (
     <div className="container my-5">
@@ -97,10 +117,10 @@ export default function About() {
             <Image
               src="/images/silders/Phai.jpg"
               alt={personalInfo.name}
-              width={300}
-              height={300}
-              className="rounded-circle shadow"
+              fill
               style={{ objectFit: "cover", border: "5px solid white" }}
+              className="rounded-circle shadow"
+              priority
             />
             <div
               className="position-absolute"
@@ -136,7 +156,13 @@ export default function About() {
             <p className="lead mb-4">{personalInfo.bio}</p>
             <div className="d-flex gap-3 mb-3">
               {personalInfo.socialMedia.map((social, index) => (
-                <a key={index} href="#" className="text-decoration-none">
+                <a
+                  key={index}
+                  href={social.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-decoration-none"
+                >
                   <div
                     style={{
                       width: "45px",
@@ -147,6 +173,7 @@ export default function About() {
                       alignItems: "center",
                       justifyContent: "center",
                       transition: "all 0.3s ease",
+                      cursor: "pointer",
                     }}
                   >
                     <i className={`bi ${social.icon} fs-5 text-white`}></i>
@@ -165,64 +192,27 @@ export default function About() {
       <div className="row mb-4">
         <div className="col-12">
           <ul className="nav nav-pills nav-fill">
-            <li className="nav-item">
-              <button
-                className={`nav-link ${activeTab === "story" ? "active" : ""}`}
-                onClick={() => setActiveTab("story")}
-                style={{
-                  background: activeTab === "story" ? "#ff85a2" : "transparent",
-                  color: activeTab === "story" ? "white" : "#666",
-                  borderRadius: "30px",
-                  padding: "10px 20px",
-                  margin: "0 5px",
-                  border: "none",
-                  transition: "all 0.3s ease",
-                }}
-              >
-                <i className="bi bi-book me-2"></i>
-                เรื่องราวของฉัน
-              </button>
-            </li>
-            <li className="nav-item">
-              <button
-                className={`nav-link ${activeTab === "skills" ? "active" : ""}`}
-                onClick={() => setActiveTab("skills")}
-                style={{
-                  background:
-                    activeTab === "skills" ? "#7ec4cf" : "transparent",
-                  color: activeTab === "skills" ? "white" : "#666",
-                  borderRadius: "30px",
-                  padding: "10px 20px",
-                  margin: "0 5px",
-                  border: "none",
-                  transition: "all 0.3s ease",
-                }}
-              >
-                <i className="bi bi-stars me-2"></i>
-                ทักษะและความสามารถ
-              </button>
-            </li>
-            <li className="nav-item">
-              <button
-                className={`nav-link ${
-                  activeTab === "experience" ? "active" : ""
-                }`}
-                onClick={() => setActiveTab("experience")}
-                style={{
-                  background:
-                    activeTab === "experience" ? "#b892ff" : "transparent",
-                  color: activeTab === "experience" ? "white" : "#666",
-                  borderRadius: "30px",
-                  padding: "10px 20px",
-                  margin: "0 5px",
-                  border: "none",
-                  transition: "all 0.3s ease",
-                }}
-              >
-                <i className="bi bi-briefcase me-2"></i>
-                ประสบการณ์
-              </button>
-            </li>
+            {tabs.map((tab) => (
+              <li className="nav-item" key={tab.id}>
+                <button
+                  className={`nav-link ${activeTab === tab.id ? "active" : ""}`}
+                  onClick={() => setActiveTab(tab.id)}
+                  style={{
+                    background:
+                      activeTab === tab.id ? tab.color : "transparent",
+                    color: activeTab === tab.id ? "white" : "#666",
+                    borderRadius: "30px",
+                    padding: "10px 20px",
+                    margin: "0 5px",
+                    border: "none",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  <i className={`${tab.icon} me-2`}></i>
+                  {tab.label}
+                </button>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -244,10 +234,9 @@ export default function About() {
           >
             {/* My Story Tab */}
             {activeTab === "story" && (
-              <div className="story-content">
+              <div>
                 <h3 className="mb-4" style={{ color: "#ff85a2" }}>
-                  <i className="bi bi-quote me-2"></i>
-                  เรื่องราวของฉัน
+                  <i className="bi bi-quote me-2"></i>เรื่องราวของฉัน
                 </h3>
                 <div className="row">
                   <div className="col-md-6 mb-4">
@@ -278,28 +267,6 @@ export default function About() {
                           ฉันอยากให้ทุกคนที่ใส่รองเท้าของฉันรู้สึกมั่นใจและโดดเด่นในทุกก้าวเดิน
                           ด้วยความตั้งใจเลือกแต่สินค้าที่ทั้งสวยและใส่สบาย
                           เพื่อให้ลูกค้าได้รับรองเท้าคุณภาพดีที่คู่ควรจริงๆ
-                          เพราะรองเท้าที่ดีไม่ใช่แค่แฟชั่น
-                          แต่คือความรู้สึกที่เต็มเปี่ยมด้วยความสุขในทุกวัน
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12 mb-4">
-                    <div className="card border-0 shadow-sm">
-                      <div className="card-body">
-                        <h5 className="card-title mb-3">
-                          <strong>แนวคิดในการขายรองเท้า</strong>
-                        </h5>
-                        <p className="card-text">
-                          สำหรับฉัน ฉันเชื่อว่า
-                          การขายรองเท้าไม่ได้เป็นแค่การขายสินค้าแต่เป็นการส่งต่อความมั่นใจและ
-                          ความสุขให้กับลูกค้า
-                          ฉันเชื่อว่ารองเท้าที่ดีจะช่วยให้ทุกคนก้าวเดินได้อย่างมั่นใจและรู้สึก
-                          สวยในแบบของตัวเอง ดังนั้นทุกคู่ที่ขาย
-                          ฉันใส่ใจเลือกสรรทั้งคุณภาพและดีไซน์
-                          เพื่อให้เหมาะกับสไตล์และความสบายของลูกค้าทุกคน
-                          ความพึงพอใจและรอยยิ้มของลูกค้าคือสิ่งที่ทำให้ธุรกิจนี้มีความหมายและ
-                          เติบโตอย่างยั่งยืน
                         </p>
                       </div>
                     </div>
@@ -308,8 +275,9 @@ export default function About() {
               </div>
             )}
 
+            {/* Skills Tab */}
             {activeTab === "skills" && (
-              <div className="skills-content">
+              <div>
                 <h3 className="mb-4" style={{ color: "#7ec4cf" }}>
                   <i className="bi bi-lightning-charge me-2"></i>
                   ทักษะและความสามารถ
@@ -353,7 +321,6 @@ export default function About() {
                       </div>
                     </div>
                   </div>
-
                   <div className="col-md-6 mb-4">
                     <div className="card border-0 shadow-sm h-100">
                       <div className="card-body">
@@ -391,101 +358,55 @@ export default function About() {
 
             {/* Experience Tab */}
             {activeTab === "experience" && (
-              <div className="experience-content">
+              <div>
                 <h3 className="mb-4" style={{ color: "#b892ff" }}>
-                  <i className="bi bi-briefcase me-2"></i>
-                  ประสบการณ์การทำงาน
+                  <i className="bi bi-briefcase me-2"></i>ประสบการณ์การทำงาน
                 </h3>
-                <div className="timeline position-relative">
-                  {personalInfo.experience.map((exp, index) => (
-                    <div key={index} className="card border-0 shadow-sm mb-4">
-                      <div className="card-body p-4">
-                        <div className="d-flex justify-content-between align-items-center mb-3">
-                          <h5 className="card-title mb-0">{exp.position}</h5>
-                          <span
-                            className="badge rounded-pill"
-                            style={{
-                              background: "#b892ff",
-                              padding: "8px 12px",
-                            }}
-                          >
-                            {exp.year}
-                          </span>
-                        </div>
-                        <h6 className="card-subtitle mb-3 text-muted">
-                          {exp.company}
-                        </h6>
-                        <p className="card-text">
-                          {index === 0
-                            ? "ในฐานะเจ้าของร้านรองเท้าออนไลน์ ฉันดูแลตั้งแต่การคัดเลือกรองเท้าคุณภาพ การถ่ายภาพสินค้า และการโปรโมตร้านผ่านช่องทางโซเชียลมีเดีย เพื่อสร้างแบรนด์ที่น่าเชื่อถือและได้รับความนิยมในกลุ่มลูกค้าแฟชั่น"
-                            : "ร่วมงานกับทีมการตลาดในการวางแผนแคมเปญโปรโมชันและการจัดการบริการลูกค้าอย่างมืออาชีพ เพื่อเพิ่มยอดขายและสร้างความพึงพอใจสูงสุดให้กับลูกค้า"}
-                        </p>
-                        <div className="mt-3">
-                          <h6 className="mb-2">ผลงานสำคัญ:</h6>
-                          <ul className="list-unstyled">
-                            <li className="mb-2 d-flex align-items-center">
-                              <i
-                                className="bi bi-check-circle-fill me-2"
-                                style={{ color: "#b892ff" }}
-                              ></i>
-                              {index === 0
-                                ? "สร้างแบรนด์ Sneakerss Brand ที่ได้รับความนิยมในกลุ่มลูกค้าแฟชั่นรองเท้า"
-                                : "ออกแบบแคมเปญโปรโมชันออนไลน์ที่เพิ่มยอดขายสูงสุด 30% ในช่วงเทศกาล"}
-                            </li>
-                            <li className="mb-2 d-flex align-items-center">
-                              <i
-                                className="bi bi-check-circle-fill me-2"
-                                style={{ color: "#b892ff" }}
-                              ></i>
-                              {index === 0
-                                ? "พัฒนาการถ่ายภาพสินค้าและการจัดการโซเชียลมีเดียเพื่อดึงดูดลูกค้าใหม่"
-                                : "สร้างความสัมพันธ์ลูกค้าผ่านบริการหลังการขายที่ใส่ใจและตอบกลับรวดเร็ว"}
-                            </li>
-                          </ul>
-                        </div>
+                {personalInfo.experience.map((exp, index) => (
+                  <div key={index} className="card border-0 shadow-sm mb-4">
+                    <div className="card-body p-4">
+                      <div className="d-flex justify-content-between align-items-center mb-3">
+                        <h5 className="card-title mb-0">{exp.position}</h5>
+                        <span
+                          className="badge rounded-pill"
+                          style={{ background: "#b892ff", padding: "8px 12px" }}
+                        >
+                          {exp.year}
+                        </span>
                       </div>
+                      <h6 className="card-subtitle mb-3 text-muted">
+                        {exp.company}
+                      </h6>
+                      <p className="card-text">
+                        {index === 0
+                          ? "ในฐานะเจ้าของร้านรองเท้าออนไลน์ ฉันดูแลตั้งแต่การคัดเลือกรองเท้าคุณภาพ การถ่ายภาพสินค้า และการโปรโมตร้านผ่านช่องทางโซเชียลมีเดีย"
+                          : "ร่วมงานกับทีมการตลาดในการวางแผนแคมเปญโปรโมชันและการจัดการบริการลูกค้าอย่างมืออาชีพ"}
+                      </p>
                     </div>
-                  ))}
-                </div>
-                <div className="card border-0 shadow-sm">
-                  <div className="card-body p-4">
-                    <h5
-                      className="card-title mb-3"
-                      style={{ color: "#ff85a2" }}
-                    >
-                      ประสบการณ์ขายรองเท้าออนไลน์
-                    </h5>
-                    <p>
-                      ฉันเริ่มต้นจากการไลฟ์สดขายรองเท้าผ้าใบคุณภาพดีที่คัดสรรมาอย่างดี
-                      พร้อมให้คำปรึกษาและบริการหลังการขายอย่างจริงใจ ผ่านช่องทาง
-                      Facebook, Instagram และ TikTok
-                      เพื่อสร้างความสัมพันธ์ที่ดีกับลูกค้าและเพิ่มยอดขายอย่างต่อเนื่อง
-                    </p>
                   </div>
-                </div>
+                ))}
               </div>
             )}
           </div>
         </div>
       </div>
 
+      {/* Contact Section */}
       <div
         className="contact-container p-4 rounded-4 shadow-sm"
         style={{ backgroundColor: "#fff" }}
       >
         <h3 style={{ color: "#ff85a2", marginBottom: "1rem" }}>
-          {" "}
-          <strong>ติดต่อฉัน </strong>
+          <strong>ติดต่อฉัน</strong>
         </h3>
         <p style={{ marginBottom: "1.5rem" }}>
           หากคุณสนใจรองเท้าคุณภาพและบริการดี ๆ จากฉัน สามารถติดต่อได้ที่:
         </p>
-
         <div className="buttons-wrapper d-flex flex-column gap-3">
           {personalInfo.socialMedia.map((social, index) => (
             <a
               key={index}
-              href={social.url}
+              href={social.link}
               target="_blank"
               rel="noopener noreferrer"
               className="social-button d-flex align-items-center"
@@ -508,11 +429,9 @@ export default function About() {
             border: 2px solid transparent;
             max-width: 320px;
           }
-
           .social-button i {
             font-size: 1.3rem;
           }
-
           .social-button:hover {
             background-color: #ff85a2;
             color: white;

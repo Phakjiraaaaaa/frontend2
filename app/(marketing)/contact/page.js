@@ -41,11 +41,6 @@ export default function Contact() {
       { name: "Facebook", icon: "bi-facebook", color: "#0008e4ff", link: "https://www.facebook.com/share/1AnghNXN5p/" },
       { name: "GitHub", icon: "bi-github", color: "#000000ff", link: "https://github.com/Phakjiraaaaaa" },
     ],
-    faq: [
-      { question: "รองเท้ามีไซซ์อะไรบ้าง?", answer: "เรามีไซซ์ตั้งแต่ 35 ถึง 45 ลูกค้าสามารถเลือกไซซ์ที่ต้องการได้ตอนสั่งซื้อ" },
-      { question: "จัดส่งกี่วันถึง?", answer: "จัดส่งภายใน 1-2 วันทำการ กรุงเทพฯ และปริมณฑลได้รับภายใน 3 วัน" },
-      { question: "เปลี่ยนคืนสินค้าได้ไหม?", answer: "สามารถเปลี่ยนคืนสินค้าได้ภายใน 7 วัน หลังจากได้รับของ (ต้องอยู่ในสภาพเดิม)" },
-    ],
   };
 
   return (
@@ -81,14 +76,8 @@ export default function Contact() {
             </li>
             <li className="nav-item">
               <button className={`nav-link ${activeMethod === "info" ? "active" : ""}`} onClick={() => setActiveMethod("info")}
-                style={{ background: activeMethod === "info" ? "linear-gradient(to right, red, #9800b3)" : "transparent", color: activeMethod === "info" ? "white" : "#666", borderRadius: "30px", padding: "10px 20px", margin: "0 5px", border: "none" }}>
+                style={{ background: activeMethod === "info" ? "#00b7d3ff" : "transparent", color: activeMethod === "info" ? "white" : "#666", borderRadius: "30px", padding: "10px 20px", margin: "0 5px", border: "none" }}>
                 <i className="bi bi-info-circle-fill me-2"></i>ข้อมูลติดต่อ
-              </button>
-            </li>
-            <li className="nav-item">
-              <button className={`nav-link ${activeMethod === "faq" ? "active" : ""}`} onClick={() => setActiveMethod("faq")}
-                style={{ background: activeMethod === "faq" ? "#5900ffff" : "transparent", color: activeMethod === "faq" ? "white" : "#666", borderRadius: "30px", padding: "10px 20px", margin: "0 5px", border: "none" }}>
-                <i className="bi bi-question-circle-fill me-2"></i>คำถามที่พบบ่อย
               </button>
             </li>
           </ul>
@@ -100,8 +89,7 @@ export default function Contact() {
         <div className="col-12">
           <div className="p-4 rounded-4 shadow-sm" style={{
             background: activeMethod === "form" ? "rgba(255, 133, 162, 0.11)" :
-                       activeMethod === "info" ? "rgba(126, 196, 207, 0.12)" :
-                       "rgba(184, 146, 255, 0.12)"
+                       "rgba(0, 183, 211, 0.12)"
           }}>
             {/* Form */}
             {activeMethod === "form" && (
@@ -147,9 +135,9 @@ export default function Contact() {
                       { icon: "bi-geo-alt-fill", title: "ที่อยู่", value: contactInfo.address },
                       { icon: "bi-clock-fill", title: "เวลาทำการ", value: contactInfo.workingHours },
                     ].map((item, idx) => (
-                      <div key={idx} className="p-3 rounded-3 shadow-sm" style={{ background: "#f4fafa" }}>
+                      <div key={idx} className="p-3 rounded-3 shadow-sm" style={{ background: "#c2f6ffff" }}>
                         <div className="d-flex align-items-center gap-3">
-                          <div style={{ background: "#73c5d3", width: "40px", height: "40px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <div style={{ background: "#00b7d3ff", width: "40px", height: "40px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                             <i className={`bi ${item.icon} text-white`}></i>
                           </div>
                           <div>
@@ -164,27 +152,6 @@ export default function Contact() {
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4790.251117770331!2d98.9839193!3d18.7928973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3a9a71d80adf%3A0xe41f657fc5052416!2z4Lin4Li04LiX4Lii4Liy4Lil4Lix4Lii4LmA4LiX4LiE4LiZ4Li04LiE4LmA4LiK4Li14Lii4LiH4LmD4Lir4Lih4LmI!5e1!3m2!1sth!2sth!4v1753104349691!5m2!1sth!2sth"
                       width="100%" height="100%" style={{ border: 0, minHeight: "300px", borderRadius: "10px" }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                   </div>
-                </div>
-              </div>
-            )}
-
-            {/* FAQ */}
-            {activeMethod === "faq" && (
-              <div>
-                <h4 className="mb-3" style={{ color: "#5900ffff" }}><i className="bi bi-question-circle-fill me-2"></i>คำถามที่พบบ่อย</h4>
-                <div className="accordion" id="faqAccordion">
-                  {contactInfo.faq.map((item, index) => (
-                    <div className="accordion-item" key={index}>
-                      <h2 className="accordion-header" id={`heading${index}`}>
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse${index}`} aria-expanded="false" aria-controls={`collapse${index}`}>
-                          {item.question}
-                        </button>
-                      </h2>
-                      <div id={`collapse${index}`} className="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div className="accordion-body">{item.answer}</div>
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
             )}

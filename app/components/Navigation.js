@@ -7,11 +7,13 @@ import Swal from "sweetalert2";
 export default function Navigation() {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [tokenState, setToken] = useState("");
+  const [activeLink, setActiveLink] = useState("/");
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
+    setActiveLink(window.location.pathname); // ตั้ง active ตามหน้าปัจจุบัน
   }, []);
 
   useEffect(() => {
@@ -56,7 +58,10 @@ export default function Navigation() {
   };
 
   const handleToggle = () => setIsNavbarOpen(!isNavbarOpen);
-  const handleLinkClick = () => setIsNavbarOpen(false);
+  const handleLinkClick = (href) => {
+    setActiveLink(href);
+    setIsNavbarOpen(false);
+  };
 
   // Styles
   const baseColor = "#1f1f1fff";
@@ -76,17 +81,12 @@ export default function Navigation() {
     fontFamily: fontFamily,
   };
 
-  const handleMouseEnter = (e) => {
-    e.currentTarget.style.transform = "scale(1.15)";
-    e.currentTarget.style.color = hoverColor;
-    e.currentTarget.style.textShadow = "0px 0px 6px rgba(125,125,255,0.6)";
-  };
-
-  const handleMouseLeave = (e) => {
-    e.currentTarget.style.transform = "scale(1.0)";
-    e.currentTarget.style.color = baseColor;
-    e.currentTarget.style.textShadow = "0px 1px 2px rgba(0,0,0,0.1)";
-  };
+  const menuItems = [
+    { href: "/", label: "หน้าแรก" },
+    { href: "/about", label: "เกี่ยวกับเรา" },
+    { href: "/service", label: "บริการ" },
+    { href: "/contact", label: "ติดต่อ" },
+  ];
 
   return (
     <nav
@@ -140,20 +140,22 @@ export default function Navigation() {
         >
           {/* เมนูซ้าย */}
           <ul className="navbar-nav" style={{ display: "flex", gap: "1rem" }}>
-            {[
-              { href: "/", label: "หน้าแรก" },
-              { href: "/about", label: "เกี่ยวกับเรา" },
-              { href: "/service", label: "บริการ" },
-              { href: "/contact", label: "ติดต่อ" },
-            ].map(({ href, label }) => (
+            {menuItems.map(({ href, label }) => (
               <li className="nav-item" key={href}>
                 <Link
                   href={href}
                   className="nav-link"
-                  style={navLinkStyle}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                  onClick={handleLinkClick}
+                  style={{
+                    ...navLinkStyle,
+                    color: activeLink === href ? hoverColor : baseColor,
+                    transform: activeLink === href ? "scale(1.15)" : "scale(1)",
+                    textShadow:
+                      activeLink === href
+                        ? "0px 0px 6px rgba(125,125,255,0.6)"
+                        : "0px 1px 2px rgba(0,0,0,0.1)",
+                  }}
+                  onMouseEnter={() => setActiveLink(href)}
+                  onClick={() => handleLinkClick(href)}
                 >
                   {label}
                 </Link>

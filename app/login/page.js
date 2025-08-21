@@ -14,12 +14,12 @@ export default function Login() {
   const [fadeIn, setFadeIn] = useState(false);
   const router = useRouter();
 
- 
   useEffect(() => {
     setFadeIn(true);
-    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token) {
-      router.push("/admin/users"); // redirect ถ้ามี token
+      router.push("/admin/users");
+      return;
     }
   }, []);
 
@@ -45,15 +45,9 @@ export default function Login() {
       );
 
       const data = await res.json();
-      console.log(username);
 
       if (data.token) {
-        
-        if (remember) {
-          localStorage.setItem("token", data.token);
-        } else {
-          sessionStorage.setItem("token", data.token);
-        }
+        localStorage.setItem("token", data.token);
 
         Swal.fire({
           icon: "success",

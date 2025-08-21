@@ -20,7 +20,9 @@ export default function Page() {
 
     async function getUsers() {
       try {
-        const res = await fetch("/api/users");
+        const res = await fetch(
+          "https://backend-nextjs-virid.vercel.app/api/users"
+        );
         if (!res.ok) {
           console.error("Failed to fetch data");
           return;
@@ -53,10 +55,13 @@ export default function Page() {
 
     if (result.isConfirmed) {
       try {
-        const res = await fetch(`https://backend-nextjs-virid.vercel.app/api/users/${id}`, {
-          method: "DELETE",
-          headers: { Accept: "application/json" },
-        });
+        const res = await fetch(
+          `https://backend-nextjs-virid.vercel.app/api/users/${id}`,
+          {
+            method: "DELETE",
+            headers: { Accept: "application/json" },
+          }
+        );
         if (!res.ok) throw new Error("Delete failed");
         await res.json();
         Swal.fire("ลบแล้ว!", "ข้อมูลถูกลบเรียบร้อย", "success");

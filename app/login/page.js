@@ -55,7 +55,7 @@ export default function Login() {
           showConfirmButton: false,
           timer: 1200,
         }).then(() => {
-          router.push("/admin/users");
+          window.location.href ="/admin/users";
         });
       } else {
         Swal.fire({

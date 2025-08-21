@@ -13,7 +13,7 @@ export default function Navigation() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
-    setActiveLink(window.location.pathname); // ตั้ง active ตามหน้าปัจจุบัน
+    setActiveLink(window.location.pathname); 
   }, []);
 
   useEffect(() => {
@@ -189,7 +189,7 @@ export default function Navigation() {
                     e.currentTarget.style.transform = "scale(1)";
                   }}
                 >
-                  <i className="bi bi-box-arrow-right"></i> Sign Out
+                  <i className="bi bi-box-arrow-right"></i> Logout
                 </button>
               </li>
             ) : (

@@ -323,7 +323,7 @@ export default function ShoeStore() {
                     borderRadius: "30px",
                   }}
                 >
-                  <i className="bi bi-cart-fill me-2"></i>เพิ่มลงตะกร้า
+                  <i className="bi bi-cart-fill me-2"></i>เพิ่มลงในตะกร้า
                 </button>
               </div>
             </div>

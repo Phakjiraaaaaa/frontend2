@@ -18,7 +18,7 @@ export default function Login() {
     setFadeIn(true);
     const token = localStorage.getItem("token");
     if (token) {
-      router.push("/admin/users");
+     window.location.href = "/admin/users";
       return;
     }
   }, []);

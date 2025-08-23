@@ -18,7 +18,7 @@ export default function EditUser() {
   const [focusedInput, setFocusedInput] = useState(null);
   const [fadeIn, setFadeIn] = useState(false);
 
-  // โหลดข้อมูลผู้ใช้จาก API เมื่อ mount
+  
   useEffect(() => {
     setFadeIn(true);
     async function fetchUser() {
@@ -27,7 +27,7 @@ export default function EditUser() {
         if (!res.ok) throw new Error("Failed to fetch user data");
         const data = await res.json();
 
-        // สมมติ data เป็น object ของ user
+  
         setFirstname(data.firstname || "");
         setFullname(data.fullname || "");
         setLastname(data.lastname || "");
@@ -44,7 +44,7 @@ export default function EditUser() {
     fetchUser();
   }, [id]);
 
-  // ฟังก์ชันส่งข้อมูลแก้ไข
+ 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
 
@@ -89,7 +89,7 @@ export default function EditUser() {
           showConfirmButton: false,
           timer: 2000,
         }).then(() => {
-          router.push("/register"); // หรือหน้าอื่นตามต้องการ
+          router.push("/register"); 
         });
       } else {
         Swal.fire({
@@ -107,7 +107,7 @@ export default function EditUser() {
     }
   };
 
-  // Styles
+  
   const inputBaseStyle = {
     width: "100%",
     padding: 8,

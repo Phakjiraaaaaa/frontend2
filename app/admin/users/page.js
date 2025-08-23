@@ -64,10 +64,27 @@ export default function Page() {
         );
         if (!res.ok) throw new Error("Delete failed");
         await res.json();
-        Swal.fire("ลบแล้ว!", "ข้อมูลถูกลบเรียบร้อย", "success");
+
+       
+        Swal.fire({
+          title: "ลบแล้ว!",
+          text: "ข้อมูลถูกลบเรียบร้อย",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        });
       } catch (error) {
         console.error("Error deleting:", error);
-        Swal.fire("เกิดข้อผิดพลาด!", "ไม่สามารถลบข้อมูลได้", "error");
+
+        Swal.fire({
+          title: "เกิดข้อผิดพลาด!",
+          text: "ไม่สามารถลบข้อมูลได้",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        });
       }
     }
   };

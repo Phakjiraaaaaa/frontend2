@@ -8,17 +8,44 @@ export default function Navigation() {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [tokenState, setToken] = useState("");
   const [activeLink, setActiveLink] = useState("/");
+  const [cartItems, setCartItems] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
   const router = useRouter();
 
+  const fontFamily = "'Prompt', sans-serif";
+  const baseColor = "#1f1f1fff";
+  const hoverColor = "#7d7dff";
+
+  // โหลด token, activeLink และ cart จาก localStorage
   useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
-    setActiveLink(window.location.pathname); 
+    setActiveLink(window.location.pathname);
+
+    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCartItems(storedCart);
+    setCartCount(storedCart.length);
+
+    const updateCart = () => {
+      const newCart = JSON.parse(localStorage.getItem("cart") || "[]");
+      setCartItems(newCart);
+      setCartCount(newCart.length);
+    };
+    window.addEventListener("storage", updateCart);
+
+    return () => window.removeEventListener("storage", updateCart);
   }, []);
 
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
+
+  const addToCart = (product) => {
+    const updatedCart = [...cartItems, product];
+    setCartItems(updatedCart);
+    setCartCount(updatedCart.length);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
 
   const handleSignOut = () => {
     Swal.fire({
@@ -35,9 +62,7 @@ export default function Navigation() {
         Swal.fire({
           title: "กำลังออกจากระบบ...",
           timer: 2000,
-          didOpen: () => {
-            Swal.showLoading();
-          },
+          didOpen: () => Swal.showLoading(),
           showConfirmButton: false,
         });
 
@@ -49,9 +74,7 @@ export default function Navigation() {
             icon: "success",
             timer: 1500,
             showConfirmButton: false,
-          }).then(() => {
-            router.push("/login");
-          });
+          }).then(() => router.push("/login"));
         }, 2000);
       }
     });
@@ -62,11 +85,6 @@ export default function Navigation() {
     setActiveLink(href);
     setIsNavbarOpen(false);
   };
-
-  // Styles
-  const baseColor = "#1f1f1fff";
-  const hoverColor = "#7d7dff";
-  const fontFamily = "'Prompt', sans-serif";
 
   const navLinkStyle = {
     fontSize: "1.1rem",
@@ -163,11 +181,12 @@ export default function Navigation() {
             ))}
           </ul>
 
-          {/* เมนูขวา */}
+          {/* เมนูขวา: Login/Logout + ตะกร้า */}
           <ul
             className="navbar-nav ms-auto"
-            style={{ display: "flex", gap: "0.6rem" }}
+            style={{ display: "flex", gap: "0.6rem", alignItems: "center" }}
           >
+            {/* ปุ่ม Login/Logout */}
             {tokenState ? (
               <li className="nav-item">
                 <button
@@ -186,7 +205,6 @@ export default function Navigation() {
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = "#dc3545";
-                    e.currentTarget.style.transform = "scale(1)";
                   }}
                 >
                   <i className="bi bi-box-arrow-right"></i> Logout
@@ -195,8 +213,7 @@ export default function Navigation() {
             ) : (
               <>
                 <li className="nav-item">
-                  <Link
-                    href="/login"
+                  <button
                     className="btn"
                     style={{
                       backgroundColor: "#007bff",
@@ -205,21 +222,19 @@ export default function Navigation() {
                       fontFamily: fontFamily,
                       transition: "all 0.3s ease",
                     }}
+                    onClick={() => router.push("/login")}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = "#0069d9";
-                      e.currentTarget.style.transform = "scale(1.05)";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = "#007bff";
-                      e.currentTarget.style.transform = "scale(1)";
                     }}
                   >
                     <i className="bi bi-box-arrow-in-right"></i> Login
-                  </Link>
+                  </button>
                 </li>
                 <li className="nav-item">
-                  <Link
-                    href="/register"
+                  <button
                     className="btn"
                     style={{
                       backgroundColor: "#28a745",
@@ -228,20 +243,59 @@ export default function Navigation() {
                       fontFamily: fontFamily,
                       transition: "all 0.3s ease",
                     }}
+                    onClick={() => router.push("/register")}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.backgroundColor = "#218838";
-                      e.currentTarget.style.transform = "scale(1.05)";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = "#28a745";
-                      e.currentTarget.style.transform = "scale(1)";
                     }}
                   >
                     สมัครสมาชิก
-                  </Link>
+                  </button>
                 </li>
               </>
             )}
+
+            {/* ปุ่มตะกร้า */}
+            <li className="nav-item position-relative">
+              <Link
+                href="/basket"
+                style={{
+                  backgroundColor: "#ffc107",
+                  width: "30px",
+                  height: "30px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "8px",
+                  color: "#000",
+                  border: "none",
+                  fontFamily: fontFamily,
+                  transition: "all 0.3s ease",
+                  fontSize: "1.3rem",
+                  position: "relative",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "#e0a800";
+                  e.currentTarget.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#ffc107";
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+              >
+                <i className="bi bi-cart-fill"></i>
+                {cartCount > 0 && (
+                  <span
+                    className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    style={{ fontSize: "0.75rem" }}
+                  >
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

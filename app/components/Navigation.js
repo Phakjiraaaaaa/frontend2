@@ -16,36 +16,33 @@ export default function Navigation() {
   const baseColor = "#1f1f1fff";
   const hoverColor = "#7d7dff";
 
-  // โหลด token, activeLink และ cart จาก localStorage
   useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
     setActiveLink(window.location.pathname);
-
-    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCartItems(storedCart);
-    setCartCount(storedCart.length);
 
     const updateCart = () => {
       const newCart = JSON.parse(localStorage.getItem("cart") || "[]");
       setCartItems(newCart);
       setCartCount(newCart.length);
     };
-    window.addEventListener("storage", updateCart);
 
-    return () => window.removeEventListener("storage", updateCart);
+    // โหลดครั้งแรก
+    updateCart();
+
+    // ฟังทั้ง storage (เปิดหลายแท็บ) และ cartUpdated (ในแท็บเดียวกัน)
+    window.addEventListener("storage", updateCart);
+    window.addEventListener("cartUpdated", updateCart);
+
+    return () => {
+      window.removeEventListener("storage", updateCart);
+      window.removeEventListener("cartUpdated", updateCart);
+    };
   }, []);
 
   useEffect(() => {
     import("bootstrap/dist/js/bootstrap.bundle.min.js");
   }, []);
-
-  const addToCart = (product) => {
-    const updatedCart = [...cartItems, product];
-    setCartItems(updatedCart);
-    setCartCount(updatedCart.length);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
 
   const handleSignOut = () => {
     Swal.fire({

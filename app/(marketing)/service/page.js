@@ -42,7 +42,7 @@ export default function ShoeStore() {
       title: "รองเท้าผู้ชาย รุ่น New Balance\n574 core men's",
       description: "แตะสไตล์มินิมอล ใส่สบาย ใช้งานทนทาน",
       image: "/images/silders/ช2.png",
-      price: "฿ 2,790-3,500",
+      price: "฿ 3,500",
       category: "men",
       features: ["สีดำ", "ไม่ลื่นแม้เปียก", "พื้นนุ่ม"],
     },
@@ -305,7 +305,7 @@ export default function ShoeStore() {
           </div>
         </div>
       </div>
-      
+
       {/* Product List */}
       <div className="row g-4 mt-4">
         {filteredProducts.map((product) => (
@@ -314,10 +314,10 @@ export default function ShoeStore() {
               <Image
                 src={product.image}
                 alt={product.title}
-                width={500}
-                height={300}
+                width={400} 
+                height={200} 
                 className="card-img-top -mt-20"
-                style={{ objectFit: "cover", height: "250px" }}
+                style={{ objectFit: "cover", height: "200px" }} 
               />
               <div className="card-body p-4">
                 <h5

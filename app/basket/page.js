@@ -109,8 +109,8 @@ export default function BasketPage() {
                 <img
                   src={item.image}
                   alt={item.name}
-                  width={50}
-                  height={50}
+                  width={80}
+                  height={40}
                   style={{ objectFit: "cover", borderRadius: "8px" }}
                 />
                 <div>
@@ -139,7 +139,7 @@ export default function BasketPage() {
         </div>
       )}
 
-      <h4 className="mb-4">ราคารวม: {totalPrice} บาท</h4>
+    
 
       <div className="d-flex gap-2">
         <Link href="/service">

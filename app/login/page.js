@@ -18,7 +18,7 @@ export default function Login() {
     setFadeIn(true);
     const token = localStorage.getItem("token");
     if (token) {
-     window.location.href = "/admin/users";
+      window.location.href = "/admin/users";
       return;
     }
   }, []);
@@ -45,9 +45,13 @@ export default function Login() {
       );
 
       const data = await res.json();
+      console.log("Login response:", data); 
 
-      if (data.token) {
-        localStorage.setItem("token", data.token);
+     
+      const token = data.token || data.accessToken || data.jwt;
+
+      if (token) {
+        localStorage.setItem("token", token);
 
         Swal.fire({
           icon: "success",
@@ -55,14 +59,14 @@ export default function Login() {
           showConfirmButton: false,
           timer: 1200,
         }).then(() => {
-          window.location.href ="/admin/users";
+          window.location.href = "/admin/users";
         });
       } else {
         Swal.fire({
           icon: "error",
-          title: "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
+          title: data.message || "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง",
           showConfirmButton: false,
-          timer: 1200,
+          timer: 1500,
         });
       }
     } catch (error) {
@@ -107,6 +111,7 @@ export default function Login() {
   };
 
   const buttonHoverStyle = { backgroundColor: "#084bcc" };
+
 
   return (
     <div
@@ -225,7 +230,9 @@ export default function Login() {
               (e.currentTarget.style.transform = "scale(0.95)")
             }
             onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
-            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.transform = "scale(1)")
+            }
             onMouseOver={(e) =>
               (e.currentTarget.style.backgroundColor =
                 buttonHoverStyle.backgroundColor)

@@ -1,10 +1,14 @@
 "use client";
+
 import { useState } from "react";
 import Image from "next/image";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 export default function ShoeStore() {
   const [activeCategory, setActiveCategory] = useState("all");
-
+  const [cart, setCart] = useState([]);
   const shoeProducts = [
     {
       id: 1,
@@ -52,13 +56,13 @@ export default function ShoeStore() {
       features: ["สายชอบความนิ่ม", "มีหลายสีให้เลือก", "บาสบาย"],
     },
     {
-      id: 6, 
+      id: 6,
       title: "รองเท้าเด็ก รุ่น  New Balance\n574 HOOK & LOOP",
       description: "ปลอดภัย พื้นนุ่ม เหมาะกับเด็ก",
       image: "/images/silders/ด2.png",
       price: "฿ 1,500",
       category: "kids",
-      features: ["น้ำหนักเบา", "ลายน่ารัก","ไซส์ 0-10"],
+      features: ["น้ำหนักเบา", "ลายน่ารัก", "ไซส์ 0-10"],
     },
     {
       id: 7,
@@ -85,7 +89,7 @@ export default function ShoeStore() {
       image: "/images/silders/ด3.png",
       price: "฿ 1,500",
       category: "kids",
-      features: [ "น้ำหนักเบามาก", "มินิมอล", "ไซส์เด็ก"],
+      features: ["น้ำหนักเบามาก", "มินิมอล", "ไซส์เด็ก"],
     },
     {
       id: 10,
@@ -103,12 +107,14 @@ export default function ShoeStore() {
       image: "/images/silders/ญ4.png",
       price: "฿ 3,800",
       category: "women",
-      features: [ "ผู้ชายก็ใส่ได้","มีหลายสี", "ไซส์ 36-41"],
+      features: ["ผู้ชายก็ใส่ได้", "มีหลายสี", "ไซส์ 36-41"],
     },
     {
       id: 12,
-      title: "รองเท้าเด็ก รุ่น Addas\nGazelle Comfort Closure Elastic Laces Shoes Kids",
-      description: "นุ่มสบาย น้ำหนักเบา เดิน-วิ่งคล่องตัว เหมาะสำหรับเด็กทุกวัย",
+      title:
+        "รองเท้าเด็ก รุ่น Addas\nGazelle Comfort Closure Elastic Laces Shoes Kids",
+      description:
+        "นุ่มสบาย น้ำหนักเบา เดิน-วิ่งคล่องตัว เหมาะสำหรับเด็กทุกวัย",
       image: "/images/silders/ด4.png",
       price: "฿ 1,800",
       category: "kids",
@@ -130,11 +136,12 @@ export default function ShoeStore() {
       image: "/images/silders/ญ5.png",
       price: "฿ 3,200",
       category: "women",
-      features: [ "ใส่สบายทุกก้าว","สบายตลอดวัน", "ไม่เจ็บเท้า"],
+      features: ["ใส่สบายทุกก้าว", "สบายตลอดวัน", "ไม่เจ็บเท้า"],
     },
     {
       id: 15,
-      title: "รองเท้าเด็ก รุ่น VANS\nERA ELASTIC LACE ( 1_4 YEARS ) - RADICALLY HAPPY TRUE WHITE",
+      title:
+        "รองเท้าเด็ก รุ่น VANS\nERA ELASTIC LACE ( 1_4 YEARS ) - RADICALLY HAPPY TRUE WHITE",
       description: "ใส่สบาย น้ำหนักเบา พร้อมลุยทุกกิจกรรมของเด็ก ๆ",
       image: "/images/silders/ด5.png",
       price: "฿ 560",
@@ -144,7 +151,8 @@ export default function ShoeStore() {
     {
       id: 16,
       title: "รองเท้าผู้ชาย รุ่น Louis Vuitton\nLV Trainer ",
-      description: "น้ำหนักเบา ช่วยให้เคลื่อนไหวได้คล่องตัว ลุคเรียบเท่แต่มีสไตล์",
+      description:
+        "น้ำหนักเบา ช่วยให้เคลื่อนไหวได้คล่องตัว ลุคเรียบเท่แต่มีสไตล์",
       image: "/images/silders/ช6.png",
       price: "฿ 48,700",
       category: "men",
@@ -157,7 +165,7 @@ export default function ShoeStore() {
       image: "/images/silders/ญ6.png",
       price: "฿ 47,400",
       category: "women",
-      features: [ "มีหลายสีให้เลือก","ตอบโจทย์ทุกสไตล์"],
+      features: ["มีหลายสีให้เลือก", "ตอบโจทย์ทุกสไตล์"],
     },
     {
       id: 18,
@@ -175,7 +183,11 @@ export default function ShoeStore() {
       image: "/images/silders/ญ7.png",
       price: "฿ 3,800",
       category: "women",
-      features: [ "สีสันสดใส","ดีไซน์เรียบหรูแต่โดดเด่น", "น้ำหนักเบา ใส่สบายตลอดวัน"],
+      features: [
+        "สีสันสดใส",
+        "ดีไซน์เรียบหรูแต่โดดเด่น",
+        "น้ำหนักเบา ใส่สบายตลอดวัน",
+      ],
     },
     {
       id: 20,
@@ -191,7 +203,12 @@ export default function ShoeStore() {
   const categories = [
     { id: "all", name: "ทั้งหมด", icon: "bi-grid-fill", color: "#ff85a2" },
     { id: "men", name: "ผู้ชาย", icon: "bi-person-fill", color: "#7ec4cf" },
-    { id: "women", name: "ผู้หญิง", icon: "bi-person-hearts", color: "#b892ff" },
+    {
+      id: "women",
+      name: "ผู้หญิง",
+      icon: "bi-person-hearts",
+      color: "#b892ff",
+    },
     { id: "kids", name: "เด็ก", icon: "bi-bicycle", color: "#ffc107" },
   ];
 
@@ -199,6 +216,28 @@ export default function ShoeStore() {
     activeCategory === "all"
       ? shoeProducts
       : shoeProducts.filter((p) => p.category === activeCategory);
+
+  const addToCart = (product) => {
+    setCart((prev) => [...prev, product]);
+
+    const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const updatedCart = [...currentCart, product];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    window.dispatchEvent(new Event("cartUpdated"));
+
+    Swal.fire({
+      title: '<span style="color:#ff85a2">สำเร็จ!</span>',
+      html: `<span style="color:#000000">เพิ่ม "${product.title}" เพิ่มลงตะกร้าแล้ว</span>`,
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1500,
+      background: "#fff0f5",
+      iconColor: "#91ff85ff",
+      toast: true,
+      position: "top-end",
+    });
+  };
 
   return (
     <div className="container my-5">
@@ -219,7 +258,9 @@ export default function ShoeStore() {
               }`}
               style={{
                 background:
-                  activeCategory === category.id ? category.color : "transparent",
+                  activeCategory === category.id
+                    ? category.color
+                    : "transparent",
                 border: `1px solid ${category.color}`,
                 borderRadius: "30px",
               }}
@@ -231,35 +272,40 @@ export default function ShoeStore() {
           ))}
         </div>
       </div>
-
       {/* Promotion */}
       <div className="row mt-5">
-        <div className="col-12">
+        {/* Promotion 1 */}
+        <div className="col-12 col-md-6 mb-4">
           <div
             className="p-4 rounded-4 shadow-sm text-center"
             style={{ background: "rgba(255, 133, 162, 0.1)" }}
           >
             <h3 className="mb-3" style={{ color: "rgba(255, 133, 162, 1)" }}>
-              <strong> โปรโมชันพิเศษ! </strong>
+              <strong>โปรโมชันพิเศษ!</strong>
             </h3>
             <p className="mb-4">
-              ลดทันที 15% เมื่อสั่งซื้อครบ 2,500 บาท วันนี้ - สิ้นเดือนนี้เท่านั้น
+              ลดทันที 15% เมื่อสั่งซื้อครบ 2,500 บาท วันนี้ -
+              สิ้นเดือนนี้เท่านั้น
             </p>
-            <button
-              className="btn px-4 py-2"
-              style={{
-                background: "#ff85a2",
-                color: "white",
-                borderRadius: "30px",
-              }}
-            >
-              <i className="bi bi-lightning-fill me-2"></i>
-              ดูโปรโมชัน
-            </button>
+          </div>
+        </div>
+
+        {/* Promotion 2 */}
+        <div className="col-12 col-md-6 mb-4">
+          <div
+            className="p-4 rounded-4 shadow-sm text-center"
+            style={{ background: "rgba(111, 190, 251, 0.1)" }}
+          >
+            <h3 className="mb-3" style={{ color: "rgba(111, 190, 251, 1)" }}>
+              <strong>โปรโมชันสมาชิก!</strong>
+            </h3>
+            <p className="mb-4">
+              รับคูปอง 200 บาท เมื่อซื้อสินค้าครบ 3,000 บาท เฉพาะสมาชิกเท่านั้น
+            </p>
           </div>
         </div>
       </div>
-
+      
       {/* Product List */}
       <div className="row g-4 mt-4">
         {filteredProducts.map((product) => (
@@ -308,6 +354,7 @@ export default function ShoeStore() {
                   ))}
                 </ul>
               </div>
+
               <div className="card-footer bg-white border-0 px-4 pb-4 d-flex justify-content-between align-items-center">
                 <div className="fw-bold fs-5">{product.price}</div>
                 <button
@@ -322,6 +369,7 @@ export default function ShoeStore() {
                     color: "white",
                     borderRadius: "30px",
                   }}
+                  onClick={() => addToCart(product)}
                 >
                   <i className="bi bi-cart-fill me-2"></i>เพิ่มลงตะกร้า
                 </button>
@@ -348,7 +396,7 @@ export default function ShoeStore() {
             <div className="d-flex justify-content-center gap-3 flex-wrap">
               {/* Facebook */}
               <a
-                href="https://www.facebook.com/share/1AnghNXN5p/" 
+                href="https://www.facebook.com/share/1AnghNXN5p/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn px-4 py-2"
@@ -375,8 +423,6 @@ export default function ShoeStore() {
               >
                 <i className="bi bi-instagram me-2"></i> ติดต่อผ่าน Instagram
               </a>
-
-            
             </div>
           </div>
         </div>

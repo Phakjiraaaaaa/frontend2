@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { Sriracha } from "next/font/google";
 
+
 const sriracha = Sriracha({ subsets: ["latin"], weight: ["400"] });
 
 export default function ShoeStore() {
@@ -308,7 +309,7 @@ export default function ShoeStore() {
           </div>
         </div>
       </div>
-
+      
       {/* Product List */}
       <div className="row g-4 mt-4">
         {filteredProducts.map((product) => (
@@ -324,7 +325,7 @@ export default function ShoeStore() {
               />
               <div className="card-body p-4">
                 <h5
-                  className={`${sriracha.className} card-title mb-2 fw-bold`}
+                  className="card-title mb-2 fw-bold"
                   style={{
                     whiteSpace: "pre-line",
                     color:

@@ -310,70 +310,75 @@ export default function ShoeStore() {
       <div className="row g-4 mt-4">
         {filteredProducts.map((product) => (
           <div key={product.id} className="col-md-6 col-lg-4">
-            <div className="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                aspectRatio: "16/9",
+              }}
+            >
               <Image
                 src={product.image}
                 alt={product.title}
-                width={400} 
-                height={200} 
-                className="card-img-top -mt-20"
-                style={{ objectFit: "cover", height: "200px" }} 
+                fill
+                className="card-img-top"
+                style={{ objectFit: "cover" }} // ครอบเต็มกรอบ
               />
-              <div className="card-body p-4">
-                <h5
-                  className="card-title mb-2 fw-bold"
-                  style={{
-                    whiteSpace: "pre-line",
-                    color:
-                      product.category === "men"
-                        ? "#7ec4cf"
-                        : product.category === "women"
-                        ? "#b892ff"
-                        : "#ffc107",
-                  }}
-                >
-                  {product.title}
-                </h5>
-                <p className="card-text">{product.description}</p>
-                <ul className="list-unstyled mt-3">
-                  {product.features.map((f, i) => (
-                    <li key={i} className="d-flex align-items-center mb-1">
-                      <i
-                        className="bi bi-check-circle-fill me-2"
-                        style={{
-                          color:
-                            product.category === "men"
-                              ? "#7ec4cf"
-                              : product.category === "women"
-                              ? "#b892ff"
-                              : "#ffc107",
-                        }}
-                      ></i>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            </div>
+            <div className="card-body p-4">
+              <h5
+                className="card-title mb-2 fw-bold"
+                style={{
+                  whiteSpace: "pre-line",
+                  color:
+                    product.category === "men"
+                      ? "#7ec4cf"
+                      : product.category === "women"
+                      ? "#b892ff"
+                      : "#ffc107",
+                }}
+              >
+                {product.title}
+              </h5>
+              <p className="card-text">{product.description}</p>
+              <ul className="list-unstyled mt-3">
+                {product.features.map((f, i) => (
+                  <li key={i} className="d-flex align-items-center mb-1">
+                    <i
+                      className="bi bi-check-circle-fill me-2"
+                      style={{
+                        color:
+                          product.category === "men"
+                            ? "#7ec4cf"
+                            : product.category === "women"
+                            ? "#b892ff"
+                            : "#ffc107",
+                      }}
+                    ></i>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              <div className="card-footer bg-white border-0 px-4 pb-4 d-flex justify-content-between align-items-center">
-                <div className="fw-bold fs-5">{product.price}</div>
-                <button
-                  className="btn"
-                  style={{
-                    background:
-                      product.category === "men"
-                        ? "#7ec4cf"
-                        : product.category === "women"
-                        ? "#b892ff"
-                        : "#ffc107",
-                    color: "white",
-                    borderRadius: "30px",
-                  }}
-                  onClick={() => addToCart(product)}
-                >
-                  <i className="bi bi-cart-fill me-2"></i>เพิ่มลงตะกร้า
-                </button>
-              </div>
+            <div className="card-footer bg-white border-0 px-4 pb-4 d-flex justify-content-between align-items-center">
+              <div className="fw-bold fs-5">{product.price}</div>
+              <button
+                className="btn"
+                style={{
+                  background:
+                    product.category === "men"
+                      ? "#7ec4cf"
+                      : product.category === "women"
+                      ? "#b892ff"
+                      : "#ffc107",
+                  color: "white",
+                  borderRadius: "30px",
+                }}
+                onClick={() => addToCart(product)}
+              >
+                <i className="bi bi-cart-fill me-2"></i>เพิ่มลงตะกร้า
+              </button>
             </div>
           </div>
         ))}

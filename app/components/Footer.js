@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 
 export default function Footer() {
   return (
@@ -65,25 +65,36 @@ export default function Footer() {
                   ติดต่อเรา
                 </Link>
               </li>
+              <li className="nav-item mb-2">
+                <Link
+                  href="/basket"
+                  className="nav-link p-0 text-body-secondary hover:text-primary"
+                >
+                  ตะกร้าสินค้า
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div className="col-md-5 offset-md-1 mb-3">
             <form>
-              <h5>Subscribe to our newsletter</h5>
-              <p>Monthly digest of what's new and exciting from us.</p>
+              <h5>ค้นหาสินค้า</h5>
+              <p>พิมพ์ชื่อสินค้าที่คุณต้องการหา</p>
               <div className="d-flex flex-column flex-sm-row w-100 gap-2">
-                <label htmlFor="newsletter1" className="visually-hidden">
-                  Email address
+                <label htmlFor="search" className="visually-hidden">
+                  ค้นหา
                 </label>
                 <input
-                  id="newsletter1"
-                  type="email"
+                  id="search"
+                  type="text"
                   className="form-control"
-                  placeholder="Email address"
+                  placeholder="ค้นหาสินค้า..."
                 />
-                <button className="btn btn-primary hover:opacity-80" type="button">
-                  Subscribe
+                <button
+                  className="btn btn-success hover:opacity-80"
+                  type="button"
+                >
+                  ค้นหา
                 </button>
               </div>
             </form>
@@ -92,16 +103,56 @@ export default function Footer() {
 
         {/* รูปรองเท้า */}
         <div className="shoe-gallery text-center">
-          <img src="/images/silders/footer.png" alt="รองเท้า" className="shoe-img hover:scale-110 transition-transform duration-300" />
-          <img src="/images/silders/footer1.png" alt="รองเท้า" className="shoe-img hover:scale-110 transition-transform duration-300" />
-          <img src="/images/silders/footer2.png" alt="รองเท้า" className="shoe-img hover:scale-110 transition-transform duration-300" />
-          <img src="/images/silders/footer3.png" alt="รองเท้า" className="shoe-img hover:scale-110 transition-transform duration-300" />
-          <img src="/images/silders/footer4.png" alt="รองเท้า" className="shoe-img hover:scale-110 transition-transform duration-300" />
-          <img src="/images/silders/footer5.png" alt="รองเท้า" className="shoe-img hover:scale-110 transition-transform duration-300" />
-          <img src="/images/silders/footer6.png" alt="รองเท้า" className="shoe-img hover:scale-110 transition-transform duration-300" />
-          <img src="/images/silders/footer7.png" alt="รองเท้า" className="shoe-img hover:scale-110 transition-transform duration-300" />
-          <img src="/images/silders/footer8.png" alt="รองเท้า" className="shoe-img hover:scale-110 transition-transform duration-300" />
-          <img src="/images/silders/footer9.png" alt="รองเท้า" className="shoe-img hover:scale-110 transition-transform duration-300" />
+          <img
+            src="/images/silders/footer.png"
+            alt="รองเท้า"
+            className="shoe-img hover:scale-110 transition-transform duration-300"
+          />
+          <img
+            src="/images/silders/footer1.png"
+            alt="รองเท้า"
+            className="shoe-img hover:scale-110 transition-transform duration-300"
+          />
+          <img
+            src="/images/silders/footer2.png"
+            alt="รองเท้า"
+            className="shoe-img hover:scale-110 transition-transform duration-300"
+          />
+          <img
+            src="/images/silders/footer3.png"
+            alt="รองเท้า"
+            className="shoe-img hover:scale-110 transition-transform duration-300"
+          />
+          <img
+            src="/images/silders/footer4.png"
+            alt="รองเท้า"
+            className="shoe-img hover:scale-110 transition-transform duration-300"
+          />
+          <img
+            src="/images/silders/footer5.png"
+            alt="รองเท้า"
+            className="shoe-img hover:scale-110 transition-transform duration-300"
+          />
+          <img
+            src="/images/silders/footer6.png"
+            alt="รองเท้า"
+            className="shoe-img hover:scale-110 transition-transform duration-300"
+          />
+          <img
+            src="/images/silders/footer7.png"
+            alt="รองเท้า"
+            className="shoe-img hover:scale-110 transition-transform duration-300"
+          />
+          <img
+            src="/images/silders/footer8.png"
+            alt="รองเท้า"
+            className="shoe-img hover:scale-110 transition-transform duration-300"
+          />
+          <img
+            src="/images/silders/footer9.png"
+            alt="รองเท้า"
+            className="shoe-img hover:scale-110 transition-transform duration-300"
+          />
         </div>
 
         {/* ลิขสิทธิ์ + Social Media */}

@@ -139,7 +139,7 @@ export default function BasketPage() {
         </div>
       )}
 
-      <h4 className="mb-4">ราคารวม: {totalPrice} บาท</h4>
+    
 
       <div className="d-flex gap-2">
         <Link href="/service">

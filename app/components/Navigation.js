@@ -1,8 +1,12 @@
 "use client";
+"use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+import { Sriracha } from "next/font/google";
+
+const sriracha = Sriracha({ subsets: ["latin"], weight: ["400"] });
 
 export default function Navigation() {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
@@ -12,7 +16,8 @@ export default function Navigation() {
   const [cartCount, setCartCount] = useState(0);
   const router = useRouter();
 
-  const fontFamily = "'Prompt', sans-serif";
+  const fontFamily = "var(--font-Sqriracha)";
+  const logoFont = "var(--font-sriracha)";
   const baseColor = "#1f1f1fff";
   const hoverColor = "#7d7dff";
 
@@ -27,10 +32,8 @@ export default function Navigation() {
       setCartCount(newCart.length);
     };
 
-    // โหลดครั้งแรก
     updateCart();
 
-    // ฟังทั้ง storage (เปิดหลายแท็บ) และ cartUpdated (ในแท็บเดียวกัน)
     window.addEventListener("storage", updateCart);
     window.addEventListener("cartUpdated", updateCart);
 
@@ -122,7 +125,7 @@ export default function Navigation() {
             fontWeight: "bold",
             color: baseColor,
             transition: "all 0.3s ease",
-            fontFamily: fontFamily,
+            fontFamily: sriracha.style.fontFamily,
           }}
           onMouseEnter={(e) => (e.currentTarget.style.color = hoverColor)}
           onMouseLeave={(e) => (e.currentTarget.style.color = baseColor)}
@@ -134,7 +137,9 @@ export default function Navigation() {
             height={45}
             style={{ objectFit: "contain" }}
           />
-          Sneakerss Brand
+          <span style={{ fontFamily: sriracha.style.fontFamily }}>
+            Sneakerss Brand
+          </span>
         </Link>
 
         <button
@@ -183,8 +188,8 @@ export default function Navigation() {
             className="navbar-nav ms-auto"
             style={{ display: "flex", gap: "0.6rem", alignItems: "center" }}
           >
-            {/* ปุ่ม Login/Logout */}
             {tokenState ? (
+              // Logout
               <li className="nav-item">
                 <button
                   type="button"
@@ -194,7 +199,7 @@ export default function Navigation() {
                     backgroundColor: "#dc3545",
                     color: "#fff",
                     border: "none",
-                    fontFamily: fontFamily,
+                    fontFamily: sriracha.style.fontFamily, 
                     transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
@@ -209,6 +214,7 @@ export default function Navigation() {
               </li>
             ) : (
               <>
+                {/* Login */}
                 <li className="nav-item">
                   <button
                     className="btn"
@@ -216,7 +222,7 @@ export default function Navigation() {
                       backgroundColor: "#007bff",
                       color: "#fff",
                       border: "none",
-                      fontFamily: fontFamily,
+                      fontFamily: sriracha.style.fontFamily, 
                       transition: "all 0.3s ease",
                     }}
                     onClick={() => router.push("/login")}
@@ -230,6 +236,8 @@ export default function Navigation() {
                     <i className="bi bi-box-arrow-in-right"></i> Login
                   </button>
                 </li>
+
+                {/* Register */}
                 <li className="nav-item">
                   <button
                     className="btn"
@@ -237,7 +245,7 @@ export default function Navigation() {
                       backgroundColor: "#28a745",
                       color: "#fff",
                       border: "none",
-                      fontFamily: fontFamily,
+                      fontFamily: sriracha.style.fontFamily, 
                       transition: "all 0.3s ease",
                     }}
                     onClick={() => router.push("/register")}

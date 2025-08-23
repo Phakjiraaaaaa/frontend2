@@ -108,7 +108,14 @@ export default function CardsCarousel() {
                           alt={item.title}
                         />
                       </div>
-                      
+
+                      {/* ชื่อและราคา */}
+                      <div className="card-body text-center">
+                        <h5 className="card-title fw-bold">{item.title}</h5>
+                        <p className="card-text text-danger fs-5">
+                          {item.price}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -182,7 +189,7 @@ export default function CardsCarousel() {
 
         .fixed-card-size {
           width: 280px;
-          height: 360px;
+          height: 420px; /* เพิ่มความสูงเพื่อรองรับข้อความ */
           display: flex;
           flex-direction: column;
         }
@@ -229,7 +236,7 @@ export default function CardsCarousel() {
 
       <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        href="https://www.f0nt.com/release/357paniasana/"
       />
     </div>
   );

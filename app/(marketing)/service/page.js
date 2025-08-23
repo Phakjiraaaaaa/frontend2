@@ -42,7 +42,7 @@ export default function ShoeStore() {
       title: "รองเท้าผู้ชาย รุ่น New Balance\n574 core men's",
       description: "แตะสไตล์มินิมอล ใส่สบาย ใช้งานทนทาน",
       image: "/images/silders/ช2.png",
-      price: "฿ 2,790-3,500",
+      price: "฿ 3,500",
       category: "men",
       features: ["สีดำ", "ไม่ลื่นแม้เปียก", "พื้นนุ่ม"],
     },
@@ -53,7 +53,7 @@ export default function ShoeStore() {
       image: "/images/silders/ญ2.png",
       price: "฿ 3,500",
       category: "women",
-      features: ["สายชอบความนิ่ม", "มีหลายสีให้เลือก", "บาสบาย"],
+      features: ["สายชอบความนิ่ม", "มีหลายสีให้เลือก", "ใส่สบาย"],
     },
     {
       id: 6,
@@ -84,7 +84,7 @@ export default function ShoeStore() {
     },
     {
       id: 9,
-      title: "รองเท้าเด็ก รุ่น",
+      title: "รองเท้าเด็ก รุ่น Converse\nChuck Taylor All Star",
       description: "ปลอดภัย พื้นนุ่มมาก ใส่แล้วเดินง่ายไม่ลื่น",
       image: "/images/silders/ด3.png",
       price: "฿ 1,500",

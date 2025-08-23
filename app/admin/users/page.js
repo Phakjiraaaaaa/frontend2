@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { Sriracha } from "next/font/google";
+
+
+const sriracha = Sriracha({ subsets: ["latin"], weight: "400" });
 
 export default function Page() {
   const [items, setItems] = useState([]);
@@ -65,7 +69,6 @@ export default function Page() {
         if (!res.ok) throw new Error("Delete failed");
         await res.json();
 
-       
         Swal.fire({
           title: "ลบแล้ว!",
           text: "ข้อมูลถูกลบเรียบร้อย",
@@ -91,6 +94,7 @@ export default function Page() {
 
   return (
     <div
+      className={sriracha.className} 
       style={{
         minHeight: "100vh",
         width: "100%",

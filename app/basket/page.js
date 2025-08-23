@@ -109,7 +109,7 @@ export default function BasketPage() {
                 <img
                   src={item.image}
                   alt={item.name}
-                  width={50}
+                  width={80}
                   height={50}
                   style={{ objectFit: "cover", borderRadius: "8px" }}
                 />

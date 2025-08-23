@@ -47,7 +47,7 @@ export default function Contact() {
     <div className="container my-5">
       {/* Header */}
       <div className="text-center mb-5">
-        <h1 className="display-4 fw-bold mb-3" style={{ color: "#2d2d2dff" }}>ติดต่อร้านรองเท้า</h1>
+        <h1 className="display-4 fw-bold mb-3" style={{ color: "#12e3d8ff" }}>ติดต่อร้านรองเท้า</h1>
         <p className="lead mb-4">มีคำถามเกี่ยวกับสินค้า หรืออยากสั่งซื้อจำนวนมาก? ติดต่อเราได้เลย!</p>
         <div className="d-flex justify-content-center gap-3 mb-4">
           {contactInfo.socialMedia.map((social, index) => (

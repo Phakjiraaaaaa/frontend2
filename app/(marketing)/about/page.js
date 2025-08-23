@@ -127,7 +127,7 @@ export default function About() {
               style={{
                 bottom: "10px",
                 right: "10px",
-                background: "#ff85a2",
+                background: "#e893f9ff",
                 width: "60px",
                 height: "60px",
                 borderRadius: "50%",
@@ -136,6 +136,8 @@ export default function About() {
                 justifyContent: "center",
                 boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
                 border: "3px solid white",
+                textAlign: "center", 
+                lineHeight: 0, 
               }}
             >
               <i className="bi bi-compass-fill fs-4 text-white"></i>
@@ -146,7 +148,7 @@ export default function About() {
           <div className="p-4 rounded-4 shadow-sm">
             <h1
               className="display-5 fw-bold mb-2"
-              style={{ color: "#1934e3ff" }}
+              style={{ color: "#7c0c93ff" }}
             >
               {personalInfo.name}
             </h1>
@@ -167,7 +169,7 @@ export default function About() {
                     style={{
                       width: "45px",
                       height: "45px",
-                      background: "#ff85a2",
+                      background: "#7c0c93ff",
                       borderRadius: "50%",
                       display: "flex",
                       alignItems: "center",
@@ -396,7 +398,7 @@ export default function About() {
         className="contact-container p-4 rounded-4 shadow-sm"
         style={{ backgroundColor: "#fff" }}
       >
-        <h3 style={{ color: "#ff85a2", marginBottom: "1rem" }}>
+        <h3 style={{ color: "#7c0c93ff", marginBottom: "1rem" }}>
           <strong>ติดต่อฉัน</strong>
         </h3>
         <p style={{ marginBottom: "1.5rem" }}>
@@ -421,8 +423,8 @@ export default function About() {
           .social-button {
             padding: 12px 20px;
             border-radius: 30px;
-            background-color: #ffdee4;
-            color: #ff85a2;
+            background-color: #f7cdffff;
+            color: #7c0c93ff;
             font-weight: 600;
             text-decoration: none;
             transition: background-color 0.3s ease, color 0.3s ease;
@@ -433,9 +435,9 @@ export default function About() {
             font-size: 1.3rem;
           }
           .social-button:hover {
-            background-color: #ff85a2;
+            background-color: #7c0c93ff;
             color: white;
-            border-color: #ff85a2;
+            border-color: #7c0c93ff;
             text-decoration: none;
           }
         `}</style>

@@ -5,7 +5,7 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import "./globals.css";
 
-// ฟอนต์ภาษาอังกฤษ
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -20,13 +20,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="th">
       <head>
-        {/* ฟอนต์ภาษาไทย Prompt */}
+        {/* ฟอนต์ไทย: Charmonman, Itim, Pattaya, Sriracha */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;700&display=swap"
+          href="https://fonts.google.com/share?selection.family=Charmonman:wght@400;700|Itim|Pattaya|Sriracha"
           rel="stylesheet"
         />
       </head>
-      <body className={`${inter.variable} antialiased`} style={{ fontFamily: "'Prompt', 'Inter', sans-serif" }}>
+      <body
+        className={`${inter.variable} antialiased`}
+        style={{
+          fontFamily:
+            "'Charmonman', 'Itim', 'Pattaya', 'Sriracha', 'Inter', sans-serif",
+        }}
+      >
         <div className="container-fluid">
           <div className="row">
             <div className="col">

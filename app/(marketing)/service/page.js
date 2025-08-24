@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { Sriracha } from "next/font/google";
 
-
 const sriracha = Sriracha({ subsets: ["latin"], weight: ["400"] });
 
 export default function ShoeStore() {
@@ -309,20 +308,31 @@ export default function ShoeStore() {
           </div>
         </div>
       </div>
-      
       {/* Product List */}
-      <div className="row g-4 mt-4">
+      <div className="row">
         {filteredProducts.map((product) => (
-          <div key={product.id} className="col-md-6 col-lg-4">
+          <div key={product.id} className="col-md-6 col-lg-4 mb-4">
             <div className="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
-              <Image
-                src={product.image}
-                alt={product.title}
-                width={500}
-                height={300}
-                className="card-img-top -mt-20"
-                style={{ objectFit: "cover", height: "250px" }}
-              />
+              <div
+                className="position-relative"
+                style={{ width: "100%", aspectRatio: "16/9" }}
+              >
+                {product?.image ? (
+                  <Image
+                    src={product.image}
+                    alt={product.title || "Product image"}
+                    fill
+                    className="card-img-top"
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                ) : (
+                  <div className="d-flex align-items-center justify-content-center bg-light w-100 h-100">
+                    <span className="text-muted">No Image</span>
+                  </div>
+                )}
+              </div>
+
               <div className="card-body p-4">
                 <h5
                   className="card-title mb-2 fw-bold"

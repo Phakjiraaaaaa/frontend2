@@ -140,7 +140,7 @@ export default function About() {
                 lineHeight: 0, 
               }}
             >
-              <i className="bi bi-compass-fill fs-4 text-white"></i>
+              <i className="bi bi-envelope-heart fs-2 text-white"></i>
             </div>
           </div>
         </div>

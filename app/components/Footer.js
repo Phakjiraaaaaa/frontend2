@@ -8,40 +8,16 @@ export default function Footer() {
     <div className="container">
       <footer className="py-5">
         <div className="row">
-          <div className="col-6 col-md-2 mb-3">
-            <h5>แหล่งข้อมูล</h5>
-            <ul className="nav flex-column">
+
+
+          <div className="col-6 col-md-2 mb-3 d-flex justify-content-center ">
+            <ul className="nav flex-column align-items-center">
               <li className="nav-item mb-2">
-                <Link
-                  href="/"
-                  className="nav-link p-0 text-body-secondary hover:text-primary"
-                >
-                  หน้าร้าน
-                </Link>
-              </li>
-              <li className="nav-item mb-2">
-                <Link
-                  href="/service"
-                  className="nav-link p-0 text-body-secondary hover:text-primary"
-                >
-                  ผู้ชาย
-                </Link>
-              </li>
-              <li className="nav-item mb-2">
-                <Link
-                  href="/service"
-                  className="nav-link p-0 text-body-secondary hover:text-primary"
-                >
-                  ผู้หญิง
-                </Link>
-              </li>
-              <li className="nav-item mb-2">
-                <Link
-                  href="/service"
-                  className="nav-link p-0 text-body-secondary hover:text-primary"
-                >
-                  เด็ก
-                </Link>
+                <img
+                  src="/images/silders/logo.png"
+                  alt="โลโก้"
+                  style={{ width: "150px", height: "150px"  }} 
+                />
               </li>
             </ul>
           </div>
@@ -76,7 +52,32 @@ export default function Footer() {
             </ul>
           </div>
 
+          <div className="col-6 col-md-2 mb-3">
+            <h5>แหล่งข้อมูล</h5>
+            <ul className="nav flex-column">
+              <li className="nav-item mb-2">
+                <Link
+                  href="/"
+                  className="nav-link p-0 text-body-secondary hover:text-primary"
+                >
+                  หน้าร้าน
+                </Link>
+              </li>
+              <li className="nav-item mb-2">
+                <Link
+                  href="/service"
+                  className="nav-link p-0 text-body-secondary hover:text-primary"
+                >
+                  เกี่ยวกับเรา
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+      
+
           <div className="col-md-5 offset-md-1 mb-3">
+            <ul className="nav flex-column align-items-center"></ul>
             <div className="p-4 bg-white rounded shadow-sm">
               <h5 className="mb-3">ค้นหาสินค้า</h5>
               <p className="mb-3 text-muted">
@@ -94,9 +95,9 @@ export default function Footer() {
                 />
                 <button
                   type="submit"
-                  className="btn btn-primary rounded-pill px-4 transition-all hover:scale-105"
+                  className="btn btn-primary rounded-pill px-8 transition-all hover:scale-105"
                 >
-                  ค้นหา
+                 <i className ="bi bi-search-heart"></i>
                 </button>
               </form>
             </div>

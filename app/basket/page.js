@@ -22,7 +22,7 @@ export default function BasketPage() {
     };
   }, []);
 
-  // ตรวจสอบสถานะการชำระเงิน
+  
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const paymentStatus = urlParams.get("payment");
@@ -51,7 +51,7 @@ export default function BasketPage() {
     }
   }, []);
 
-  // คำนวณราคารวม โดยแปลง price และ quantity เป็น number
+ 
   const totalPrice = useMemo(() => {
     return cartItems.reduce((sum, item) => {
       const price = Number(item.price) || 0;
@@ -60,7 +60,7 @@ export default function BasketPage() {
     }, 0);
   }, [cartItems]);
 
-  // ลบสินค้า
+  
   const handleRemove = async (index) => {
     const result = await Swal.fire({
       title: "คุณแน่ใจไหม?",
@@ -91,7 +91,7 @@ export default function BasketPage() {
     }
   };
 
-  // ชำระเงิน
+ 
   const handleCheckout = (item) => {
     window.location.href = `https://www.kasikornbank.com/th/kplus/start/?itemId=${item.id}`;
   };
@@ -141,7 +141,7 @@ export default function BasketPage() {
                       {item.name}
                     </h5>
                     <p className="mb-0 fw-bold" style={{ color: "#555" }}>
-                      ราคา: {item.price} บาท x {item.quantity || 1}
+                       {item.price} x {item.quantity || 1}
                     </p>
                   </div>
                 </div>

@@ -186,7 +186,7 @@ export default function Navigation() {
           {/* เมนูขวา: Login/Logout + ตะกร้า */}
           <ul
             className="navbar-nav ms-auto"
-            style={{ display: "flex", gap: "0.6rem", alignItems: "center" }}
+            style={{ display: "flex", gap: "0.6rem", }}
           >
             {tokenState ? (
               // Logout

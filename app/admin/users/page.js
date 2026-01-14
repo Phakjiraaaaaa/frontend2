@@ -7,13 +7,44 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { Sriracha } from "next/font/google";
 
-
 const sriracha = Sriracha({ subsets: ["latin"], weight: "400" });
 
 export default function Page() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+  // ===== GET USERS =====
+  const getUsers = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      const res = await fetch("/api/users", {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error("Fetch users failed");
+      }
+
+      const data = await res.json();
+      setItems(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      Swal.fire({
+        icon: "error",
+        title: "ไม่สามารถดึงข้อมูลผู้ใช้ได้",
+        text: "กรุณาลองใหม่อีกครั้ง",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -22,29 +53,10 @@ export default function Page() {
       return;
     }
 
-    async function getUsers() {
-      try {
-        const res = await fetch(
-          "https://backend-nextjs-virid.vercel.app/api/users"
-        );
-        if (!res.ok) {
-          console.error("Failed to fetch data");
-          return;
-        }
-        const data = await res.json();
-        setItems(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    }
-
     getUsers();
-    const interval = setInterval(getUsers, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  }, [router]);
 
+  // ===== DELETE USER =====
   const handleDelete = async (id) => {
     const result = await Swal.fire({
       title: "คุณแน่ใจไหม?",
@@ -57,44 +69,50 @@ export default function Page() {
       cancelButtonText: "ยกเลิก",
     });
 
-    if (result.isConfirmed) {
-      try {
-        const res = await fetch(
-          `https://backend-nextjs-virid.vercel.app/api/users/${id}`,
-          {
-            method: "DELETE",
-            headers: { Accept: "application/json" },
-          }
-        );
-        if (!res.ok) throw new Error("Delete failed");
-        await res.json();
+    if (!result.isConfirmed) return;
 
-        Swal.fire({
-          title: "ลบแล้ว!",
-          text: "ข้อมูลถูกลบเรียบร้อย",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1500,
-          timerProgressBar: true,
-        });
-      } catch (error) {
-        console.error("Error deleting:", error);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`/api/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
-        Swal.fire({
-          title: "เกิดข้อผิดพลาด!",
-          text: "ไม่สามารถลบข้อมูลได้",
-          icon: "error",
-          showConfirmButton: false,
-          timer: 1500,
-          timerProgressBar: true,
-        });
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        console.error("Delete API error:", res.status, errorData);
+        throw new Error(`Delete failed: ${res.status} - ${errorData.error || 'Unknown error'}`);
       }
+
+      Swal.fire({
+        title: "ลบแล้ว!",
+        text: "ข้อมูลถูกลบเรียบร้อย",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      // โหลดข้อมูลใหม่
+      getUsers();
+    } catch (error) {
+      console.error("Error deleting user:", error);
+
+      Swal.fire({
+        title: "เกิดข้อผิดพลาด!",
+        text: "ไม่สามารถลบข้อมูลได้",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
   return (
     <div
-      className={sriracha.className} 
+      className={sriracha.className}
       style={{
         minHeight: "100vh",
         width: "100%",
@@ -136,6 +154,7 @@ export default function Page() {
                 <div style={{ marginBottom: 15 }}>
                   <strong>จำนวนผู้ใช้ทั้งหมด: {items.length} คน</strong>
                 </div>
+
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -165,7 +184,7 @@ export default function Page() {
                                 href={`/admin/users/edit/${item.id}`}
                                 className="btn btn-warning btn-sm"
                               >
-                                <i className="fa fa-pencil-alt"></i> Edit
+                                Edit
                               </Link>
                             </td>
                             <td>
@@ -173,7 +192,7 @@ export default function Page() {
                                 className="btn btn-danger btn-sm"
                                 onClick={() => handleDelete(item.id)}
                               >
-                                <i className="fa fa-trash"></i> Del
+                                Del
                               </button>
                             </td>
                           </tr>

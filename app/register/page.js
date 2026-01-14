@@ -15,7 +15,6 @@ export default function Register() {
   const [fadeIn, setFadeIn] = useState(false);
   const router = useRouter();
 
-
   useEffect(() => {
     setFadeIn(true);
     const token = localStorage.getItem("token");
@@ -44,12 +43,21 @@ export default function Register() {
       return;
     }
 
-    const res = await fetch(
-      "https://backend-nextjs-virid.vercel.app/api/users",
-      {
+let res;
+    try {
+      console.log("Attempting to fetch from: /api/users");
+      console.log("Request body:", {
+        firstname,
+        fullname,
+        lastname,
+        username,
+        password,
+      });
+      
+      res = await fetch("/api/users", {
         method: "POST",
         headers: {
-          Accept: "application/json",
+          "Accept": "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -59,8 +67,24 @@ export default function Register() {
           username,
           password,
         }),
-      }
-    );
+      });
+      
+      console.log("Response status:", res.status);
+      console.log("Response ok:", res.ok);
+      
+    } catch (err) {
+      console.error("Network error details:", err);
+      console.error("Error name:", err.name);
+      console.error("Error message:", err.message);
+      Swal.fire({
+        icon: "error",
+        title: "<h3>ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้</h3>",
+        html: `<p>รายละเอียดข้อผิดพลาด: ${err.message}</p>`,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      return;
+    }
 
     if (res.ok) {
       Swal.fire({

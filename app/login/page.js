@@ -35,14 +35,20 @@ export default function Login() {
     }
 
     try {
+      console.log("Attempting login fetch from: /api/login");
+      console.log("Request body:", { username, password });
+      
       const res = await fetch(
-        "https://backend-nextjs-virid.vercel.app/api/auth/login",
+        "/api/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password }),
         }
       );
+      
+      console.log("Login response status:", res.status);
+      console.log("Login response ok:", res.ok);
 
       const data = await res.json();
       console.log("Login response:", data); 
@@ -70,12 +76,15 @@ export default function Login() {
         });
       }
     } catch (error) {
-      console.error("Login error:", error);
+      console.error("Login error details:", error);
+      console.error("Error name:", error.name);
+      console.error("Error message:", error.message);
       Swal.fire({
         icon: "error",
-        title: "เกิดข้อผิดพลาดในการเข้าสู่ระบบ",
+        title: "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้",
+        html: `<p>รายละเอียดข้อผิดพลาด: ${error.message}</p>`,
         showConfirmButton: false,
-        timer: 1200,
+        timer: 3000,
       });
     }
   };

@@ -19,7 +19,10 @@ export default function Page() {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const res = await fetch("/api/users", {
+      
+      // แก้ไข URL และแนบ Bearer Token
+      const res = await fetch("https://backend024-seven.vercel.app/api/users", {
+        method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -73,7 +76,9 @@ export default function Page() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`/api/users/${id}`, {
+      
+      // แก้ไข URL และแนบ Bearer Token
+      const res = await fetch(`https://backend024-seven.vercel.app/api/users/${id}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`,

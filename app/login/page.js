@@ -37,23 +37,22 @@ export default function Login() {
     try {
       console.log("Attempting login fetch from: /api/login");
       console.log("Request body:", { username, password });
-      
+
       const res = await fetch(
-        "/api/login",
+        "https://backend024-seven.vercel.app/api/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password }),
-        }
+        },
       );
-      
+
       console.log("Login response status:", res.status);
       console.log("Login response ok:", res.ok);
 
       const data = await res.json();
-      console.log("Login response:", data); 
+      console.log("Login response:", data);
 
-     
       const token = data.token || data.accessToken || data.jwt;
 
       if (token) {
@@ -120,7 +119,6 @@ export default function Login() {
   };
 
   const buttonHoverStyle = { backgroundColor: "#084bcc" };
-
 
   return (
     <div
@@ -239,9 +237,7 @@ export default function Login() {
               (e.currentTarget.style.transform = "scale(0.95)")
             }
             onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.transform = "scale(1)")
-            }
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
             onMouseOver={(e) =>
               (e.currentTarget.style.backgroundColor =
                 buttonHoverStyle.backgroundColor)

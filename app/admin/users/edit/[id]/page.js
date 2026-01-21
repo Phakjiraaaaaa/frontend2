@@ -12,27 +12,52 @@ export default function EditUser() {
   const [firstname, setFirstname] = useState("");
   const [fullname, setFullname] = useState("");
   const [lastname, setLastname] = useState("");
+
+  // เพิ่ม State ใหม่
+  const [address, setAddress] = useState("");
+  const [sex, setSex] = useState("");
+  const [birthday, setBirthday] = useState("");
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [focusedInput, setFocusedInput] = useState(null);
   const [fadeIn, setFadeIn] = useState(false);
 
-  
   useEffect(() => {
     setFadeIn(true);
     async function fetchUser() {
       try {
-        const res = await fetch(`https://backend-nextjs-virid.vercel.app/api/users/${id}`);
+        const token = localStorage.getItem("token");
+        // แนบ Token ในการดึงข้อมูลด้วย
+        const res = await fetch(
+          `https://backend024-seven.vercel.app/api/users/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          },
+        );
+
         if (!res.ok) throw new Error("Failed to fetch user data");
         const data = await res.json();
 
-  
         setFirstname(data.firstname || "");
         setFullname(data.fullname || "");
         setLastname(data.lastname || "");
+
+        // set ค่าฟิลด์ใหม่
+        setAddress(data.address || "");
+        setSex(data.sex || "");
+        // แปลงวันที่สำหรับ input type="date"
+        if (data.birthday) {
+          setBirthday(data.birthday.split("T")[0]);
+        }
+
         setUsername(data.username || "");
-        setPassword(data.password || "");
+        // Password มักจะไม่ส่งกลับมา หรือถ้าส่งมาก็ set ไว้ (แต่ปกติหลังบ้านจะ hash)
+        // setPassword(data.password || "");
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -41,10 +66,11 @@ export default function EditUser() {
         });
       }
     }
-    fetchUser();
+    if (id) {
+      fetchUser();
+    }
   }, [id]);
 
- 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
 
@@ -53,7 +79,10 @@ export default function EditUser() {
       !fullname.trim() ||
       !lastname.trim() ||
       !username.trim() ||
-      !password.trim()
+      // ตรวจสอบฟิลด์ใหม่
+      !address.trim() ||
+      !sex ||
+      !birthday
     ) {
       Swal.fire({
         icon: "error",
@@ -65,21 +94,33 @@ export default function EditUser() {
     }
 
     try {
-      const res = await fetch("https://backend-nextjs-virid.vercel.app/api/users", {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+      const token = localStorage.getItem("token");
+
+      // 1. แก้ URL ให้ส่ง ID เป็น Param
+      const res = await fetch(
+        `https://backend024-seven.vercel.app/api/users/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            // แนบ Token
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            // ไม่ต้องส่ง id ใน body แล้วเพราะส่งใน url (แต่ถ้าหลังบ้านต้องการก็ใส่ได้)
+            firstname,
+            fullname,
+            lastname,
+            // ส่งฟิลด์ใหม่
+            address,
+            sex,
+            birthday,
+            username,
+            password: password || undefined, // ส่ง password เฉพาะเมื่อมีการแก้ไข
+          }),
         },
-        body: JSON.stringify({
-          id,
-          firstname,
-          fullname,
-          lastname,
-          username,
-          password,
-        }),
-      });
+      );
 
       const result = await res.json();
       if (res.ok) {
@@ -89,7 +130,8 @@ export default function EditUser() {
           showConfirmButton: false,
           timer: 2000,
         }).then(() => {
-          router.push("/register"); 
+          // แก้เป็นกลับไปหน้า admin users หรือหน้า dashboard แทน register
+          router.push("/admin/users");
         });
       } else {
         Swal.fire({
@@ -107,7 +149,6 @@ export default function EditUser() {
     }
   };
 
-  
   const inputBaseStyle = {
     width: "100%",
     padding: 8,
@@ -141,7 +182,7 @@ export default function EditUser() {
     <div
       style={{
         position: "relative",
-        height: "100vh",
+        minHeight: "100vh", // แก้เป็น minHeight เผื่อจอยาว
         width: "100%",
         backgroundImage: 'url("/images/silders/bg.jpg")',
         backgroundSize: "cover",
@@ -152,6 +193,7 @@ export default function EditUser() {
         alignItems: "center",
         opacity: fadeIn ? 1 : 0,
         transition: "opacity 1s ease-in",
+        padding: "20px 0",
       }}
     >
       <main
@@ -224,6 +266,55 @@ export default function EditUser() {
             required
           />
 
+          {/* --- เพิ่ม Input ใหม่ --- */}
+          <label>ที่อยู่</label>
+          <textarea
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            rows="3"
+            style={{
+              ...inputBaseStyle,
+              resize: "vertical",
+              ...(focusedInput === "address" ? inputFocusStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("address")}
+            onBlur={() => setFocusedInput(null)}
+            required
+          />
+
+          <label>เพศ</label>
+          <select
+            value={sex}
+            onChange={(e) => setSex(e.target.value)}
+            style={{
+              ...inputBaseStyle,
+              ...(focusedInput === "sex" ? inputFocusStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("sex")}
+            onBlur={() => setFocusedInput(null)}
+            required
+          >
+            <option value="">เลือกเพศ</option>
+            <option value="ชาย">ชาย</option>
+            <option value="หญิง">หญิง</option>
+            <option value="อื่นๆ">อื่นๆ</option>
+          </select>
+
+          <label>วันเกิด</label>
+          <input
+            type="date"
+            value={birthday}
+            onChange={(e) => setBirthday(e.target.value)}
+            style={{
+              ...inputBaseStyle,
+              ...(focusedInput === "birthday" ? inputFocusStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("birthday")}
+            onBlur={() => setFocusedInput(null)}
+            required
+          />
+          {/* --- จบส่วน Input ใหม่ --- */}
+
           <label>ชื่อผู้ใช้</label>
           <input
             type="text"
@@ -238,12 +329,13 @@ export default function EditUser() {
             required
           />
 
-          <label>รหัสผ่าน</label>
+          <label>รหัสผ่าน (กรอกเมื่อต้องการเปลี่ยน)</label>
           <div style={{ position: "relative", marginBottom: 12 }}>
             <input
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="เว้นว่างไว้หากไม่เปลี่ยน"
               style={{
                 ...inputBaseStyle,
                 paddingRight: 40,
@@ -251,7 +343,6 @@ export default function EditUser() {
               }}
               onFocus={() => setFocusedInput("password")}
               onBlur={() => setFocusedInput(null)}
-              required
             />
             <button
               type="button"

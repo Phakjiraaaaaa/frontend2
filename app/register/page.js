@@ -5,9 +5,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Register() {
-  const [firstname, setFirstname] = useState("");
+  const [firstname, setFirstname] = useState(""); // คำนำหน้า
   const [fullname, setFullname] = useState("");
   const [lastname, setLastname] = useState("");
+
+  // เพิ่ม State สำหรับข้อมูลใหม่
+  const [address, setAddress] = useState("");
+  const [sex, setSex] = useState("");
+  const [birthday, setBirthday] = useState("");
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -32,7 +38,11 @@ export default function Register() {
       !fullname.trim() ||
       !lastname.trim() ||
       !username.trim() ||
-      !password.trim()
+      !password.trim() ||
+      // เพิ่ม Validation
+      !address.trim() ||
+      !sex ||
+      !birthday
     ) {
       Swal.fire({
         icon: "error",
@@ -43,35 +53,44 @@ export default function Register() {
       return;
     }
 
-let res;
+    let res;
     try {
       console.log("Attempting to fetch from: /api/users");
+      // อัปเดต log
       console.log("Request body:", {
         firstname,
         fullname,
         lastname,
+        address, // เพิ่ม
+        sex, // เพิ่ม
+        birthday, // เพิ่ม
         username,
         password,
       });
-      
-      res = await fetch("/api/users", {
-        method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
+
+      res = await fetch(
+        "https://backend024-seven.vercel.app/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstname,
+            fullname,
+            lastname,
+            address, // ส่งข้อมูลเพิ่ม
+            sex, // ส่งข้อมูลเพิ่ม
+            birthday, // ส่งข้อมูลเพิ่ม
+            username,
+            password,
+          }),
         },
-        body: JSON.stringify({
-          firstname,
-          fullname,
-          lastname,
-          username,
-          password,
-        }),
-      });
-      
+      );
+
       console.log("Response status:", res.status);
       console.log("Response ok:", res.ok);
-      
     } catch (err) {
       console.error("Network error details:", err);
       console.error("Error name:", err.name);
@@ -138,7 +157,7 @@ let res;
     <div
       style={{
         position: "relative",
-        height: "100vh",
+        height: "100vh", // หรือใช้ minHeight: "100vh" หากเนื้อหายาวเกินหน้าจอ
         width: "100%",
         backgroundImage: 'url("/images/silders/bg.jpg")',
         backgroundSize: "cover",
@@ -149,6 +168,8 @@ let res;
         alignItems: "center",
         opacity: fadeIn ? 1 : 0,
         transition: "opacity 1s ease-in",
+        overflowY: "auto", // เพิ่มเพื่อให้เลื่อนได้ถ้าจอมือถือเล็ก
+        padding: "20px 0", // เพิ่ม padding บนล่างเผื่อเนื้อหาล้น
       }}
     >
       <main
@@ -159,6 +180,8 @@ let res;
           borderRadius: 12,
           backgroundColor: "rgba(175, 175, 175, 0.95)",
           boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+          marginTop: "auto", // จัดกึ่งกลางในกรณี scroll
+          marginBottom: "auto",
         }}
       >
         <h1
@@ -221,6 +244,60 @@ let res;
             onBlur={() => setFocusedInput(null)}
             required
           />
+
+          {/* --- ส่วนที่เพิ่มเข้ามา --- */}
+
+          {/* ที่อยู่ */}
+          <label>ที่อยู่</label>
+          <textarea
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            rows="3"
+            style={{
+              ...inputBaseStyle,
+              resize: "vertical",
+              ...(focusedInput === "address" ? inputFocusStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("address")}
+            onBlur={() => setFocusedInput(null)}
+            required
+          />
+
+          {/* เพศ */}
+          <label>เพศ</label>
+          <select
+            value={sex}
+            onChange={(e) => setSex(e.target.value)}
+            style={{
+              ...inputBaseStyle,
+              ...(focusedInput === "sex" ? inputFocusStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("sex")}
+            onBlur={() => setFocusedInput(null)}
+            required
+          >
+            <option value="">เลือกเพศ</option>
+            <option value="ชาย">ชาย</option>
+            <option value="หญิง">หญิง</option>
+            <option value="อื่นๆ">อื่นๆ</option>
+          </select>
+
+          {/* วันเกิด */}
+          <label>วันเกิด</label>
+          <input
+            type="date"
+            value={birthday}
+            onChange={(e) => setBirthday(e.target.value)}
+            style={{
+              ...inputBaseStyle,
+              ...(focusedInput === "birthday" ? inputFocusStyle : {}),
+            }}
+            onFocus={() => setFocusedInput("birthday")}
+            onBlur={() => setFocusedInput(null)}
+            required
+          />
+
+          {/* --- จบส่วนที่เพิ่มเข้ามา --- */}
 
           {/* Username */}
           <label>ชื่อผู้ใช้</label>

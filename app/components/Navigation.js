@@ -194,7 +194,7 @@ export default function Navigation() {
               <li className="nav-item">
                 <button
                   type="button"
-                  onClick={handleSignOut}
+                  onClick={() => router.push("/admin/users")}
                   className="btn me-2"
                   style={{
                     backgroundColor: "#dc3545",

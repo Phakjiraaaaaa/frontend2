@@ -186,11 +186,32 @@ export default function Navigation() {
           {/* เมนูขวา: Login/Logout + ตะกร้า */}
           <ul
             className="navbar-nav ms-auto"
-            style={{ display: "flex", gap: "0.6rem", }}
+            style={{ display: "flex", gap: "0.6rem" }}
           >
             {tokenState ? (
               // Logout
+
               <li className="nav-item">
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="btn me-2"
+                  style={{
+                    backgroundColor: "#dc3545",
+                    color: "#fff",
+                    border: "none",
+                    fontFamily: sriracha.style.fontFamily,
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#aaac3f";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#aaac3f";
+                  }}
+                >
+                  <i className="bi bi-box-arrow-right"></i> Admin
+                </button>
                 <button
                   type="button"
                   onClick={handleSignOut}
@@ -199,7 +220,7 @@ export default function Navigation() {
                     backgroundColor: "#dc3545",
                     color: "#fff",
                     border: "none",
-                    fontFamily: sriracha.style.fontFamily, 
+                    fontFamily: sriracha.style.fontFamily,
                     transition: "all 0.3s ease",
                   }}
                   onMouseEnter={(e) => {
@@ -222,7 +243,7 @@ export default function Navigation() {
                       backgroundColor: "#007bff",
                       color: "#fff",
                       border: "none",
-                      fontFamily: sriracha.style.fontFamily, 
+                      fontFamily: sriracha.style.fontFamily,
                       transition: "all 0.3s ease",
                     }}
                     onClick={() => router.push("/login")}
@@ -245,7 +266,7 @@ export default function Navigation() {
                       backgroundColor: "#28a745",
                       color: "#fff",
                       border: "none",
-                      fontFamily: sriracha.style.fontFamily, 
+                      fontFamily: sriracha.style.fontFamily,
                       transition: "all 0.3s ease",
                     }}
                     onClick={() => router.push("/register")}

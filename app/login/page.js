@@ -18,7 +18,7 @@ export default function Login() {
     setFadeIn(true);
     const token = localStorage.getItem("token");
     if (token) {
-      window.location.href = "/admin/users";
+      window.location.href = "/";
       return;
     }
   }, []);
@@ -46,25 +46,27 @@ export default function Login() {
 
       const data = await res.json();
 
-      // เช็คว่ามี Token หรือไม่
       if (res.ok && data.token) {
+        // ✅ บันทึกข้อมูลลง LocalStorage ให้ครบ
         localStorage.setItem("token", data.token);
 
-        // (Optional) เก็บ role ไว้ใช้เช็คหน้าอื่น
-        localStorage.setItem("role", data.role);
+        if (data.user) {
+          localStorage.setItem("id", data.user.id); // เก็บ ID
+          localStorage.setItem("role", data.user.role); // เก็บ Role
+          localStorage.setItem("user", JSON.stringify(data.user)); // เก็บ User object
+        }
 
         Swal.fire({
           icon: "success",
           title: "เข้าสู่ระบบสำเร็จ",
-          text: `ยินดีต้อนรับคุณ ${username} (${data.role})`, // แสดง Role ให้เห็น
           showConfirmButton: false,
           timer: 1200,
         }).then(() => {
-          // --- LOGIC แยกแอดมินตรงนี้ ---
-          if (data.role === "admin") {
-            window.location.href = "/admin/users"; // ถ้าเป็น Admin ไปหน้าจัดการ
+          // Redirect ตาม Role
+          if (data.user?.role === "admin") {
+            window.location.href = "/admin/users";
           } else {
-            window.location.href = "/"; // ถ้าเป็น User ธรรมดา ไปหน้าแรก หรือ Dashboard
+            window.location.href = "/";
           }
         });
       } else {
@@ -76,7 +78,7 @@ export default function Login() {
         });
       }
     } catch (error) {
-      console.error("Login error details:", error);
+      console.error("Login error:", error);
       Swal.fire({
         icon: "error",
         title: "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้",
@@ -144,7 +146,6 @@ export default function Login() {
           borderRadius: 12,
           backgroundColor: "rgba(175, 175, 175, 0.95)",
           boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
-          animation: fadeIn ? "fadeIn 1s ease forwards" : "none",
         }}
       >
         <h1

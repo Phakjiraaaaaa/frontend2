@@ -8,28 +8,39 @@ export default function EditUser() {
   const params = useParams();
   const id = params.id;
 
-  // State สำหรับข้อมูลฟอร์ม
+  // State
   const [firstname, setFirstname] = useState("");
   const [fullname, setFullname] = useState("");
   const [lastname, setLastname] = useState("");
-
-  // เพิ่ม State ใหม่
   const [address, setAddress] = useState("");
   const [sex, setSex] = useState("");
   const [birthday, setBirthday] = useState("");
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  
   const [showPassword, setShowPassword] = useState(false);
   const [focusedInput, setFocusedInput] = useState(null);
   const [fadeIn, setFadeIn] = useState(false);
+  
+  // ✅ เก็บ Role
+  const [currentUserRole, setCurrentUserRole] = useState("");
 
   useEffect(() => {
     setFadeIn(true);
+    // ✅ ดึง Role มาเก็บไว้
+    const role = localStorage.getItem("role");
+    setCurrentUserRole(role);
+
     async function fetchUser() {
       try {
         const token = localStorage.getItem("token");
-        // แนบ Token ในการดึงข้อมูลด้วย
+        
+        // ถ้าไม่มี Token ดีดออก
+        if (!token) {
+            router.push("/login");
+            return;
+        }
+
         const res = await fetch(
           `https://backend024-seven.vercel.app/api/users/${id}`,
           {
@@ -42,50 +53,46 @@ export default function EditUser() {
 
         if (!res.ok) throw new Error("Failed to fetch user data");
         const data = await res.json();
+        
+        // Handle array or object
+        const user = Array.isArray(data) ? data[0] : data;
 
-        setFirstname(data.firstname || "");
-        setFullname(data.fullname || "");
-        setLastname(data.lastname || "");
-
-        // set ค่าฟิลด์ใหม่
-        setAddress(data.address || "");
-        setSex(data.sex || "");
-        // แปลงวันที่สำหรับ input type="date"
-        if (data.birthday) {
-          setBirthday(data.birthday.split("T")[0]);
+        setFirstname(user.firstname || "");
+        setFullname(user.fullname || "");
+        setLastname(user.lastname || "");
+        setAddress(user.address || "");
+        setSex(user.sex || "");
+        if (user.birthday) {
+          setBirthday(user.birthday.split("T")[0]);
         }
-
-        setUsername(data.username || "");
-        // Password มักจะไม่ส่งกลับมา หรือถ้าส่งมาก็ set ไว้ (แต่ปกติหลังบ้านจะ hash)
-        // setPassword(data.password || "");
+        setUsername(user.username || "");
+        
       } catch (error) {
         Swal.fire({
           icon: "error",
           title: "เกิดข้อผิดพลาด",
           text: "ไม่สามารถโหลดข้อมูลผู้ใช้ได้",
+        }).then(() => {
+            // Error แล้วเด้งกลับตาม Role
+            if (role === 'admin') router.push("/admin/users");
+            else router.push("/");
         });
       }
     }
     if (id) {
       fetchUser();
     }
-  }, [id]);
+  }, [id, router]);
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
 
     if (
-      !firstname ||
-      !fullname.trim() ||
-      !lastname.trim() ||
-      !username.trim() ||
-      // ตรวจสอบฟิลด์ใหม่
-      !address.trim() ||
-      !sex ||
-      !birthday
+      !firstname || !fullname.trim() || !lastname.trim() ||
+      !username.trim() || !address.trim() || !sex || !birthday
     ) {
       Swal.fire({
-        icon: "error",
+        icon: "warning",
         title: "<h3>กรุณากรอกข้อมูลให้ครบถ้วน</h3>",
         showConfirmButton: false,
         timer: 2000,
@@ -96,7 +103,6 @@ export default function EditUser() {
     try {
       const token = localStorage.getItem("token");
 
-      // 1. แก้ URL ให้ส่ง ID เป็น Param
       const res = await fetch(
         `https://backend024-seven.vercel.app/api/users/${id}`,
         {
@@ -104,20 +110,17 @@ export default function EditUser() {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            // แนบ Token
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            // ไม่ต้องส่ง id ใน body แล้วเพราะส่งใน url (แต่ถ้าหลังบ้านต้องการก็ใส่ได้)
             firstname,
             fullname,
             lastname,
-            // ส่งฟิลด์ใหม่
             address,
             sex,
             birthday,
             username,
-            password: password || undefined, // ส่ง password เฉพาะเมื่อมีการแก้ไข
+            password: password || undefined,
           }),
         },
       );
@@ -130,8 +133,12 @@ export default function EditUser() {
           showConfirmButton: false,
           timer: 2000,
         }).then(() => {
-          // แก้เป็นกลับไปหน้า admin users หรือหน้า dashboard แทน register
-          router.push("/admin/users");
+          // ✅ Redirect ตาม Role
+          if (currentUserRole === 'admin') {
+            router.push("/admin/users");
+          } else {
+            router.push("/");
+          }
         });
       } else {
         Swal.fire({
@@ -146,6 +153,15 @@ export default function EditUser() {
         title: "ข้อผิดพลาดเครือข่าย",
         text: "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้",
       });
+    }
+  };
+
+  const handleCancel = () => {
+    // ✅ ปุ่มยกเลิกทำงานตาม Role
+    if (currentUserRole === 'admin') {
+        router.push("/admin/users");
+    } else {
+        router.push("/");
     }
   };
 
@@ -182,7 +198,7 @@ export default function EditUser() {
     <div
       style={{
         position: "relative",
-        minHeight: "100vh", // แก้เป็น minHeight เผื่อจอยาว
+        minHeight: "100vh",
         width: "100%",
         backgroundImage: 'url("/images/silders/bg.jpg")',
         backgroundSize: "cover",
@@ -216,7 +232,8 @@ export default function EditUser() {
             whiteSpace: "nowrap",
           }}
         >
-          แก้ไขข้อมูลผู้ใช้ {id}
+          {/* เปลี่ยนหัวข้อตามบริบท */}
+          {currentUserRole === 'admin' ? `แก้ไขข้อมูลผู้ใช้ ${id}` : 'แก้ไขข้อมูลส่วนตัว'}
         </h1>
 
         <form onSubmit={handleUpdateSubmit} noValidate>
@@ -266,7 +283,6 @@ export default function EditUser() {
             required
           />
 
-          {/* --- เพิ่ม Input ใหม่ --- */}
           <label>ที่อยู่</label>
           <textarea
             value={address}
@@ -313,7 +329,6 @@ export default function EditUser() {
             onBlur={() => setFocusedInput(null)}
             required
           />
-          {/* --- จบส่วน Input ใหม่ --- */}
 
           <label>ชื่อผู้ใช้</label>
           <input
@@ -383,8 +398,26 @@ export default function EditUser() {
                 buttonStyle.backgroundColor)
             }
           >
-            ปรับปรุงข้อมูล
+            บันทึกการเปลี่ยนแปลง
           </button>
+
+          {/* ปุ่มยกเลิก */}
+          <div className="text-center mt-3">
+            <button 
+                type="button" 
+                onClick={handleCancel}
+                style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#6c757d',
+                    textDecoration: 'underline',
+                    cursor: 'pointer'
+                }}
+            >
+                ยกเลิก
+            </button>
+          </div>
+
         </form>
       </main>
     </div>

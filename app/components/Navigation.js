@@ -1,5 +1,4 @@
 "use client";
-"use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -14,16 +13,28 @@ export default function Navigation() {
   const [activeLink, setActiveLink] = useState("/");
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  
+  // ✅ เพิ่ม State สำหรับเก็บข้อมูล User
+  const [userId, setUserId] = useState(null);
+  const [userRole, setUserRole] = useState(null);
+  
   const router = useRouter();
 
   const fontFamily = "var(--font-Sqriracha)";
-  const logoFont = "var(--font-sriracha)";
   const baseColor = "#1f1f1fff";
   const hoverColor = "#7d7dff";
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
+    
+    // ✅ ดึง ID และ Role จาก LocalStorage
+    // (หมายเหตุ: ตอน Login คุณต้อง localStorage.setItem('id', ...) และ 'role' ด้วยนะครับ)
+    const storedId = localStorage.getItem("id"); 
+    const storedRole = localStorage.getItem("role");
+    setUserId(storedId);
+    setUserRole(storedRole);
+
     setActiveLink(window.location.pathname);
 
     const updateCart = () => {
@@ -68,7 +79,12 @@ export default function Navigation() {
 
         setTimeout(() => {
           localStorage.removeItem("token");
+          localStorage.removeItem("id");   // ลบ ID
+          localStorage.removeItem("role"); // ลบ Role
           setToken(null);
+          setUserId(null);
+          setUserRole(null);
+          
           Swal.fire({
             title: "ออกจากระบบเรียบร้อย!",
             icon: "success",
@@ -84,6 +100,15 @@ export default function Navigation() {
   const handleLinkClick = (href) => {
     setActiveLink(href);
     setIsNavbarOpen(false);
+  };
+  
+  // ✅ ฟังก์ชันจัดการคลิกปุ่ม Profile
+  const handleProfileClick = () => {
+    if (userRole === 'admin') {
+        router.push('/admin/users'); // Admin ไปหน้าจัดการ
+    } else {
+        router.push(`/admin/users/edit/${userId}`); // User ไปหน้าแก้ไขตัวเอง
+    }
   };
 
   const navLinkStyle = {
@@ -189,30 +214,53 @@ export default function Navigation() {
             style={{ display: "flex", gap: "0.6rem" }}
           >
             {tokenState ? (
-              // Logout
+              <>
+                {/* ✅ ปุ่ม Profile / Manage */}
+                <li className="nav-item">
+                    <button
+                        type="button"
+                        onClick={handleProfileClick}
+                        className="btn"
+                        style={{
+                            backgroundColor: userRole === 'admin' ? "#17a2b8" : "#6f42c1",
+                            color: "#fff",
+                            border: "none",
+                            fontFamily: sriracha.style.fontFamily,
+                            transition: "all 0.3s ease",
+                        }}
+                    >
+                        {userRole === 'admin' ? (
+                            <><i className="bi bi-gear-fill"></i> จัดการระบบ</>
+                        ) : (
+                            <><i className="bi bi-person-circle"></i> ข้อมูลส่วนตัว</>
+                        )}
+                    </button>
+                </li>
 
-              <li className="nav-item">
-                <button
-                  type="button"
-                  onClick={handleSignOut}
-                  className="btn"
-                  style={{
-                    backgroundColor: "#dc3545",
-                    color: "#fff",
-                    border: "none",
-                    fontFamily: sriracha.style.fontFamily,
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "#c82333";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "#dc3545";
-                  }}
-                >
-                  <i className="bi bi-box-arrow-right"></i> Logout
-                </button>
-              </li>
+                {/* Logout */}
+                <li className="nav-item">
+                    <button
+                    type="button"
+                    onClick={handleSignOut}
+                    className="btn"
+                    style={{
+                        backgroundColor: "#dc3545",
+                        color: "#fff",
+                        border: "none",
+                        fontFamily: sriracha.style.fontFamily,
+                        transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = "#c82333";
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "#dc3545";
+                    }}
+                    >
+                    <i className="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </li>
+              </>
             ) : (
               <>
                 {/* Login */}

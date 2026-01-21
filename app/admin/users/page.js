@@ -20,7 +20,6 @@ export default function Page() {
       setLoading(true);
       const token = localStorage.getItem("token");
       
-      // แก้ไข URL และแนบ Bearer Token
       const res = await fetch("https://backend024-seven.vercel.app/api/users", {
         method: "GET",
         headers: {
@@ -49,13 +48,32 @@ export default function Page() {
     }
   };
 
+  // ✅ Check Auth & Role (กันหน้านี้)
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role"); // ดึง Role มาตรวจสอบ
+
+    // 1. ถ้าไม่มี Token ดีดไป Login
     if (!token) {
       router.push("/login");
       return;
     }
 
+    // 2. ถ้ามี Token แต่ไม่ใช่ Admin ดีดกลับหน้าแรก (หรือหน้า Login)
+    if (role !== 'admin') {
+      Swal.fire({
+        icon: 'error',
+        title: 'ไม่มีสิทธิ์เข้าถึง',
+        text: 'หน้านี้สำหรับผู้ดูแลระบบเท่านั้น',
+        timer: 2000,
+        showConfirmButton: false
+      }).then(() => {
+        router.push("/"); 
+      });
+      return;
+    }
+
+    // 3. ถ้าเป็น Admin ให้ดึงข้อมูล
     getUsers();
   }, [router]);
 
@@ -77,7 +95,6 @@ export default function Page() {
     try {
       const token = localStorage.getItem("token");
       
-      // แก้ไข URL และแนบ Bearer Token
       const res = await fetch(`https://backend024-seven.vercel.app/api/users/${id}`, {
         method: "DELETE",
         headers: {
@@ -152,7 +169,7 @@ export default function Page() {
                   color: "#0d6efd",
                 }}
               >
-                Loading...
+                Checking Authorization...
               </div>
             ) : (
               <>
@@ -173,6 +190,7 @@ export default function Page() {
                           <th>Firstname</th>
                           <th>Fullname</th>
                           <th>Lastname</th>
+                          <th>Role</th> {/* เพิ่มแสดง Role ให้เห็นชัดเจน */}
                           <th>Edit</th>
                           <th>Delete</th>
                         </tr>
@@ -184,6 +202,11 @@ export default function Page() {
                             <td>{item.firstname}</td>
                             <td>{item.fullname}</td>
                             <td>{item.lastname}</td>
+                            <td>
+                              <span className={`badge ${item.role === 'admin' ? 'bg-danger' : 'bg-primary'}`}>
+                                {item.role}
+                              </span>
+                            </td>
                             <td>
                               <Link
                                 href={`/admin/users/edit/${item.id}`}

@@ -194,26 +194,6 @@ export default function Navigation() {
               <li className="nav-item">
                 <button
                   type="button"
-                  onClick={() => router.push("/admin/users")}
-                  className="btn me-2"
-                  style={{
-                    backgroundColor: "#dc3545",
-                    color: "#fff",
-                    border: "none",
-                    fontFamily: sriracha.style.fontFamily,
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "#aaac3f";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "#aaac3f";
-                  }}
-                >
-                  <i className="bi bi-box-arrow-right"></i> Admin
-                </button>
-                <button
-                  type="button"
                   onClick={handleSignOut}
                   className="btn"
                   style={{

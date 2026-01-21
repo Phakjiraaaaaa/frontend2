@@ -35,9 +35,6 @@ export default function Login() {
     }
 
     try {
-      console.log("Attempting login fetch from: /api/login");
-      console.log("Request body:", { username, password });
-
       const res = await fetch(
         "https://backend024-seven.vercel.app/api/auth/login",
         {
@@ -47,24 +44,28 @@ export default function Login() {
         },
       );
 
-      console.log("Login response status:", res.status);
-      console.log("Login response ok:", res.ok);
-
       const data = await res.json();
-      console.log("Login response:", data);
 
-      const token = data.token || data.accessToken || data.jwt;
+      // เช็คว่ามี Token หรือไม่
+      if (res.ok && data.token) {
+        localStorage.setItem("token", data.token);
 
-      if (token) {
-        localStorage.setItem("token", token);
+        // (Optional) เก็บ role ไว้ใช้เช็คหน้าอื่น
+        localStorage.setItem("role", data.role);
 
         Swal.fire({
           icon: "success",
           title: "เข้าสู่ระบบสำเร็จ",
+          text: `ยินดีต้อนรับคุณ ${username} (${data.role})`, // แสดง Role ให้เห็น
           showConfirmButton: false,
           timer: 1200,
         }).then(() => {
-          window.location.href = "/admin/users";
+          // --- LOGIC แยกแอดมินตรงนี้ ---
+          if (data.role === "admin") {
+            window.location.href = "/admin/users"; // ถ้าเป็น Admin ไปหน้าจัดการ
+          } else {
+            window.location.href = "/"; // ถ้าเป็น User ธรรมดา ไปหน้าแรก หรือ Dashboard
+          }
         });
       } else {
         Swal.fire({
@@ -76,12 +77,10 @@ export default function Login() {
       }
     } catch (error) {
       console.error("Login error details:", error);
-      console.error("Error name:", error.name);
-      console.error("Error message:", error.message);
       Swal.fire({
         icon: "error",
         title: "ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้",
-        html: `<p>รายละเอียดข้อผิดพลาด: ${error.message}</p>`,
+        text: error.message,
         showConfirmButton: false,
         timer: 3000,
       });
